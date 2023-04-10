@@ -37,6 +37,9 @@
     <None Update="STLSamples\Achsenkreuz.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\Agrippina.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\Alien.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -44,6 +47,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Anubis.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\AphroditeBust.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Art_Torus_Low_Poly.stl">
@@ -109,6 +115,9 @@
     <None Update="STLSamples\Complete.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\ContemplatingAngel.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\copter.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -157,7 +166,13 @@
     <None Update="STLSamples\egyptian-mask-02-fixed-cut-2-repaired.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\EgyptianSculpture.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\egyptian_king_Cut_2_repaired.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Einstein.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\EMU-MMU_Upload.stl">
@@ -166,7 +181,16 @@
     <None Update="STLSamples\f8f19340431ec09528e206f93de50194733a0fbd.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\Fish.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\globe.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\godcatfinal.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\griffon_statue.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Grogu.stl">
@@ -185,6 +209,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\horus.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Hulk.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\HulkHalfStatue.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\HulkHalfStatueSupport.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\HulkRagnarokWithHammer.stl">
@@ -250,6 +283,9 @@
     <None Update="STLSamples\mars_o1765_7x.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\Mayan_Sculpture.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\mid.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -269,6 +305,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Nefertiti_200k_faces.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\NeptuneStatue.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Object_of_Constant_Width_Tetrahedron_3.STL">
@@ -394,6 +433,9 @@
     <None Update="STLSamples\torus_7_11.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\TOS_Constitution_Class.STL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\trefoil.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -409,6 +451,24 @@
     <None Update="STLSamples\vader.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\VaderwoCape-ByDecadia.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\vader_buste.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\venus_1_12_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\venus_1_25_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\venus_1_6_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Venus_out_55.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\Voronoi_Tetrahedron_Matrix_Start_Tetrahedron.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -422,6 +482,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\yoda.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Zeus_.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
