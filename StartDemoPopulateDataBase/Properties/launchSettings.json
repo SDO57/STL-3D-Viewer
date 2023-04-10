@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "StartDemoPopulateDataBase": {
+      "commandName": "Executable",
+      "executablePath": "H:\\STL-3D-Viewer\\StartDemoPopulateDataBase\\bin\\Debug\\net7.0\\StartDemoPopulateDataBase.exe"
+    }
+  }
+}
