@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Model.STLFile>
+@*@model List<Core.Entities.STLFile>*@
+
+@{
+    ViewData["Title"] = "STLViewer";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileSize)
+            </th>
+            <th>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileSize)
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a asp-action="View" asp-route-id="@item.FileId">View</a>|
+                    <a asp-action="Load" asp-route-id="@item.FileId">Load</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

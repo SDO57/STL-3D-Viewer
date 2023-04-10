@@ -1,0 +1,70 @@
+﻿@page "/fetchdata"
+@using DemoAPIClient;
+
+@inject HttpClient Http
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.DateTime.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[] forecasts = new WeatherForecast[]{};
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            string urlAPI = "https://localhost:7096";
+            System.Net.Http.HttpClient clientHttp = new System.Net.Http.HttpClient();
+            DemoAPIClient.Client apiClient = new DemoAPIClient.Client(urlAPI, clientHttp);
+
+
+            var r1 = apiClient.GetWeatherForecastAsync();
+            //   var forecasts = r1...ToList();
+
+            var r2 = r1.Result;
+
+
+            //   var res = Store..Result;
+          /*  if (Response == null) forecasts = new WeatherForecast[] { };
+            else forecasts = Response.ToArray();*/
+        // else _STLFiles = res.ToList();
+
+         /*  else forecasts = Store.ToList();
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/WeatherForecast") ?? new WeatherForecast[]{};
+      */  }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+    }
+}

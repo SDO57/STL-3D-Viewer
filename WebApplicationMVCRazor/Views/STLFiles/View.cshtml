@@ -1,0 +1,259 @@
+﻿@model STLFileViewModel
+
+@{
+    var decrypt = new Core.Tools.STLJsEncryptDecrypt() { Data = Model.Data };
+    var jpositions = String.Join(',', decrypt.jsPositions);
+    var jindices = String.Join(',', decrypt.jsIndices);
+    var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
+    var jnormals = String.Join(',', decrypt.jsNormals);
+}
+
+<h3>STLViewer</h3>
+
+<h5><label>FileName : @Model.Desc.FileName</label></h5>
+<h5><label>FileId : @Model.Desc.FileId</label></h5>
+<h5><label>FileSize : @Model.Desc.FileSize</label></h5>
+<h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+<a asp-action="Load" asp-route-id="@Model.Desc.FileId">Load</a>
+
+
+<div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
+
+<a asp-action="Index" asp-route-id="">Back</a>
+
+
+
+<script>
+
+
+    var startRenderLoop = function (engine, canvas) {
+        engine.runRenderLoop(function () {
+            if (sceneToRender && sceneToRender.activeCamera) {
+                sceneToRender.render();
+            }
+        });
+    }
+
+    var showRGBDirectionalLight = function (intensity, scene) {
+
+        var lightDRed = new BABYLON.DirectionalLight("lightDRed", new BABYLON.Vector3(0, 1, 1), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightDRed.intensity = intensity;
+        lightDRed.diffuse = new BABYLON.Color3(1, 0, 0);
+        //lightDRed.specular = new BABYLON.Color3( 1,0, 0);
+
+
+        // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+        var lightDGreen = new BABYLON.DirectionalLight("lightDGreen", new BABYLON.Vector3(1, 0, 1), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightDGreen.intensity = intensity;
+        lightDGreen.diffuse = new BABYLON.Color3(0, 1, 0);
+        //lightDGreen.specular = new BABYLON.Color3(0, 1, 0);
+
+
+        // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+        var lightDBlue = new BABYLON.DirectionalLight("lightDBlue", new BABYLON.Vector3(1, 1, 0), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightDBlue.intensity = intensity;
+        lightDBlue.diffuse = new BABYLON.Color3(0, 0, 1);
+        //lightDBlue.specular = new BABYLON.Color3(0, 0, 1);
+
+
+
+    }
+
+
+    // REPOSITIONNEMENT
+
+    var boundingBox = [@jboundingBox];
+    var positions = [@jpositions];
+
+    var numberOfVertices = positions.length / 3;
+    for (var i = 0; i < numberOfVertices; i++) {
+        var newZ = positions[i * 3 + 1];
+        var newY = positions[i * 3 + 2];
+        positions[i * 3 + 1] = newY;
+        positions[i * 3 + 2] = newZ
+    }
+    var indices = [@jindices];
+    var normals = [@jnormals];
+
+    BABYLON.VertexData.ComputeNormals(positions, indices, normals);
+
+    //
+
+    var Color3Red = new BABYLON.Color3(1, 0, 0);
+    var Color3Green = new BABYLON.Color3(0, 1, 0);
+    var Color3Blue = new BABYLON.Color3(0, 0, 1);
+
+    var ColorWhite = new BABYLON.Color3(1, 1, 1);
+
+
+    var canvas = document.getElementById("renderCanvas");
+
+    var engine = null;
+    var scene = null;
+    var sceneToRender = null;
+    var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
+
+
+
+    var showRGBPointLight = function (intensity, scene) {
+
+
+
+
+        var lightP1 = new BABYLON.PointLight("lightP1", new BABYLON.Vector3(-1000, 0, 0), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightP1.intensity = intensity;
+        //lightPRed.diffuse = new BABYLON.Color3(1, 0, 0);
+        lightP1.specular = ColorWhite;
+
+        var lightP2 = new BABYLON.PointLight("lightP2", new BABYLON.Vector3(+1000, 0, 0), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightP2.intensity = intensity;
+        //lightPRed.diffuse = new BABYLON.Color3(1, 0, 0);
+        lightP2.specular = ColorWhite;
+
+
+
+
+    }
+
+
+    var showAmbiantLight = function (intensity, scene) {
+
+        var lightAmbiant = new BABYLON.HemisphericLight("lightAmbiant", new BABYLON.Vector3(0, 1, 0), scene);
+        // Default intensity is 1. Let's dim the light a small amount
+        lightAmbiant.intensity = intensity;
+        lightAmbiant.diffuse = new BABYLON.Color3(1, 1, 1);
+        lightAmbiant.specular = new BABYLON.Color3(1, 1, 1);
+
+    }
+
+
+
+
+    const createSceneSTL = () => {
+
+        // SCENE
+        var scene = new BABYLON.Scene(engine);
+        var hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("textures/environment.env", scene);
+        scene.environmentTexture = hdrTexture;
+
+        // CUSTOM MESH
+
+        var customMesh = new BABYLON.Mesh("custom", scene);
+        var vertexData = new BABYLON.VertexData();
+
+        vertexData.positions = positions;
+        vertexData.indices = indices;
+        vertexData.normals = normals;
+
+        vertexData.applyToMesh(customMesh);
+
+        // MATERIAL
+
+        var myMaterial = new BABYLON.StandardMaterial("mat", scene);
+        myMaterial.backFaceCulling = true;
+        myMaterial.wireframe = false;
+
+        myMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.2);
+        myMaterial.specularColor = new BABYLON.Color3(0.8, 0.9, 0.5);
+        myMaterial.emissiveColor = new BABYLON.Color3(0.0, 0.0, 0.0);
+        myMaterial.ambientColor = new BABYLON.Color3(0.4, 0.3, 0.2);
+
+        customMesh.material = myMaterial;
+
+        customMesh.showBoundingBox = false;
+
+        // CAMERA Target
+
+        let meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
+        let meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
+
+        var cameraTarget = new BABYLON.Vector3(
+            meshMin.x + (meshMax.x - meshMin.x) / 2,
+            meshMin.y + (meshMax.y - meshMin.y) / 2,
+            meshMin.z + (meshMax.z - meshMin.z) / 2);
+
+        var maxBoundingLengh = Math.max((boundingBox[3] - boundingBox[0]) + (boundingBox[4] - boundingBox[1]), (boundingBox[5] - boundingBox[2]));
+
+        var camera = new BABYLON.ArcRotateCamera("camera1",
+            1, 1,
+            maxBoundingLengh,
+            new BABYLON.Vector3(0, 5, -10),
+            scene);
+
+        camera.attachControl(canvas, true);
+        camera.setTarget(cameraTarget);
+
+
+        // LIGHTS
+
+        /* showAmbiantLight(0.4, scene);
+         showRGBPointLight(0.2,scene);*/
+
+        var lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
+        lightCamera.intensity = 0.8;
+        lightCamera.specular = ColorWhite;
+        lightCamera.parent = camera;
+
+
+        /* var lightCamera2 = new BABYLON.HemisphericLight("lightCamera2", new BABYLON.Vector3(-100, 0, 0), scene);
+         lightCamera2.intensity = 0.4;
+         lightCamera2.specular = ColorWhite;
+         lightCamera2.parent = camera;*/
+
+        /*  var lightCamera3 = new BABYLON.PointLight("lightCamera3", new BABYLON.Vector3(0, 0, 100), scene);
+          lightCamera3.intensity = 0.4;
+          lightCamera3.specular = Color3Blue;
+          lightCamera3.parent = camera;*/
+
+        /* var lightCamera2 = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(+0, 0, 0), scene);
+         lightCamera.intensity = 0.4;
+         lightCamera.specular = ColorWhite;
+         lightCamera.position = camera.position;*/
+        // GROUND
+
+        //var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000 }, scene);
+
+        // BEFORE RENDER
+
+        scene.registerBeforeRender(function () {
+            // lightCamera.position = camera.position;
+            // lightCamera.position = camera.position;
+        });
+
+        return scene;
+
+    };
+
+    window.initFunction = async function () {
+
+
+        var asyncEngineCreation = async function () {
+            try {
+                return createDefaultEngine();
+            } catch (e) {
+                console.log("the available createEngine function failed. Creating the default engine instead");
+                return createDefaultEngine();
+            }
+        }
+
+        window.engine = await asyncEngineCreation();
+        if (!engine) throw 'engine should not be null.';
+        startRenderLoop(engine, canvas);
+        window.scene = createSceneSTL();
+    };
+
+    initFunction().then(() => {
+        sceneToRender = scene
+    });
+
+    // Resize
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
+
+</script>

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>Babylon.Blazor</PackageId>
+    <Authors>Alex Nek</Authors>
+    <Company>private</Company>
+    <Product>Balylon.Blazor</Product>
+    <Description>This library packages the well-known 3D library [Babylon.js](https://www.babylonjs.com/) into a Razor component that can be used in a C# Blazor project.
+The library is intended to use for creation of molecules visualization and used limited API of Babylon library.
+
+More info on [github](https://github.com/AlexNek/BabylonBlazor)
+</Description>
+    <AssemblyName>Babylon.Blazor</AssemblyName>
+    <RootNamespace>Babylon.Blazor</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/AlexNek/BabylonBlazor</RepositoryUrl>
+    <PackageTags>babylon.js blazor net5.0 web</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Configurations>Debug;Release;ClientMAUI+API</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Babylon\BabylonFactory.cs" />
+    <Compile Remove="Babylon\BabylonObjectOld.cs" />
+    <Compile Remove="Babylon\IBabylonFactory.cs" />
+    <Compile Remove="Babylon\JsRuntimeObjectRef.cs" />
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.10.0" />
+    <PackageReference Include="GitVersion.MsBuild" Version="5.8.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
