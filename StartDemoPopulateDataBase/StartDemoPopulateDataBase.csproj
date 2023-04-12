@@ -16,88 +16,61 @@
     <None Update="STLSamples\2da214c43c1e8b45e21109c00c37e4ce30266625.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\39.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\3_canh_v1.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\64_Tetrahedron_Grid %283%29.STL">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\64_Tetrahedron_Grid %284%29.STL">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\64_Tetrahedron_Grid %285%29.STL">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\64_Tetrahedron_Grid.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Achsenkreuz.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Agrippina.stl">
+    <None Update="STLSamples\Antique\Agrippina.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Alien.stl">
+    <None Update="STLSamples\Antique\NeptuneStatue.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Anubis %281%29.stl">
+    <None Update="STLSamples\Antique\Zeus_.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Anubis.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\AphroditeBust.stl">
+    <None Update="STLSamples\Art\Fish.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Art_Torus_Low_Poly.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\batman-bust-by-eastman.stl">
+    <None Update="STLSamples\Astronomy\Earth.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\BATMAN.stl">
+    <None Update="STLSamples\Astronomy\globe.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\batmobile-bodyuse_raft.stl">
+    <None Update="STLSamples\Astronomy\marsglobeexag.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\batmobile-no_raft.stl">
+    <None Update="STLSamples\Astronomy\marsglobeexag2.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Batmobile_windows.stl">
+    <None Update="STLSamples\Astronomy\mars_20xo.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Bear_Keychain_Full.stl">
+    <None Update="STLSamples\Astronomy\mars_o1765_7x.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Astronomy\venus_1_12_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Astronomy\venus_1_25_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Astronomy\venus_1_6_10_7.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Astronomy\Venus_out_55.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Berserker_predator.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\boitier PI en open source sur Thingiverse 2.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\boitier PI en open source sur Thingiverse 3.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\boitier PI en open source sur Thingiverse 4.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\boitier PI en open source sur Thingiverse 5.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\boitier PI en open source sur Thingiverse.JPG">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\boxringlopoly.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\b_wing_compleet.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Cartesian_coordinate_system.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\CenterRing.stl">
@@ -106,73 +79,133 @@
     <None Update="STLSamples\cinquefoil.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Circle_Snap_Egg_Bottom.stl">
+    <None Update="STLSamples\Comics\batman-bust-by-eastman.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Circle_Snap_Egg_Top.stl">
+    <None Update="STLSamples\Comics\BATMAN.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\batmobile-bodyuse_raft.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\batmobile-no_raft.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\Batmobile_windows.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\Hulk.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\HulkHalfStatue.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\HulkHalfStatueSupport.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\HulkRagnarokWithHammer.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\ironman_withoutsupport_v1_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\IronPunisher_helmet_Face.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Comics\Rocket_Raccon.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Complete.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\ContemplatingAngel.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\copter.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\deathstar_1_1_10_6.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\deathstar_1_2_10_6.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\deathstar_1_5_10_5.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Dexters_Moon_v2.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Diamond_Snap_Egg_Bottom.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Diamond_Snap_Egg_Top.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\Dishonored_2_mask.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\ducksitstands.stl">
+    <None Update="STLSamples\egg\Circle_Snap_Egg_Bottom.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Earth.STL">
+    <None Update="STLSamples\egg\Circle_Snap_Egg_Top.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Egg10.stl">
+    <None Update="STLSamples\egg\Diamond_Snap_Egg_Bottom.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Egg11.stl">
+    <None Update="STLSamples\egg\Diamond_Snap_Egg_Top.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Egg3.stl">
+    <None Update="STLSamples\egg\Egg10.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Egg6.stl">
+    <None Update="STLSamples\egg\Egg11.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Egg8.stl">
+    <None Update="STLSamples\egg\Egg3.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\egyptian-mask-02-fixed-cut-2-repaired.stl">
+    <None Update="STLSamples\egg\Egg6.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\EgyptianSculpture.stl">
+    <None Update="STLSamples\egg\Egg8.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\egyptian_king_Cut_2_repaired.stl">
+    <None Update="STLSamples\egg\Square_Snap_Egg_Bottom.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Einstein.stl">
+    <None Update="STLSamples\egg\Square_Snap_Egg_Top.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Anubis %281%29.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Anubis.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\AphroditeBust.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\egyptian-mask-02-fixed-cut-2-repaired.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\EgyptianSculpture.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\egyptian_king_Cut_2_repaired.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\godcatfinal.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\HeadShouldersSphinxHatshepsut.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Horus %281%29.STL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\horus.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\KingTut-remixedL.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\king_ptolemaic_period.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\King_Tut-9.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Nefertiti_200k_faces.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Queen_of_Egypt_Bust_Flower_Pot_repaired.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Egyptian\Queen_of_Egypt_Bust_repaired.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\EMU-MMU_Upload.stl">
@@ -181,16 +214,31 @@
     <None Update="STLSamples\f8f19340431ec09528e206f93de50194733a0fbd.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Fish.stl">
+    <None Update="STLSamples\Geometry\64_Tetrahedron_Grid.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\globe.stl">
+    <None Update="STLSamples\Geometry\Object_of_Constant_Width_Tetrahedron_3.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\godcatfinal.stl">
+    <None Update="STLSamples\Geometry\tetrahedron.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\griffon_statue.stl">
+    <None Update="STLSamples\Geometry\tetra_links_1.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Geometry\tetra_links_2.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Geometry\tetra_links_3.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Geometry\torus.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Geometry\torus_5_11.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Geometry\torus_7_11.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Grogu.stl">
@@ -202,64 +250,7 @@
     <None Update="STLSamples\Happy_Birthday.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\HeadShouldersSphinxHatshepsut.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Horus %281%29.STL">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\horus.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Hulk.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\HulkHalfStatue.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\HulkHalfStatueSupport.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\HulkRagnarokWithHammer.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\human_ear_canal.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\inv-576-1.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\ironman_withoutsupport_v1_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\IronPunisher_helmet_Face.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\KingTut-remixedL.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\king_ptolemaic_period.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\King_Tut-9.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Kylo_Ren_Helmet_JTM_.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Large_Diameter_Base.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Large_Diameter_Cap.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Large_Geode_Tower_Medium.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Large_Geode_Tower_Short.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Large_Geode_Tower_Tall.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\Lego_iron_man_mark_42.stl">
@@ -268,49 +259,13 @@
     <None Update="STLSamples\Low.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\luke_with_base.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\marsglobeexag.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\marsglobeexag2.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\mars_20xo.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\mars_o1765_7x.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\Mayan_Sculpture.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\mid.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\MiddleFingerYoda.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\mid_V2.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\MilleniumFalcon_V1_STL.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Millenium_falcon_base.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Millenium_Falcon_Complete_STL.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Nefertiti_200k_faces.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\NeptuneStatue.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Object_of_Constant_Width_Tetrahedron_3.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\oni_mask.stl">
@@ -319,121 +274,187 @@
     <None Update="STLSamples\PExRepPlate_fixed.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full1_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full2_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full3_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full_4_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full_5_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Pi_2B_Case_v2_redesign_full_indus_cover_fixed.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\PlanExBIG_fixed.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Queen_of_Egypt_Bust_Flower_Pot_repaired.stl">
+    <None Update="STLSamples\Religion\ContemplatingAngel.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Queen_of_Egypt_Bust_repaired.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\R2.stl">
+    <None Update="STLSamples\Religion\griffon_statue.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\RHCoordinates.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="STLSamples\Right Hand\Cartesian_coordinate_system.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="STLSamples\right_hand_system_assembled.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Rocket_Raccon.stl">
+    <None Update="STLSamples\Sciences\Einstein.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Rotor.stl">
+    <None Update="STLSamples\Sciences\human_ear_canal.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\sample.zip">
+    <None Update="STLSamples\StarTrek\TOS_Constitution_Class.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Small_Diameter_Base.stl">
+    <None Update="STLSamples\StarWars\b_wing_compleet.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Small_Diameter_Cap.stl">
+    <None Update="STLSamples\StarWars\deathstar_1_1_10_6.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Small_Geode_Tower_Medium.stl">
+    <None Update="STLSamples\StarWars\deathstar_1_2_10_6.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Small_Geode_Tower_Short.stl">
+    <None Update="STLSamples\StarWars\deathstar_1_5_10_5.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Small_Geode_Tower_Tall.stl">
+    <None Update="STLSamples\StarWars\Kylo_Ren_Helmet_JTM_.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\SpacerRing_1.stl">
+    <None Update="STLSamples\StarWars\luke_with_base.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\SpacerRing_2.stl">
+    <None Update="STLSamples\StarWars\MiddleFingerYoda.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Square_Snap_Egg_Bottom.stl">
+    <None Update="STLSamples\StarWars\MilleniumFalcon_V1_STL.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Square_Snap_Egg_Top.stl">
+    <None Update="STLSamples\StarWars\Millenium_falcon_base.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\StatorBasis.stl">
+    <None Update="STLSamples\StarWars\Millenium_Falcon_Complete_STL.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\StatorCover.stl">
+    <None Update="STLSamples\StarWars\R2.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\T70_with_BB8_STL.stl">
+    <None Update="STLSamples\StarWars\T70_with_BB8_STL.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\Taun_Taun.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\TIE-Fighter_complete.STL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\vader.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\VaderwoCape-ByDecadia.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\vader_buste.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\XwingFull_Clean_noR2.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\xwing_sliced.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\StarWars\yoda.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\T800_SmoothedSKP-nomiddle.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\Taun_Taun.stl">
+    <None Update="STLSamples\Things\39.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\tetrahedron.stl">
+    <None Update="STLSamples\Things\Alien.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\tetra_links_1.stl">
+    <None Update="STLSamples\Things\Bear_Keychain_Full.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\tetra_links_2.stl">
+    <None Update="STLSamples\Things\boitier PI en open source sur Thingiverse 2.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\tetra_links_3.stl">
+    <None Update="STLSamples\Things\boitier PI en open source sur Thingiverse 3.JPG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\TIE-Fighter_complete.STL">
+    <None Update="STLSamples\Things\boitier PI en open source sur Thingiverse 4.JPG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\boitier PI en open source sur Thingiverse 5.JPG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\boitier PI en open source sur Thingiverse.JPG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\ducksitstands.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Large_Diameter_Base.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Large_Diameter_Cap.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Large_Geode_Tower_Medium.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Large_Geode_Tower_Short.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Large_Geode_Tower_Tall.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full1_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full2_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full3_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full_4_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full_5_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Pi_2B_Case_v2_redesign_full_indus_cover_fixed.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Rotor.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Small_Diameter_Base.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Small_Diameter_Cap.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Small_Geode_Tower_Medium.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Small_Geode_Tower_Short.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\Small_Geode_Tower_Tall.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\SpacerRing_1.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\SpacerRing_2.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\StatorBasis.stl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="STLSamples\Things\StatorCover.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\TinTin_Rocket.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\torus.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\torus_5_11.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\torus_7_11.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\TOS_Constitution_Class.STL">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\trefoil.stl">
@@ -448,43 +469,10 @@
     <None Update="STLSamples\V29D_Fixed.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="STLSamples\vader.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\VaderwoCape-ByDecadia.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\vader_buste.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\venus_1_12_10_7.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\venus_1_25_10_7.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\venus_1_6_10_7.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Venus_out_55.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="STLSamples\Voronoi_Tetrahedron_Matrix_Start_Tetrahedron.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="STLSamples\xg1-gunboat-full-pin.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\XwingFull_Clean_noR2.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\xwing_sliced.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\yoda.stl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="STLSamples\Zeus_.stl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

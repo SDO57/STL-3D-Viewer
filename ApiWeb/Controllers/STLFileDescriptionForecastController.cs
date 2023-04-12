@@ -23,7 +23,7 @@ namespace DemoApi.Controllers
         [HttpGet(Name = "GetSTLFileDescriptionForecast")]
         public Dto.STLFile Get(int id)
         {
-            var _file = _repository.Get(id);
+            var _file = _repository.GetFileDesc(id);
 
             var resFile = new Dto.STLFile()
             {

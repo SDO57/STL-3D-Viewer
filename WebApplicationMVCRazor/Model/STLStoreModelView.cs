@@ -2,12 +2,12 @@
 
 namespace Model
 {
-    public class STLStore
+    public class STLStoreModelView
     {
        
         public int StoreId { get; set; }
 
         public string Owner { get; set; }
-        public List<STLFile> Files { get; set; }
+        public List<STLFileModelView> Files { get; set; }
     }
 }

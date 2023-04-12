@@ -5,9 +5,9 @@ namespace Infra.DB
     public class DBRepository : IFileDescriptionRepository
     {
 
-     
 
-        public STLFileDescription Get(int id)
+
+        public STLFileDescription GetFileDesc(int id)
         {
             using var db = new CAD_DBContext();
 
@@ -29,5 +29,22 @@ namespace Infra.DB
 
             return store;
         }
+
+
+
+        public List<STLStore> GetAllStores()
+        {
+            using var db = new CAD_DBContext();
+
+            //Acces a tous les stores du plus recent au plus ancien
+            var store = db.STLStores
+        .OrderByDescending(s => s.StoreId)
+        .ToList();
+
+            var files = db.STLFileDescriptions.ToArray();
+
+            return store;
+        }
+
     }
 }

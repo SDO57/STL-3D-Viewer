@@ -19,16 +19,19 @@ namespace WebApplicationMVC.Controllers
         // GET: STLFiles
         public async Task<IActionResult> Index()
         {
+            var resFiles = new List<Model.STLFileModelView>() { };//on vide les datas en attendant
+         
+            
+            var _stores = _fileDescriptionRepository.GetAllStores();
+            foreach(var _store in _stores)
 
-            var _store = _fileDescriptionRepository.GetLastStore();
-
-            var resFiles = new List<Model.STLFile>() { };//on vide les datas en attendant
-
+           // var _store = _fileDescriptionRepository.GetLastStore();
             foreach (var file in _store.Files)
             {
-                var resFile = new Model.STLFile()
+                var resFile = new Model.STLFileModelView()
                 {
                     StoreId = _store.StoreId,
+                    StoreName = _store.Owner,
                     FileId = file.FileId,
                     FileName = file.FileName,
                     FileSize = file.FileSize
@@ -43,7 +46,7 @@ namespace WebApplicationMVC.Controllers
         // GET: STLFiles/Details/5
         public async Task<IActionResult> Load(int id)
         {
-            var _desc = _fileDescriptionRepository.Get(id);
+            var _desc = _fileDescriptionRepository.GetFileDesc(id);
             var _data = _fileDataRepository.Get(_desc.FileName);
 
             return File(_data, "application/octet-stream", _desc.FileName);
@@ -51,7 +54,7 @@ namespace WebApplicationMVC.Controllers
 
         public async Task<IActionResult> View(int id)
         {
-            var _desc = _fileDescriptionRepository.Get(id);
+            var _desc = _fileDescriptionRepository.GetFileDesc(id);
             var _data = _fileDataRepository.Get(_desc.FileName);
 
             var model = new STLFileViewModel()

@@ -2,9 +2,11 @@
 {
     public interface IFileDescriptionRepository
     {
-        public STLFileDescription Get(int id);
+        public STLFileDescription GetFileDesc(int id);
 
         public STLStore GetLastStore();
+
+        public List<STLStore> GetAllStores();
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Model.STLFile>
+﻿@model IEnumerable<Model.STLFileModelView>
 @*@model List<Core.Entities.STLFile>*@
 
 @{
@@ -13,6 +13,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.StoreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FileName)
@@ -32,6 +35,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.StoreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FileName)

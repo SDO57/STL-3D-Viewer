@@ -25,7 +25,7 @@ namespace DemoApi.Controllers
         [HttpGet(Name = "GetSTLFileDataForecast")]
         public IActionResult Get(int id)
         {
-            var _desc = _descriptionRepository.Get(id);
+            var _desc = _descriptionRepository.GetFileDesc(id);
             var _data = _dataRepository.Get(_desc.FileName);
 
             return File(_data, "application/octet-stream", _desc.FileName);
