@@ -9,7 +9,7 @@ namespace Data
         public Task<STLStore> GetForecastAsync()
         {
             return Task.FromResult(
-                  new Infra.DB.Repository().GetLastStore()
+                  new Infra.DB.DBRepository().GetLastStore()
                   );
         }
     }

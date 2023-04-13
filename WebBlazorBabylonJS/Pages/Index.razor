@@ -1,17 +1,17 @@
 @page "/"
-@using Grpc.Net.Client;
+
 
 
 <PageTitle>Sylvain Dollinger Portfolio</PageTitle>
 
 <h4>Ce site est réalisé avec Blazor</h4>
 
-<p role="status">Message From GRPC : @messageFromGRPC</p>
+@*<p role="status">Message From GRPC : @messageFromGRPC</p>*@
 @*<Counter IncrementBy="5"></Counter>*@
 
 
 @code {
-    private string messageFromGRPC;
+    //private string messageFromGRPC;
 
     protected override async Task OnInitializedAsync()
     {
