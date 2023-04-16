@@ -42,7 +42,7 @@
                     </div>
 
                     <select name="Material" id="material-select">
-
+                        <option disabled>Basic Materials</option>
                         <option value='emerald'>emerald</option>
                         <option value='jade'>jade</option>
                         <option value='obsidian'>obsidian</option>
@@ -50,33 +50,45 @@
                         <option value='ruby'>ruby</option>
                         <option value='turquoise'>turquoise</option>
                         <option value='brass'>brass</option>
-                        <option value='bronze'>bronze</option>
+                        <option selected value='bronze'>bronze</option>
                         <option value='polished_bronze'>polished_bronze</option>
-
                         <option value='chrome'>chrome</option>
                         <option value='copper'>copper</option>
                         <option value='polished_copper'>polished_copper</option>
                         <option value='gold'>gold</option>
                         <option value='polished_gold'>polished_gold</option>
                         <option value='pewter'>pewter</option>
-
                         <option value='silver'>silver</option>
                         <option value='polished_silver'>polished_silver</option>
-                     
-                        <option value='plaster'>plaster</option>
 
-                        <option value='black_plastic'>black plastic</option>
-                        <option value='cyan_plastic'>cyan plastic</option>
-                        <option value='green_plastic'>green plastic</option>
-                        <option value='red_plastic'>red plastic</option>
-                        <option value='white_plastic'>white plastic</option>
-                        <option value='yellow_plastic'>yellow plastic</option>
-                        <option value='black_rubber'>black rubber</option>
-                        <option value='cyan_rubber'>cyan rubber</option>
-                        <option value='green_rubber'>green rubber</option>
-                        <option value='red_rubber'>red rubber</option>
-                        <option value='white_rubber'>white rubber</option>
-                        <option value='yellow_rubber'>yellow rubber</option>
+                        <option disabled>My Materials</option>
+                        <option value='plaster'>plaster</option>
+                        <option value='white_marble'>white marble</option>
+                        <option value='rose_marble'>rose marble</option>
+
+                        <option disabled>Plastic</option>
+                        <option value='black_plastic'>black</option>
+                        <option value='cyan_plastic'>cyan</option>
+                        <option value='green_plastic'>green</option>
+                        <option value='red_plastic'>red</option>
+                        <option value='white_plastic'>white</option>
+                        <option value='yellow_plastic'>yellow</option>
+
+                        <option disabled>Rubber</option>
+                        <option value='black_rubber'>black</option>
+                        <option value='cyan_rubber'>cyan</option>
+                        <option value='green_rubber'>green</option>
+                        <option value='red_rubber'>red</option>
+                        <option value='white_rubber'>white</option>
+                        <option value='yellow_rubber'>yellow</option>
+                      
+                        <option disabled>My Mats</option>
+                        <option value='black_mat'>black</option>
+                        <option value='cyan_mat'>cyan</option>
+                        <option value='green_mat'>green</option>
+                        <option value='red_mat'>red</option>
+                        <option value='white_mat'>white</option>
+                        <option value='yellow_mat'>yellow</option>
 
                     </select>
 
@@ -179,8 +191,8 @@
         'pewter': [0.105882, 0.058824, 0.113725, 0.427451, 0.470588, 0.541176, 0.333333, 0.333333, 0.521569, 9.84615],
         'silver': [0.19225, 0.19225, 0.19225, 0.50754, 0.50754, 0.50754, 0.508273, 0.508273, 0.508273, 0.4],
         'polished_silver': [0.23125, 0.23125, 0.23125, 0.2775, 0.2775, 0.2775, 0.773911, 0.773911, 0.773911, 89.6],
-      
-        'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
+
+
 
         'black_plastic': [0.0, 0.0, 0.0, 0.01, 0.01, 0.01, 0.50, 0.50, 0.50, .25],
         'cyan_plastic': [0.0, 0.1, 0.06, 0.0, 0.50980392, 0.50980392, 0.50196078, 0.50196078, 0.50196078, .25],
@@ -188,12 +200,25 @@
         'red_plastic': [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.7, 0.6, 0.6, .25],
         'white_plastic': [0.0, 0.0, 0.0, 0.55, 0.55, 0.55, 0.70, 0.70, 0.70, .25],
         'yellow_plastic': [0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.60, 0.60, 0.50, .25],
+       
         'black_rubber': [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.4, 0.4, 0.4, .078125],
         'cyan_rubber': [0.0, 0.05, 0.05, 0.4, 0.5, 0.5, 0.04, 0.7, 0.7, .078125],
-        'green_rubber': [0.0, , 0.05, 0.0, 0.4, 0.5, 0.4, 0.04, 0.7, 0.04, .078125],
+        'green_rubber': [0.0, 0.05, 0.0, 0.4, 0.5, 0.4, 0.04, 0.7, 0.04, .078125],
         'red_rubber': [0.05, 0.0, 0.0, 0.5, 0.4, 0.4, 0.7, 0.04, 0.04, .078125],
-        'white_rubber': [0.05, 0.05, , 0.05, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, .078125],
-        'yellow_rubber': [0.05, 0.05, 0.0, 0.5, 0.5, 0.4, 0.7, 0.7, 0.04, .078125]
+        'white_rubber': [0.05, 0.05, 0.05, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, .078125],
+        'yellow_rubber': [0.05, 0.05, 0.0, 0.5, 0.5, 0.4, 0.7, 0.7, 0.04, .078125],
+
+        //my materials
+        'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
+        'white_marble': [1, 0.95, 0.85, 1, 0.9, 0.8, 1, 1, 1, 1.4],
+        'rose_marble': [1, 0.8, 0.8, 1, 0.7, 0.7, 1, 1, 1, 1.4],
+        
+        'black_mat': [0.01, 0.01, 0.01, 0.15, 0.15, 0.15, 0., 0., 0., .25],
+        'cyan_mat': [0.01, 0.23, 0.23, 0.2, 0.3, 0.3, 0., 0., 0., .25],
+        'green_mat': [0.01, 0.06, 0.01, 0.2, 0.6, 0.2, 0., 0., 0., .25],
+        'red_mat': [0.06, 0.01, 0.01, 0.6, 0.2, 0.2, 0., 0., 0., .25],
+        'white_mat': [0.06, 0.06, 0.06, 0.6, 0.6, 0.6, 0., 0., 0., .25],
+        'yellow_mat': [0.06, 0.06, 0.01, 0.6, 0.6, 0.2, 0., 0., 0., .25]
     };
 
     var startRenderLoop = function (engine, canvas) {
@@ -343,7 +368,7 @@
             //myMaterial.alpha = 0.8;
         }
 
-        SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
+        SetMaterial(MaterialsTable.bronze, 0, 0, 0, 0, 0);
 
         $('#material-select').on('change',
             function () {
@@ -369,6 +394,10 @@
                     case 'silver': SetMaterial(MaterialsTable.silver, 0, 0, 0, 0, 0); break;
                     case 'polished_silver': SetMaterial(MaterialsTable.polished_silver, 0, 0, 0, 0, 0); break;
 
+                    case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
+                    case 'white_marble': SetMaterial(MaterialsTable.white_marble, 0, 0, 0, 0, 0); break;
+                    case 'rose_marble': SetMaterial(MaterialsTable.rose_marble, 0, 0, 0, 0, 0); break;
+
                     case 'black_plastic': SetMaterial(MaterialsTable.black_plastic, 0, 0, 0, 0, 0); break;
                     case 'cyan_plastic': SetMaterial(MaterialsTable.cyan_plastic, 0, 0, 0, 0, 0); break;
                     case 'green_plastic': SetMaterial(MaterialsTable.green_plastic, 0, 0, 0, 0, 0); break;
@@ -382,7 +411,12 @@
                     case 'white_rubber': SetMaterial(MaterialsTable.white_rubber, 0, 0, 0, 0, 0); break;
                     case 'yellow_rubber': SetMaterial(MaterialsTable.yellow_rubber, 0, 0, 0, 0, 0); break;
 
-                    case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
+                    case 'black_mat': SetMaterial(MaterialsTable.black_mat, 0, 0, 0, 0, 0); break;
+                    case 'cyan_mat': SetMaterial(MaterialsTable.cyan_mat, 0, 0, 0, 0, 0); break;
+                    case 'green_mat': SetMaterial(MaterialsTable.green_mat, 0, 0, 0, 0, 0); break;
+                    case 'red_mat': SetMaterial(MaterialsTable.red_mat, 0, 0, 0, 0, 0); break;
+                    case 'white_mat': SetMaterial(MaterialsTable.white_mat, 0, 0, 0, 0, 0); break;
+                    case 'yellow_mat': SetMaterial(MaterialsTable.yellow_mat, 0, 0, 0, 0, 0); break;
 
                     default: SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
                 }
