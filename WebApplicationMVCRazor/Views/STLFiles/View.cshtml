@@ -10,103 +10,191 @@
 
 <h3>STLViewer</h3>
 
-<h5>
-    <label>FileName : @Model.Desc.FileName</label><a asp-action="Load" asp-route-id="@Model.Desc.FileId">Load</a></h5>
-<h5><label>FileId : @Model.Desc.FileId</label></h5>
-<h5><label>FileSize : @Model.Desc.FileSize</label></h5>
-<h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-3">
+
+            <h5>
+                <label>FileName : @Model.Desc.FileName</label><a asp-action="Load" asp-route-id="@Model.Desc.FileId">Load</a>
+            </h5>
+            <h5><label>FileId : @Model.Desc.FileId</label></h5>
+            <h5><label>FileSize : @Model.Desc.FileSize</label></h5>
+            <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+
+
+
+            <form>
+                <fieldset>
+                    <div>
+                        <input type="checkbox" id="boundingBox" name="boundingBox">
+                        <label for="scales">Show BoundingBox</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="wireframe" name="wireframe">
+                        <label for="scales">Wireframe Mode</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                        <label for="scales">Back Face Culling</label>
+                    </div>
+
+                    <select name="Material" id="material-select">
+
+                        <option value='emerald'>emerald</option>
+                        <option value='jade'>jade</option>
+                        <option value='obsidian'>obsidian</option>
+                        <option value='pearl'>pearl</option>
+                        <option value='ruby'>ruby</option>
+                        <option value='turquoise'>turquoise</option>
+                        <option value='brass'>brass</option>
+                        <option value='bronze'>bronze</option>
+                        <option value='polished_bronze'>polished_bronze</option>
+
+                        <option value='chrome'>chrome</option>
+                        <option value='copper'>copper</option>
+                        <option value='polished_copper'>polished_copper</option>
+                        <option value='gold'>gold</option>
+                        <option value='polished_gold'>polished_gold</option>
+                        <option value='pewter'>pewter</option>
+
+                        <option value='silver'>silver</option>
+                        <option value='polished_silver'>polished_silver</option>
+                     
+                        <option value='plaster'>plaster</option>
+
+                        <option value='black_plastic'>black plastic</option>
+                        <option value='cyan_plastic'>cyan plastic</option>
+                        <option value='green_plastic'>green plastic</option>
+                        <option value='red_plastic'>red plastic</option>
+                        <option value='white_plastic'>white plastic</option>
+                        <option value='yellow_plastic'>yellow plastic</option>
+                        <option value='black_rubber'>black rubber</option>
+                        <option value='cyan_rubber'>cyan rubber</option>
+                        <option value='green_rubber'>green rubber</option>
+                        <option value='red_rubber'>red rubber</option>
+                        <option value='white_rubber'>white rubber</option>
+                        <option value='yellow_rubber'>yellow rubber</option>
+
+                    </select>
+
+                    <!--
+
+
+                        <label for="fuel">Fuel level:</label>
+
+                        <meter id="fuel"
+                               min="0" max="100"
+                               low="33" high="66" optimum="80"
+                               value="50">
+                            at 50/100
+                        </meter>
+                        <label for="file">File progress:</label>
+
+                        <progress id="file" max="100" value="70"> 70% </progress>
+
+
+                        <div>
+                            <input type="file"
+                                   id="meshFile" name="meshFile"
+                                   accept=".stl">
+                        </div>
 
 
 
 
+                    <div>
+                        <input type="range" id="Camera.Distance" name="Camera.distance"
+                               min="0" max="10">
+                        <label for="Camera.Distance">Distance</label>
+                    </div>
+                    <div>
+                        <input type="range" id="cowbell" name="cowbell"
+                               min="0" max="100" value="90" step="10">
+                        <label for="cowbell">Cowbell</label>
+                    </div>
 
 
-<form>
-    <fieldset>
-        <div>
-            <input type="checkbox" id="boundingBox" name="boundingBox">
-            <label for="scales">Show BoundingBox</label>
+                    <div>
+                        <input type="color" id="head" name="head"
+                               value="#e66465">
+                        <label for="head">Head</label>
+                    </div>
+
+
+                        <legend>Select a maintenance drone:</legend>
+
+                        <div>
+                            <input type="radio" id="huey" name="drone" value="huey"
+                                   checked>
+                            <label for="huey">Huey</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="dewey" name="drone" value="dewey">
+                            <label for="dewey">Dewey</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="louie" name="drone" value="louie">
+                            <label for="louie">Louie</label>
+                        </div>-->
+                </fieldset>
+
+            </form>
         </div>
 
-        <div>
-            <input type="checkbox" id="wireframe" name="wireframe">
-            <label for="scales">Wireframe Mode</label>
-        </div>
-        <div>
-            <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-            <label for="scales">Back Face Culling</label>
+
+        <div class="col-9"
+            <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
         </div>
 
+    </div>
+</div>
 
-        <!--
-
-
-            <label for="fuel">Fuel level:</label>
-
-            <meter id="fuel"
-                   min="0" max="100"
-                   low="33" high="66" optimum="80"
-                   value="50">
-                at 50/100
-            </meter>
-            <label for="file">File progress:</label>
-
-            <progress id="file" max="100" value="70"> 70% </progress>
-
-
-            <div>
-                <input type="file"
-                       id="meshFile" name="meshFile"
-                       accept=".stl">
-            </div>
-
-
-
-
-        <div>
-            <input type="range" id="Camera.Distance" name="Camera.distance"
-                   min="0" max="10">
-            <label for="Camera.Distance">Distance</label>
-        </div>
-        <div>
-            <input type="range" id="cowbell" name="cowbell"
-                   min="0" max="100" value="90" step="10">
-            <label for="cowbell">Cowbell</label>
-        </div>
-
-
-        <div>
-            <input type="color" id="head" name="head"
-                   value="#e66465">
-            <label for="head">Head</label>
-        </div>
-
-
-            <legend>Select a maintenance drone:</legend>
-
-            <div>
-                <input type="radio" id="huey" name="drone" value="huey"
-                       checked>
-                <label for="huey">Huey</label>
-            </div>
-
-            <div>
-                <input type="radio" id="dewey" name="drone" value="dewey">
-                <label for="dewey">Dewey</label>
-            </div>
-
-            <div>
-                <input type="radio" id="louie" name="drone" value="louie">
-                <label for="louie">Louie</label>
-            </div>-->
-    </fieldset>
-
-</form>
-<div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
 
 <a asp-action="Index" asp-route-id="">Back</a>
 <script>
 
+
+    const MaterialsTable = {
+        'emerald': [0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.633, 0.727811, 0.633, 0.6],
+        'jade': [0.135, 0.2225, 0.1575, 0.54, 0.89, 0.63, 0.316228, 0.316228, 0.316228, 0.1],
+        'obsidian': [0.05375, 0.05, 0.06625, 0.18275, 0.17, 0.22525, 0.332741, 0.328634, 0.346435, 0.3],
+        'pearl': [0.25, 0.20725, 0.20725, 1, 0.829, 0.829, 0.296648, 0.296648, 0.296648, 0.088],
+        'ruby': [0.1745, 0.01175, 0.01175, 0.61424, 0.04136, 0.04136, 0.727811, 0.626959, 0.626959, 0.6],
+        'turquoise': [0.1, 0.18725, 0.1745, 0.396, 0.74151, 0.69102, 0.297254, 0.30829, 0.306678, 0.1],
+        'brass': [0.329412, 0.223529, 0.027451, 0.780392, 0.568627, 0.113725, 0.992157, 0.941176, 0.807843, 0.21794872],
+        'bronze': [0.2125, 0.1275, 0.054, 0.714, 0.4284, 0.18144, 0.393548, 0.271906, 0.166721, 0.2],
+        'polished_bronze': [0.25, 0.148, 0.06475, 0.4, 0.2368, 0.1036, 0.774597, 0.458561, 0.200621, 76.8],
+
+        'chrome': [0.25, 0.25, 0.25, 0.4, 0.4, 0.4, 0.774597, 0.774597, 0.774597, 0.6],
+        'copper': [0.19125, 0.0735, 0.0225, 0.7038, 0.27048, 0.0828, 0.256777, 0.137622, 0.086014, 0.1],
+        'polished_copper': [0.2295, 0.08825, 0.0275, 0.5508, 0.2118, 0.066, 0.580594, 0.223257, 0.0695701, 51.2],
+        'gold': [0.24725, 0.1995, 0.0745, 0.75164, 0.60648, 0.22648, 0.628281, 0.555802, 0.366065, 0.4],
+        'polished_gold': [0.24725, 0.2245, 0.0645, 0.34615, 0.3143, 0.0903, 0.797357, 0.723991, 0.208006, 83.2],
+
+        'pewter': [0.105882, 0.058824, 0.113725, 0.427451, 0.470588, 0.541176, 0.333333, 0.333333, 0.521569, 9.84615],
+        'silver': [0.19225, 0.19225, 0.19225, 0.50754, 0.50754, 0.50754, 0.508273, 0.508273, 0.508273, 0.4],
+        'polished_silver': [0.23125, 0.23125, 0.23125, 0.2775, 0.2775, 0.2775, 0.773911, 0.773911, 0.773911, 89.6],
+      
+        'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
+
+        'black_plastic': [0.0, 0.0, 0.0, 0.01, 0.01, 0.01, 0.50, 0.50, 0.50, .25],
+        'cyan_plastic': [0.0, 0.1, 0.06, 0.0, 0.50980392, 0.50980392, 0.50196078, 0.50196078, 0.50196078, .25],
+        'green_plastic': [0.0, 0.0, 0.0, 0.1, 0.35, 0.1, 0.45, 0.55, 0.45, .25],
+        'red_plastic': [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.7, 0.6, 0.6, .25],
+        'white_plastic': [0.0, 0.0, 0.0, 0.55, 0.55, 0.55, 0.70, 0.70, 0.70, .25],
+        'yellow_plastic': [0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.60, 0.60, 0.50, .25],
+        'black_rubber': [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.4, 0.4, 0.4, .078125],
+        'cyan_rubber': [0.0, 0.05, 0.05, 0.4, 0.5, 0.5, 0.04, 0.7, 0.7, .078125],
+        'green_rubber': [0.0, , 0.05, 0.0, 0.4, 0.5, 0.4, 0.04, 0.7, 0.04, .078125],
+        'red_rubber': [0.05, 0.0, 0.0, 0.5, 0.4, 0.4, 0.7, 0.04, 0.04, .078125],
+        'white_rubber': [0.05, 0.05, , 0.05, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, .078125],
+        'yellow_rubber': [0.05, 0.05, 0.0, 0.5, 0.5, 0.4, 0.7, 0.7, 0.04, .078125]
+    };
 
     var startRenderLoop = function (engine, canvas) {
         engine.runRenderLoop(function () {
@@ -237,23 +325,71 @@
         // MATERIAL
 
         var myMaterial = new BABYLON.StandardMaterial("mat", scene);
-        
-     
 
+        /*
         myMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.2);
         myMaterial.specularColor = new BABYLON.Color3(0.8, 0.9, 0.5);
         myMaterial.emissiveColor = new BABYLON.Color3(0.0, 0.0, 0.0);
         myMaterial.ambientColor = new BABYLON.Color3(0.4, 0.3, 0.2);
+        */
 
-      
-            function SetMaterial(materialTable, shininess, transparency) {
-               
-                myMaterial.ambientColor = new BABYLON.Color3(materialTable[0], materialTable[1], materialTable.ab);
-                myMaterial.diffuseColor = new BABYLON.Color3(dr, dg, materialTable.db);
-                myMaterial.specularColor = new BABYLON.Color3(sr, sg, materialTable.sb);
-                myMaterial.emissiveColor = new BABYLON.Color3(er, eg, eb);
+
+        var SetMaterial = function (materialTable, er, eg, eb, shininess, transparency) {
+
+            myMaterial.ambientColor = new BABYLON.Color3(materialTable[0], materialTable[1], materialTable[2]);
+            myMaterial.diffuseColor = new BABYLON.Color3(materialTable[3], materialTable[4], materialTable[5]);
+            myMaterial.specularColor = new BABYLON.Color3(materialTable[6], materialTable[7], materialTable[8]);
+            myMaterial.emissiveColor = new BABYLON.Color3(er, eg, eb);
+            //myMaterial.alpha = 0.8;
+        }
+
+        SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
+
+        $('#material-select').on('change',
+            function () {
+                var mat = this.value;
+                switch (mat) {
+
+                    case 'emerald': SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0); break;
+                    case 'jade': SetMaterial(MaterialsTable.jade, 0, 0, 0, 0, 0); break;
+                    case 'obsidian': SetMaterial(MaterialsTable.obsidian, 0, 0, 0, 0, 0); break;
+                    case 'pearl': SetMaterial(MaterialsTable.pearl, 0, 0, 0, 0, 0); break;
+                    case 'ruby': SetMaterial(MaterialsTable.ruby, 0, 0, 0, 0, 0); break;
+                    case 'turquoise': SetMaterial(MaterialsTable.turquoise, 0, 0, 0, 0, 0); break;
+                    case 'brass': SetMaterial(MaterialsTable.brass, 0, 0, 0, 0, 0); break;
+                    case 'bronze': SetMaterial(MaterialsTable.bronze, 0, 0, 0, 0, 0); break;
+                    case 'polished_bronze': SetMaterial(MaterialsTable.polished_bronze, 0, 0, 0, 0, 0); break;
+
+                    case 'chrome': SetMaterial(MaterialsTable.chrome, 0, 0, 0, 0, 0); break;
+                    case 'copper': SetMaterial(MaterialsTable.copper, 0, 0, 0, 0, 0); break;
+                    case 'polished_copper': SetMaterial(MaterialsTable.polished_copper, 0, 0, 0, 0, 0); break;
                     case 'gold': SetMaterial(MaterialsTable.gold, 0, 0, 0, 0, 0); break;
+                    case 'polished_gold': SetMaterial(MaterialsTable.polished_gold, 0, 0, 0, 0, 0); break;
+                    case 'pewter': SetMaterial(MaterialsTable.pewter, 0, 0, 0, 0, 0); break;
+                    case 'silver': SetMaterial(MaterialsTable.silver, 0, 0, 0, 0, 0); break;
+                    case 'polished_silver': SetMaterial(MaterialsTable.polished_silver, 0, 0, 0, 0, 0); break;
+
+                    case 'black_plastic': SetMaterial(MaterialsTable.black_plastic, 0, 0, 0, 0, 0); break;
+                    case 'cyan_plastic': SetMaterial(MaterialsTable.cyan_plastic, 0, 0, 0, 0, 0); break;
+                    case 'green_plastic': SetMaterial(MaterialsTable.green_plastic, 0, 0, 0, 0, 0); break;
+                    case 'red_plastic': SetMaterial(MaterialsTable.red_plastic, 0, 0, 0, 0, 0); break;
+                    case 'white_plastic': SetMaterial(MaterialsTable.white_plastic, 0, 0, 0, 0, 0); break;
+                    case 'yellow_plastic': SetMaterial(MaterialsTable.yellow_plastic, 0, 0, 0, 0, 0); break;
+                    case 'black_rubber': SetMaterial(MaterialsTable.black_rubber, 0, 0, 0, 0, 0); break;
+                    case 'cyan_rubber': SetMaterial(MaterialsTable.cyan_rubber, 0, 0, 0, 0, 0); break;
+                    case 'green_rubber': SetMaterial(MaterialsTable.green_rubber, 0, 0, 0, 0, 0); break;
+                    case 'red_rubber': SetMaterial(MaterialsTable.red_rubber, 0, 0, 0, 0, 0); break;
+                    case 'white_rubber': SetMaterial(MaterialsTable.white_rubber, 0, 0, 0, 0, 0); break;
+                    case 'yellow_rubber': SetMaterial(MaterialsTable.yellow_rubber, 0, 0, 0, 0, 0); break;
+
+                    case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
+
+                    default: SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
+                }
+
             }
+        );
+
 
 
 
@@ -261,23 +397,22 @@
          script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
          document.getElementsByTagName('head')[0].appendChild(script);
          */
-        
+
         customMesh.showBoundingBox = false;
-        $('#boundingBox').change(function () {
-            customMesh.showBoundingBox = !customMesh.showBoundingBox;
+        $('#boundingBox').on('change', function () {
+            customMesh.showBoundingBox = this.checked;
         });
-        
+
         myMaterial.backFaceCulling = true;
-        $('#backFaceCulling').change(function () {
-            myMaterial.backFaceCulling = !myMaterial.backFaceCulling;
-            myMaterial.backFaceCulling = ($(this).checkedval == true );
-        });   
-        
-        myMaterial.wireframe = false;
-        $('#wireframe').change(function () {
-            myMaterial.wireframe = !myMaterial.wireframe;
+        $('#backFaceCulling').on('change', function () {
+            myMaterial.backFaceCulling = this.checked;
         });
-        
+
+        myMaterial.wireframe = false;
+        $('#wireframe').on('change', function () {
+            myMaterial.wireframe = this.checked;
+        });
+
         customMesh.material = myMaterial;
 
         // CAMERA Target
@@ -334,10 +469,11 @@
          showRGBPointLight(0.2,scene);*/
 
         var lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
-        lightCamera.intensity = 0.8;
-        lightCamera.specular = ColorWhite;
-        lightCamera.parent = camera;
+        lightCamera.intensity = 1;
 
+        lightCamera.diffuse = new BABYLON.Color3(1, 1, 1);
+        lightCamera.specular = new BABYLON.Color3(1, 1, 1);
+        lightCamera.parent = camera;
 
         /* var lightCamera2 = new BABYLON.HemisphericLight("lightCamera2", new BABYLON.Vector3(-100, 0, 0), scene);
          lightCamera2.intensity = 0.4;

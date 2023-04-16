@@ -23,21 +23,21 @@ namespace WebApplicationMVC.Controllers
          
             
             var _stores = _fileDescriptionRepository.GetAllStores();
-            foreach(var _store in _stores)
-
+            foreach (var _store in _stores)
+            { if (_store.Files != null)
            // var _store = _fileDescriptionRepository.GetLastStore();
             foreach (var file in _store.Files)
-            {
-                var resFile = new Model.STLFileModelView()
                 {
-                    StoreId = _store.StoreId,
-                    StoreName = _store.Owner,
-                    FileId = file.FileId,
-                    FileName = file.FileName,
-                    FileSize = file.FileSize
-                };
-                resFiles.Add(resFile);
-            }
+                    var resFile = new Model.STLFileModelView()
+                    {
+                        StoreId = _store.StoreId,
+                        StoreName = _store.Owner,
+                        FileId = file.FileId,
+                        FileName = file.FileName,
+                        FileSize = file.FileSize
+                    };
+                    resFiles.Add(resFile);
+                } }
 
             return View(resFiles);
 

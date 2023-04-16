@@ -20,13 +20,12 @@ dbc.SaveChanges();
 var contextPath = new CAD_FileContext().ContextPath;
 if (!Directory.Exists(contextPath)) Directory.CreateDirectory(contextPath);
 
-string strExeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-string sourcePath = @$"{System.IO.Path.GetDirectoryName(strExeFilePath)}\STLSamples\";
 
+string sourcePath = @"C:\temp\STLSamples\";
 var fr = new FileRepository();
 
 // CREATE STORES
 
-Tools.DirectoryToStore(sourcePath, dbc, fr);
+Tools.DirectoryToStore(sourcePath,"", dbc, fr);
 
 

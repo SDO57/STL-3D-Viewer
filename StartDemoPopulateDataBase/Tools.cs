@@ -3,18 +3,20 @@ using Infra.DB;
 
 public static class Tools
 {
-    public static void DirectoryToStore(string sourcePath, CAD_DBContext dbc, FileRepository fr)
+    public static void DirectoryToStore(string sourcePath, string subfolders, CAD_DBContext dbc, FileRepository fr)
     {
-        string[] dirEntries = Directory.EnumerateDirectories(sourcePath).ToArray();
+        string searchPath = sourcePath + subfolders;
+        string[] dirEntries = Directory.EnumerateDirectories(searchPath).ToArray();
 
         foreach (string dirEntry in dirEntries)
         {
-            DirectoryToStore(dirEntry, dbc, fr); 
+            DirectoryToStore(sourcePath, dirEntry.Replace(sourcePath,""), dbc, fr); 
         }
 
         // CREATE STORE
-        Console.WriteLine($"Inserting a new store [{sourcePath.TrimEnd('\\').Split('\\').Last()}]");
-        dbc.Add(new STLStore { Owner = sourcePath.TrimEnd('\\').Split('\\').Last(), Files = new List<STLFileDescription>() });
+        string StoreName = subfolders.TrimEnd('\\');
+        Console.WriteLine($"Inserting a new store [{StoreName}]");
+        dbc.Add(new STLStore { Owner = StoreName, Files = new List<STLFileDescription>() });
         dbc.SaveChanges();
 
         // INSERTION DES STL DANS LE DERNIER STORE CREE
@@ -26,10 +28,10 @@ public static class Tools
         Console.WriteLine("Adding STL files in ");
 
 
-        string[] fileEntries = Directory.GetFiles(sourcePath, "*.stl");
+        string[] fileEntries = Directory.GetFiles(searchPath, "*.stl");
         foreach (var fullFileName in fileEntries)
         {
-            string shortFileName = fullFileName.Replace(sourcePath, "").TrimStart('\\');
+            string shortFileName = fullFileName.Replace(searchPath, "").TrimStart('\\');
             Console.WriteLine($"Adding [{shortFileName}]");
 
             Byte[] Data = File.ReadAllBytes(fullFileName);
