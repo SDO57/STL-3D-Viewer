@@ -4,21 +4,21 @@ using System.Runtime.CompilerServices;
 
 namespace Core.Tools
 {
-    public class STLJsEncryptDecrypt
+    public class STLBinaryJsEncryptDecrypt : CADJsEncryptDecrypt
     {
 
-        public byte[] Data
+        public STLBinaryJsEncryptDecrypt(byte[] data):base(data) { }
+   
+
+        protected override void DecriptData()
         {
-            get { return _data; }
-            set
-            {
-                _data = value;
+    
 
                 var temp = new byte[80];
-                Array.Copy(_data, 0, temp, 0, 80);
+                Array.Copy(Data, 0, temp, 0, 80);
                 Commentaire80 = temp;
 
-                Compteur4 = BitConverter.ToUInt32(_data, 80);
+                Compteur4 = BitConverter.ToUInt32(Data, 80);
 
                 List<Triangle> triangles = new List<Triangle>();
                 for (int i = 0; i < Compteur4; i++)
@@ -115,57 +115,14 @@ namespace Core.Tools
                 boundings.Add((box.zMax).ToString().Replace(',', '.'));
                 jsBoundingBox = boundings;
 
-            }
+          
         }
+
+
         private byte[] _data;
 
-        public byte[] Commentaire80 { get; private set; }
-
-        
-
-        public uint Compteur4 { get; private set; }
-
-        public List<Triangle> Triangles { get; private set; }
-
-        public class Triangle
-        {
-            public float xNormale { get; set; }
-            public float yNormale { get; set; }
-            public float zNormale { get; set; }
-            public float x1 { get; set; }
-            public float y1 { get; set; }
-            public float z1 { get; set; }
-            public float x2 { get; set; }
-            public float y2 { get; set; }
-            public float z2 { get; set; }
-            public float x3 { get; set; }
-            public float y3 { get; set; }
-            public float z3 { get; set; }
-            public byte[] ctrl { get; set; }
-        }
-
-        public class BoundingBox
-        {
-            public float xMin { get; set; }
-            public float yMin { get; set; }
-            public float zMin { get; set; }
-            public float xMax { get; set; }
-            public float yMax { get; set; }
-            public float zMax { get; set; }
-        }
-        public BoundingBox boundingBox { get; private set; }
-
-        public uint maxJSTriangles = 2500000;
-
-        public List<string> jsNormals { get; private set; }
-        public List<string> jsPositions { get; private set; }
-
-        public List<string> jsIndices { get; private set; }
-
-        public List<string> jsBoundingBox { get; private set; }
-
-
-
+     
+       
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿@model STLFileViewModel
 
 @{
-    var decrypt = new Core.Tools.STLJsEncryptDecrypt() { Data = Model.Data };
+    var decrypt = new Core.Tools.STLBinaryJsEncryptDecrypt(Model.Data);
     var jpositions = String.Join(',', decrypt.jsPositions);
     var jindices = String.Join(',', decrypt.jsIndices);
     var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
