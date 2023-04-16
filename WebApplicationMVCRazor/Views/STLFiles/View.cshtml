@@ -246,6 +246,16 @@
         myMaterial.ambientColor = new BABYLON.Color3(0.4, 0.3, 0.2);
 
       
+            function SetMaterial(materialTable, shininess, transparency) {
+               
+                myMaterial.ambientColor = new BABYLON.Color3(materialTable[0], materialTable[1], materialTable.ab);
+                myMaterial.diffuseColor = new BABYLON.Color3(dr, dg, materialTable.db);
+                myMaterial.specularColor = new BABYLON.Color3(sr, sg, materialTable.sb);
+                myMaterial.emissiveColor = new BABYLON.Color3(er, eg, eb);
+                    case 'gold': SetMaterial(MaterialsTable.gold, 0, 0, 0, 0, 0); break;
+            }
+
+
 
         /* var script = document.createElement('script');
          script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
@@ -260,6 +270,7 @@
         myMaterial.backFaceCulling = true;
         $('#backFaceCulling').change(function () {
             myMaterial.backFaceCulling = !myMaterial.backFaceCulling;
+            myMaterial.backFaceCulling = ($(this).checkedval == true );
         });   
         
         myMaterial.wireframe = false;
