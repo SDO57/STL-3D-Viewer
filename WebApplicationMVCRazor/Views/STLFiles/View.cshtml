@@ -16,33 +16,38 @@
 
         <div class="col-3">
 
-            <h5>
-                <label>FileName : @Model.Desc.FileName</label><a asp-action="Load" asp-route-id="@Model.Desc.FileId">Load</a>
-            </h5>
-            <h5><label>FileId : @Model.Desc.FileId</label></h5>
-            <h5><label>FileSize : @Model.Desc.FileSize</label></h5>
-            <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+
 
 
 
             <form>
                 <fieldset>
+                    <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Return to the Store</a></h2>
+                    <h5>
+                        <label>FileName : @Model.Desc.FileName</label>
+                    </h5>
+
+                    <h5><label>FileId : @Model.Desc.FileId</label></h5>
+                    <h5><label>FileSize : @Model.Desc.FileSize</label></h5>
+                    <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+
+
                     <div>
-                        <input type="checkbox" id="boundingBox" name="boundingBox">
-                        <label for="scales">Show BoundingBox</label>
+                        <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
+                        <label for="cbShowGridGround">Grid Ground</label>
+
                     </div>
 
                     <div>
-                        <input type="checkbox" id="wireframe" name="wireframe">
-                        <label for="scales">Wireframe Mode</label>
+                        <input type="checkbox" id="gridMaterialBox" name="gridMaterialBox">
+                        <label for="gridMaterialBox">Grid Material</label>
+
                     </div>
-                    <div>
-                        <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-                        <label for="scales">Back Face Culling</label>
-                    </div>
+
+
 
                     <select name="Material" id="material-select">
-                        <option disabled>Basic Materials</option>
+                        <option disabled>Color Defined Materials</option>
                         <option value='emerald'>emerald</option>
                         <option value='jade'>jade</option>
                         <option value='obsidian'>obsidian</option>
@@ -50,7 +55,7 @@
                         <option value='ruby'>ruby</option>
                         <option value='turquoise'>turquoise</option>
                         <option value='brass'>brass</option>
-                        <option selected value='bronze'>bronze</option>
+                        <option value='bronze'>bronze</option>
                         <option value='polished_bronze'>polished_bronze</option>
                         <option value='chrome'>chrome</option>
                         <option value='copper'>copper</option>
@@ -62,7 +67,7 @@
                         <option value='polished_silver'>polished_silver</option>
 
                         <option disabled>My Materials</option>
-                        <option value='plaster'>plaster</option>
+                        <option selected value='plaster'>plaster</option>
                         <option value='white_marble'>white marble</option>
                         <option value='rose_marble'>rose marble</option>
 
@@ -81,7 +86,7 @@
                         <option value='red_rubber'>red</option>
                         <option value='white_rubber'>white</option>
                         <option value='yellow_rubber'>yellow</option>
-                      
+
                         <option disabled>My Mats</option>
                         <option value='black_mat'>black</option>
                         <option value='cyan_mat'>cyan</option>
@@ -91,43 +96,73 @@
                         <option value='yellow_mat'>yellow</option>
 
                     </select>
+                    <div>
+                        <input type="color" id="CClearColor" name="CClearColor"
+                               value="#3663AB">
+                        <label for="CClearColor">CClearColor</label>
+                    </div>
 
+                    <div>
+                        <input type="range" id="RAmbiantColor" name="RAmbiantColor"
+                               min="0" max="100" value="40" step="10">
+                        <label for="RAmbiantColor">RAmbiantColor</label>
+                    </div>
+                    <div>
+                        <input type="range" id="RCameraLight" name="RCameraLight"
+                               min="0" max="100" value="60" step="10">
+                        <label for="RCameraLight">RCameraLight</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="wireframe" name="wireframe">
+                        <label for="scales">Wireframe Mode</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                        <label for="scales">Back Face Culling</label>
+                    </div>
+
+                    <div>
+                        <input checked disabled type="checkbox" id="cbShowAxis" name="cbShowAxis">
+                        <label for="cbShowAxis">Show Axis</label>
+
+                    </div>
+                    <div>
+                        <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
+                        <label for="cbBoundingBox">Show BoundingBox</label>
+
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="cbShowNormals" name="cbShowNormals">
+                        <label for="cbShowNormals">Show Normals</label>
+
+                    </div>
                     <!--
 
 
-                        <label for="fuel">Fuel level:</label>
+                                            <label for="fuel">Fuel level:</label>
 
-                        <meter id="fuel"
-                               min="0" max="100"
-                               low="33" high="66" optimum="80"
-                               value="50">
-                            at 50/100
-                        </meter>
-                        <label for="file">File progress:</label>
+                                            <meter id="fuel"
+                                                   min="0" max="100"
+                                                   low="33" high="66" optimum="80"
+                                                   value="50">
+                                                at 50/100
+                                            </meter>
+                                            <label for="file">File progress:</label>
 
-                        <progress id="file" max="100" value="70"> 70% </progress>
-
-
-                        <div>
-                            <input type="file"
-                                   id="meshFile" name="meshFile"
-                                   accept=".stl">
-                        </div>
+                                            <progress id="file" max="100" value="70"> 70% </progress>
 
 
+                                            <div>
+                                                <input type="file"
+                                                       id="meshFile" name="meshFile"
+                                                       accept=".stl">
+                                            </div>
 
 
-                    <div>
-                        <input type="range" id="Camera.Distance" name="Camera.distance"
-                               min="0" max="10">
-                        <label for="Camera.Distance">Distance</label>
-                    </div>
-                    <div>
-                        <input type="range" id="cowbell" name="cowbell"
-                               min="0" max="100" value="90" step="10">
-                        <label for="cowbell">Cowbell</label>
-                    </div>
 
+                    -->
+                    <!--
 
                     <div>
                         <input type="color" id="head" name="head"
@@ -160,14 +195,17 @@
 
 
         <div class="col-9"
+
+
             <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
+                <h2><a class="btn btn-primary" asp-action="Load" asp-route-id="@Model.Desc.FileId"> Download File</a></h2>
         </div>
 
     </div>
 </div>
 
 
-<a asp-action="Index" asp-route-id="">Back</a>
+
 <script>
 
 
@@ -200,7 +238,7 @@
         'red_plastic': [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.7, 0.6, 0.6, .25],
         'white_plastic': [0.0, 0.0, 0.0, 0.55, 0.55, 0.55, 0.70, 0.70, 0.70, .25],
         'yellow_plastic': [0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.60, 0.60, 0.50, .25],
-       
+
         'black_rubber': [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.4, 0.4, 0.4, .078125],
         'cyan_rubber': [0.0, 0.05, 0.05, 0.4, 0.5, 0.5, 0.04, 0.7, 0.7, .078125],
         'green_rubber': [0.0, 0.05, 0.0, 0.4, 0.5, 0.4, 0.04, 0.7, 0.04, .078125],
@@ -212,7 +250,7 @@
         'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
         'white_marble': [1, 0.95, 0.85, 1, 0.9, 0.8, 1, 1, 1, 1.4],
         'rose_marble': [1, 0.8, 0.8, 1, 0.7, 0.7, 1, 1, 1, 1.4],
-        
+
         'black_mat': [0.01, 0.01, 0.01, 0.15, 0.15, 0.15, 0., 0., 0., .25],
         'cyan_mat': [0.01, 0.23, 0.23, 0.2, 0.3, 0.3, 0., 0., 0., .25],
         'green_mat': [0.01, 0.06, 0.01, 0.2, 0.6, 0.2, 0., 0., 0., .25],
@@ -263,13 +301,30 @@
     var boundingBox = [@jboundingBox];
     var positions = [@jpositions];
 
-    var numberOfVertices = positions.length / 3;
-    for (var i = 0; i < numberOfVertices; i++) {
-        var newZ = positions[i * 3 + 1];
-        var newY = positions[i * 3 + 2];
-        positions[i * 3 + 1] = newY;
-        positions[i * 3 + 2] = newZ
+
+    var changeMeshOrientationYZ = function () {
+
+        var numberOfVertices = positions.length / 3;
+        for (var i = 0; i < numberOfVertices; i++) {
+            var newZ = positions[i * 3 + 1];
+            var newY = positions[i * 3 + 2];
+            positions[i * 3 + 1] = newY;
+            positions[i * 3 + 2] = newZ
+        }
     }
+
+    var changeMeshOrientationYSign = function () {
+
+        var numberOfVertices = positions.length / 3;
+        for (var i = 0; i < numberOfVertices; i++) {
+
+            positions[i * 3 + 1] = -positions[i * 3 + 1];
+
+        }
+    }
+
+    changeMeshOrientationYZ();
+
     var indices = [@jindices];
     var normals = [@jnormals];
 
@@ -323,7 +378,7 @@
         lightAmbiant.intensity = intensity;
         lightAmbiant.diffuse = new BABYLON.Color3(1, 1, 1);
         lightAmbiant.specular = new BABYLON.Color3(1, 1, 1);
-
+        return lightAmbiant;
     }
 
 
@@ -347,6 +402,60 @@
 
         vertexData.applyToMesh(customMesh);
 
+
+
+
+        // Calculs Magiques
+        var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
+        var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
+
+        customMesh.position.x = -meshMin.x;
+        customMesh.position.y = -meshMin.y;
+        customMesh.position.z = -meshMin.z;
+
+
+        var cameraTarget = new BABYLON.Vector3(
+            (meshMax.x - meshMin.x) / 2,
+            (meshMax.y - meshMin.y) / 2,
+            (meshMax.z - meshMin.z) / 2);
+
+        var maxBoundingLengh = Math.max(
+            (boundingBox[3] - boundingBox[0]),
+            (boundingBox[4] - boundingBox[1]),
+            (boundingBox[5] - boundingBox[2]));
+
+
+        // normals
+
+
+
+        function showNormals(mesh, size, color, sc) {
+            var normals = mesh.getVerticesData(BABYLON.VertexBuffer.NormalKind);
+            var positions = mesh.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+            color = color || BABYLON.Color3.White();
+            sc = sc || scene;
+            size = size || 1;
+
+            var lines = [];
+            for (var i = 0; i < normals.length; i += 3) {
+                var v1 = BABYLON.Vector3.FromArray(positions, i);
+                var v2 = v1.add(BABYLON.Vector3.FromArray(normals, i).scaleInPlace(size));
+                lines.push([v1.add(mesh.position), v2.add(mesh.position)]);
+            }
+            var normalLines = BABYLON.MeshBuilder.CreateLineSystem("normalLines", { lines: lines }, sc);
+            normalLines.color = color;
+            return normalLines;
+        }
+
+
+        var normalLines = showNormals(customMesh, 0.010 * maxBoundingLengh, new BABYLON.Color3(1, 0, 0));
+
+        //ground.material = gridTransparentMaterial;
+        normalLines.setEnabled(false);
+        $('#cbShowNormals').on('change', function () {
+            normalLines.setEnabled(this.checked);
+        });
+
         // MATERIAL
 
         var myMaterial = new BABYLON.StandardMaterial("mat", scene);
@@ -368,7 +477,7 @@
             //myMaterial.alpha = 0.8;
         }
 
-        SetMaterial(MaterialsTable.bronze, 0, 0, 0, 0, 0);
+        SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0);
 
         $('#material-select').on('change',
             function () {
@@ -426,14 +535,38 @@
 
 
 
+        // GRID MATERIAL
+
+
+        var gridSolidMaterial = new BABYLON.GridMaterial("gridSolidMaterial", scene);
+        gridSolidMaterial.majorUnitFrequency = 1;
+        gridSolidMaterial.gridRatio = 1;
+        gridSolidMaterial.mainColor = new BABYLON.Color3(0.7, 0.7, 0.8);
+        gridSolidMaterial.lineColor = new BABYLON.Color3(0.2, 0.2, 0.3);
+        gridSolidMaterial.useMaxLine = true;
+
+        gridSolidMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
+        gridSolidMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+        gridSolidMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+        gridSolidMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+
+        // MARBLE MATERIAL
+        var marbleMaterial = new BABYLON.StandardMaterial("torus", scene);
+        var marbleTexture = new BABYLON.MarbleProceduralTexture("marble", 512, scene);
+        marbleTexture.numberOfTilesHeight = 3;
+        marbleTexture.numberOfTilesWidth = 3;
+        marbleMaterial.ambientTexture = marbleTexture;
+
 
         /* var script = document.createElement('script');
          script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
          document.getElementsByTagName('head')[0].appendChild(script);
          */
 
+        var axesViewer = new BABYLON.AxesViewer(scene, 5);
+
         customMesh.showBoundingBox = false;
-        $('#boundingBox').on('change', function () {
+        $('#cbBoundingBox').on('change', function () {
             customMesh.showBoundingBox = this.checked;
         });
 
@@ -447,25 +580,23 @@
             myMaterial.wireframe = this.checked;
         });
 
+
+
         customMesh.material = myMaterial;
+        //customMesh.material = gridMaterial;
+        //customMesh.material = gridSolidMaterial;
+        // customMesh.material = defaultGridMaterial;
+        $('#gridMaterialBox').on('change', function () {
+            if (this.checked) customMesh.material = gridSolidMaterial;
+            else customMesh.material = myMaterial;
+        });
 
         // CAMERA Target
 
-        let meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
-        let meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
 
-        var cameraTarget = new BABYLON.Vector3(
-            meshMin.x + (meshMax.x - meshMin.x) / 2,
-            meshMin.y + (meshMax.y - meshMin.y) / 2,
-            meshMin.z + (meshMax.z - meshMin.z) / 2);
-
-        var maxBoundingLengh = Math.max(
-            (boundingBox[3] - boundingBox[0]),
-            (boundingBox[4] - boundingBox[1]),
-            (boundingBox[5] - boundingBox[2]));
 
         var camera = new BABYLON.ArcRotateCamera("camera1",
-            1, 1,
+            0, 0,
             maxBoundingLengh * 0.3,
             new BABYLON.Vector3(0, 5, -10),
             scene);
@@ -473,16 +604,7 @@
         camera.attachControl(canvas, true);
         camera.setTarget(cameraTarget);
 
-        // COLLISIONS
-        /*
-                scene.collisionsEnabled = true;
-                camera.collisionRadius = new BABYLON.Vector3(0.5, 0.5, 0.5);
-                camera.checkCollisions = true;
-                customMesh.checkCollisions = true;
-                customMesh.collisionRadius = new BABYLON.Vector3(maxBoundingLengh, maxBoundingLengh, maxBoundingLengh);
-                */
-
-        // LIMITATIONS
+        // CAMERA LIMITATIONS
         camera.radius = maxBoundingLengh;
 
         var camerasBorderFunction = function () {
@@ -499,36 +621,65 @@
 
         // LIGHTS
 
-        /* showAmbiantLight(0.4, scene);
-         showRGBPointLight(0.2,scene);*/
+        //   var lightAmbiant =
+        //   showAmbiantLight(0.4, scene);
+        //  showRGBPointLight(0.2,scene);
+        var defineLightCamera = function () {
+            var lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
 
-        var lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
-        lightCamera.intensity = 1;
 
-        lightCamera.diffuse = new BABYLON.Color3(1, 1, 1);
-        lightCamera.specular = new BABYLON.Color3(1, 1, 1);
-        lightCamera.parent = camera;
+            lightCamera.diffuse = new BABYLON.Color3(1, 1, 1);
+            lightCamera.specular = new BABYLON.Color3(1, 1, 1);
+            lightCamera.parent = camera;
 
-        /* var lightCamera2 = new BABYLON.HemisphericLight("lightCamera2", new BABYLON.Vector3(-100, 0, 0), scene);
-         lightCamera2.intensity = 0.4;
-         lightCamera2.specular = ColorWhite;
-         lightCamera2.parent = camera;*/
 
-        /*  var lightCamera3 = new BABYLON.PointLight("lightCamera3", new BABYLON.Vector3(0, 0, 100), scene);
-          lightCamera3.intensity = 0.4;
-          lightCamera3.specular = Color3Blue;
-          lightCamera3.parent = camera;*/
+            lightCamera.intensity = 0.6;
+            $('#RCameraLight').on('change', function () {
+                lightCamera.intensity = 0.01 * this.value;
+            });
+        }
 
-        /* var lightCamera2 = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(+0, 0, 0), scene);
-         lightCamera.intensity = 0.4;
-         lightCamera.specular = ColorWhite;
-         lightCamera.position = camera.position;*/
-        // GROUND
+        defineLightCamera();
 
-        //var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000 }, scene);
+        // SHOW GRID GROUND ON/OFF
+
+
+        var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000, subdivisions: 10 }, scene, false);
+
+        var gridGroundMaterial = new BABYLON.GridMaterial("gridGroundMaterial", scene);
+        gridGroundMaterial.majorUnitFrequency = 5;
+        gridGroundMaterial.minorUnitVisibility = 0.7;
+        gridGroundMaterial.lineColor = new BABYLON.Color3(0.9, 0.9, 1);
+        gridGroundMaterial.gridRatio = 1;
+        gridGroundMaterial.opacity = 0.99;
+        gridGroundMaterial.useMaxLine = true;
+
+        ground.material = gridGroundMaterial;
+        ground.setEnabled(true);
+        $('#cbShowGridGround').on('change', function () {
+            ground.setEnabled(this.checked);
+        });
+
+
+
+
+
+        scene.clearColor = BABYLON.Color3.FromHexString("#3663AB");
+        $('#CClearColor').on('change', function () {
+            var chex = this.value;
+            scene.clearColor = new BABYLON.Color3.FromHexString(chex);
+
+        });
+
+        // AMBIANT COLOR
+        scene.ambientColor = new BABYLON.Color3(0.4, 0.4, 0.4);
+        $('#RAmbiantColor').on('change', function () {
+            var x = 0.01 * this.value;
+            scene.ambientColor = new BABYLON.Color3(x, x, x);
+
+        });
 
         // BEFORE RENDER
-
         scene.registerBeforeRender(function () {
             // lightCamera.position = camera.position;
             // lightCamera.position = camera.position;
@@ -554,6 +705,7 @@
         if (!engine) throw 'engine should not be null.';
         startRenderLoop(engine, canvas);
         window.scene = createSceneSTL();
+
     };
 
     initFunction().then(() => {
@@ -561,8 +713,82 @@
     });
 
     // Resize
-    window.addEventListener("resize", function () {
-        engine.resize();
-    });
+    /* window.addEventListener("resize", function () {
+         engine.resize();
+     });
+        canvas = document.addEventListener("resize", function () { engine.resize(); });
+        */
+
+
+
+    const createSceneGRIDMAGICSTL = () => {
+
+
+        // This creates a basic Babylon Scene object (non-mesh)
+        var scene = new BABYLON.Scene(engine);
+
+        // This creates and positions a free camera (non-mesh)
+        //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+        var camera = new BABYLON.ArcRotateCamera("camera1",
+            0, 0,
+            10,
+            new BABYLON.Vector3(0, 5, -10),
+            scene);
+
+        // This targets the camera to scene origin
+        camera.setTarget(BABYLON.Vector3.Zero());
+
+        // This attaches the camera to the canvas
+        camera.attachControl(canvas, true);
+
+        // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+        var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+        // Default intensity is 1. Let's dim the light a small amount
+        light.intensity = 0.4;
+
+        var light2 = new BABYLON.PointLight("light", new BABYLON.Vector3(-3, 4, -4), scene);
+
+        light2.intensity = 1;
+
+        // Our built-in 'sphere' shape.
+        var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
+
+        // Move the sphere upward 1/2 its height
+        sphere.position.y = 1;
+        sphere.position.x = -1;
+
+        var cube = BABYLON.MeshBuilder.CreateBox("box", { size: 1.5 }, scene);
+
+        cube.position.y = 1;
+        cube.position.x = 1.5;
+        cube.position.z = -1.5;
+
+        // Our built-in 'ground' shape.
+        var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
+
+        BABYLON.NodeMaterial.ParseFromSnippetAsync("#I4DJ9Z", scene).then(nodeMaterial => {
+            sphere.material = nodeMaterial;
+            ground.material = nodeMaterial;
+            cube.material = nodeMaterial.clone("node2");
+
+            cube.material.getBlockByName("Diffuse color").value = new BABYLON.Color3(1, 146 / 255, 18 / 255);
+            cube.material.getBlockByName("Line color").value = new BABYLON.Color3(0, 0, 1);
+            cube.material.getBlockByName("Major unit frequency").value = 4;
+            cube.material.getBlockByName("Grid ratio").value = 0.25;
+            cube.material.getBlockByName("Minor unit visibility").value = 0.65;
+
+            scene.debugLayer.show({ showExplorer: true, embedMode: true }).then(() => {
+                scene.debugLayer.select(sphere.material, "INPUTS");
+            });
+        });
+
+
+        return scene;
+
+
+    };
+
+
 
 </script>
