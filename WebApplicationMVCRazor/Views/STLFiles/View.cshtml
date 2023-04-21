@@ -323,7 +323,30 @@
         }
     }
 
+
+    var resizeMesh = function () {
+        var maxBoundingLengh = Math.max(
+            (boundingBox[3] - boundingBox[0]),
+            (boundingBox[4] - boundingBox[1]),
+            (boundingBox[5] - boundingBox[2]));
+
+        var numberOfVertices = positions.length / 3;
+        for (var i = 0; i < numberOfVertices; i++) {
+            positions[i * 3 + 0] = positions[i * 3 + 0] *10 / maxBoundingLengh ;
+            positions[i * 3 + 1] = positions[i * 3 + 1] *10 / maxBoundingLengh;
+            positions[i * 3 + 2] = positions[i * 3 + 2] *10 / maxBoundingLengh ;
+        }
+
+        boundingBox[0] = boundingBox[0] *10 / maxBoundingLengh ;
+        boundingBox[1] = boundingBox[1] *10 / maxBoundingLengh ;
+        boundingBox[2] = boundingBox[2] *10 / maxBoundingLengh ;
+        boundingBox[3] = boundingBox[3] *10 / maxBoundingLengh ;
+        boundingBox[4] = boundingBox[4] *10 / maxBoundingLengh ;
+        boundingBox[5] = boundingBox[5] *10 / maxBoundingLengh ;
+    }
+
     changeMeshOrientationYZ();
+    resizeMesh();
 
     var indices = [@jindices];
     var normals = [@jnormals];
@@ -539,10 +562,11 @@
 
 
         var gridSolidMaterial = new BABYLON.GridMaterial("gridSolidMaterial", scene);
-        gridSolidMaterial.majorUnitFrequency = 1;
-        gridSolidMaterial.gridRatio = 1;
-        gridSolidMaterial.mainColor = new BABYLON.Color3(0.7, 0.7, 0.8);
-        gridSolidMaterial.lineColor = new BABYLON.Color3(0.2, 0.2, 0.3);
+        gridSolidMaterial.majorUnitFrequency = 5;
+        gridSolidMaterial.gridRatio = 0.1;
+        gridSolidMaterial.minorUnitVisibility = 0.8;
+        gridSolidMaterial.mainColor = new BABYLON.Color3(0.8, 0.8, 0.9);
+        gridSolidMaterial.lineColor = new BABYLON.Color3(0, 0, 0.1);
         gridSolidMaterial.useMaxLine = true;
 
         gridSolidMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
@@ -563,7 +587,7 @@
          document.getElementsByTagName('head')[0].appendChild(script);
          */
 
-        var axesViewer = new BABYLON.AxesViewer(scene, 5);
+        var axesViewer = new BABYLON.AxesViewer(scene, 1);
 
         customMesh.showBoundingBox = false;
         $('#cbBoundingBox').on('change', function () {
@@ -597,8 +621,8 @@
 
         var camera = new BABYLON.ArcRotateCamera("camera1",
             0, 0,
-            maxBoundingLengh * 0.3,
-            new BABYLON.Vector3(0, 5, -10),
+            maxBoundingLengh * 2,
+            new BABYLON.Vector3(0, 1, -1),
             scene);
 
         camera.attachControl(canvas, true);
@@ -614,7 +638,7 @@
 
             //Zoom
             if (camera.radius > maxBoundingLengh * 2) camera.radius = maxBoundingLengh * 2;
-            if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
+            if (camera.radius < maxBoundingLengh * 0.68) camera.radius = maxBoundingLengh *0.68 ;
         };
         scene.registerBeforeRender(camerasBorderFunction);
 
@@ -647,7 +671,7 @@
         var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000, subdivisions: 10 }, scene, false);
 
         var gridGroundMaterial = new BABYLON.GridMaterial("gridGroundMaterial", scene);
-        gridGroundMaterial.majorUnitFrequency = 5;
+        gridGroundMaterial.majorUnitFrequency = 10;
         gridGroundMaterial.minorUnitVisibility = 0.7;
         gridGroundMaterial.lineColor = new BABYLON.Color3(0.9, 0.9, 1);
         gridGroundMaterial.gridRatio = 1;
