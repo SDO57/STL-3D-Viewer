@@ -34,7 +34,8 @@ namespace WebApplicationMVC.Controllers
                         StoreName = _store.Owner,
                         FileId = file.FileId,
                         FileName = file.FileName,
-                        FileSize = file.FileSize
+                        FileSize = file.FileSize,
+                        Codage = file.FileCodage
                     };
                     resFiles.Add(resFile);
                 } }

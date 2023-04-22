@@ -1,7 +1,8 @@
-﻿@model STLFileViewModel
+﻿@using Core.Tools;
+@model STLFileViewModel
 
 @{
-    var decrypt = new Core.Tools.STLBinaryJsEncryptDecrypt(Model.Data);
+    CADJsEncryptDecrypt decrypt = (Model.Desc.FileCodage == "BIN") ? new Core.Tools.STLBinaryJsEncryptDecrypt(Model.Data) : new Core.Tools.STLAsciiJsEncryptDecrypt(Model.Data);
     var jpositions = String.Join(',', decrypt.jsPositions);
     var jindices = String.Join(',', decrypt.jsIndices);
     var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
@@ -332,21 +333,43 @@
 
         var numberOfVertices = positions.length / 3;
         for (var i = 0; i < numberOfVertices; i++) {
-            positions[i * 3 + 0] = positions[i * 3 + 0] *10 / maxBoundingLengh ;
-            positions[i * 3 + 1] = positions[i * 3 + 1] *10 / maxBoundingLengh;
-            positions[i * 3 + 2] = positions[i * 3 + 2] *10 / maxBoundingLengh ;
+            positions[i * 3 + 0] = positions[i * 3 + 0] * 10 / maxBoundingLengh;
+            positions[i * 3 + 1] = positions[i * 3 + 1] * 10 / maxBoundingLengh;
+            positions[i * 3 + 2] = positions[i * 3 + 2] * 10 / maxBoundingLengh;
         }
 
-        boundingBox[0] = boundingBox[0] *10 / maxBoundingLengh ;
-        boundingBox[1] = boundingBox[1] *10 / maxBoundingLengh ;
-        boundingBox[2] = boundingBox[2] *10 / maxBoundingLengh ;
-        boundingBox[3] = boundingBox[3] *10 / maxBoundingLengh ;
-        boundingBox[4] = boundingBox[4] *10 / maxBoundingLengh ;
-        boundingBox[5] = boundingBox[5] *10 / maxBoundingLengh ;
+        boundingBox[0] = boundingBox[0] * 10 / maxBoundingLengh;
+        boundingBox[1] = boundingBox[1] * 10 / maxBoundingLengh;
+        boundingBox[2] = boundingBox[2] * 10 / maxBoundingLengh;
+        boundingBox[3] = boundingBox[3] * 10 / maxBoundingLengh;
+        boundingBox[4] = boundingBox[4] * 10 / maxBoundingLengh;
+        boundingBox[5] = boundingBox[5] * 10 / maxBoundingLengh;
+    }
+
+    var centerMesh = function () {
+
+        var l0 = (boundingBox[3] - boundingBox[0]);
+        var l1 = (boundingBox[4] - boundingBox[1]);
+        var l2 = (boundingBox[5] - boundingBox[2]);
+
+        var numberOfVertices = positions.length / 3;
+        for (var i = 0; i < numberOfVertices; i++) {
+            positions[i * 3 + 0] = positions[i * 3 + 0] + (10-l0) *0.5;
+            positions[i * 3 + 1] = positions[i * 3 + 1] + (10-l1) *0.5;
+            positions[i * 3 + 2] = positions[i * 3 + 2] + (10-l2) *0.5;
+        }
+
+        boundingBox[0] = boundingBox[0] + (10 - l0) * 0.5;
+        boundingBox[1] = boundingBox[1] + (10 - l1) * 0.5;
+        boundingBox[2] = boundingBox[2] + (10 - l2) * 0.5;
+        boundingBox[3] = boundingBox[3] + (10 - l0) * 0.5;
+        boundingBox[4] = boundingBox[4] + (10 - l1) * 0.5;
+        boundingBox[5] = boundingBox[5] + (10 - l2) * 0.5;
     }
 
     changeMeshOrientationYZ();
     resizeMesh();
+    //centerMesh();
 
     var indices = [@jindices];
     var normals = [@jnormals];
@@ -428,19 +451,19 @@
 
 
 
-        // Calculs Magiques
+        // Calculs Magiques recentrage
         var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
         var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
 
-        customMesh.position.x = -meshMin.x;
-        customMesh.position.y = -meshMin.y;
-        customMesh.position.z = -meshMin.z;
+        customMesh.position.x = -meshMin.x + (10 - (meshMax.x-meshMin.x)) * 0.5;
+        customMesh.position.y = -meshMin.y/*+ (10 - (meshMax.x-meshMin.x)) * 0.5*/;
+        customMesh.position.z = -meshMin.z + (10 - (meshMax.z - meshMin.z)) * 0.5;
 
 
         var cameraTarget = new BABYLON.Vector3(
-            (meshMax.x - meshMin.x) / 2,
+            (meshMax.x - meshMin.x) / 2 + (10 - (meshMax.x - meshMin.x)) * 0.5,
             (meshMax.y - meshMin.y) / 2,
-            (meshMax.z - meshMin.z) / 2);
+            (meshMax.z - meshMin.z) / 2 + (10 - (meshMax.z - meshMin.z)) * 0.5);
 
         var maxBoundingLengh = Math.max(
             (boundingBox[3] - boundingBox[0]),
@@ -587,7 +610,7 @@
          document.getElementsByTagName('head')[0].appendChild(script);
          */
 
-        var axesViewer = new BABYLON.AxesViewer(scene, 1);
+        var axesViewer = new BABYLON.AxesViewer(scene, 3);
 
         customMesh.showBoundingBox = false;
         $('#cbBoundingBox').on('change', function () {
@@ -638,7 +661,7 @@
 
             //Zoom
             if (camera.radius > maxBoundingLengh * 2) camera.radius = maxBoundingLengh * 2;
-            if (camera.radius < maxBoundingLengh * 0.68) camera.radius = maxBoundingLengh *0.68 ;
+            if (camera.radius < maxBoundingLengh * 1) camera.radius = maxBoundingLengh * 1;
         };
         scene.registerBeforeRender(camerasBorderFunction);
 

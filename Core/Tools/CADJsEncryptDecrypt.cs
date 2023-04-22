@@ -10,9 +10,14 @@ namespace Core.Tools
         public CADJsEncryptDecrypt(byte[] data)
         {
             Data = data;
+
+
         }
 
-        protected abstract void DecriptData();
+        public bool IsDecryptable { get; private set; }
+
+
+        protected abstract void DecriptDataOneShot();
 
         protected byte[] Data
         {
@@ -20,15 +25,27 @@ namespace Core.Tools
             set
             {
                 _data = value;
-                DecriptData();
-                
+                bool res = true;
+                try
+                {
+                    DecriptDataOneShot();
+                    IsDecryptable = true;
+
+                }
+                catch (Exception e)
+                {
+                    IsDecryptable = false;
+                }
+
+
             }
         }
+
         private byte[] _data;
 
         public byte[] Commentaire80 { get; protected set; }
 
-        
+
 
         public uint Compteur4 { get; protected set; }
 
@@ -64,7 +81,7 @@ namespace Core.Tools
 
         public uint maxJSTriangles = 2500000;
 
-       
+
 
         public List<string> jsNormals { get; protected set; }
         public List<string> jsPositions { get; protected set; }

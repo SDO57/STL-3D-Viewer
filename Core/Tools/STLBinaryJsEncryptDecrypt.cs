@@ -8,9 +8,9 @@ namespace Core.Tools
     {
 
         public STLBinaryJsEncryptDecrypt(byte[] data):base(data) { }
-   
 
-        protected override void DecriptData()
+      
+        protected override void DecriptDataOneShot()
         {
     
 
@@ -104,7 +104,7 @@ namespace Core.Tools
                     indices.Add($"{i * 3 + 2}");
                 }
                 jsIndices = indices;
-
+            
                 List<string> boundings = new List<string>();
                 boundings.Add((box.xMin).ToString().Replace(',', '.'));
                 boundings.Add((box.yMin).ToString().Replace(',', '.'));
@@ -114,7 +114,7 @@ namespace Core.Tools
                 boundings.Add((box.yMax).ToString().Replace(',', '.'));
                 boundings.Add((box.zMax).ToString().Replace(',', '.'));
                 jsBoundingBox = boundings;
-
+            
           
         }
 

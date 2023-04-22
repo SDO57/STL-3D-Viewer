@@ -18,8 +18,12 @@
                 @Html.DisplayNameFor(model => model.StoreName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Codage)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FileName)
             </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.FileSize)
             </th>
@@ -38,6 +42,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StoreName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codage)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FileName)
