@@ -27,12 +27,19 @@
                     <h5>
                         <label>FileName : @Model.Desc.FileName</label>
                     </h5>
+                    <h5>
+                        <label>Codage : @Model.Desc.FileCodage</label>
+                    </h5>
 
                     <h5><label>FileId : @Model.Desc.FileId</label></h5>
                     <h5><label>FileSize : @Model.Desc.FileSize</label></h5>
                     <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
 
-
+                    <div>
+                        <input type="color" id="CClearColor" name="CClearColor"
+                               value="#3663AB">
+                        <label for="CClearColor">CClearColor</label>
+                    </div>
                     <div>
                         <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
                         <label for="cbShowGridGround">Grid Ground</label>
@@ -45,85 +52,81 @@
 
                     </div>
 
+                    <div id="material-group">
 
+                        <select name="Material" id="material-select">
+                            <option disabled>Color Defined Materials</option>
+                            <option value='emerald'>emerald</option>
+                            <option value='jade'>jade</option>
+                            <option value='obsidian'>obsidian</option>
+                            <option value='pearl'>pearl</option>
+                            <option value='ruby'>ruby</option>
+                            <option value='turquoise'>turquoise</option>
+                            <option value='brass'>brass</option>
+                            <option value='bronze'>bronze</option>
+                            <option value='polished_bronze'>polished_bronze</option>
+                            <option value='chrome'>chrome</option>
+                            <option value='copper'>copper</option>
+                            <option value='polished_copper'>polished_copper</option>
+                            <option value='gold'>gold</option>
+                            <option value='polished_gold'>polished_gold</option>
+                            <option value='pewter'>pewter</option>
+                            <option value='silver'>silver</option>
+                            <option value='polished_silver'>polished_silver</option>
 
-                    <select name="Material" id="material-select">
-                        <option disabled>Color Defined Materials</option>
-                        <option value='emerald'>emerald</option>
-                        <option value='jade'>jade</option>
-                        <option value='obsidian'>obsidian</option>
-                        <option value='pearl'>pearl</option>
-                        <option value='ruby'>ruby</option>
-                        <option value='turquoise'>turquoise</option>
-                        <option value='brass'>brass</option>
-                        <option value='bronze'>bronze</option>
-                        <option value='polished_bronze'>polished_bronze</option>
-                        <option value='chrome'>chrome</option>
-                        <option value='copper'>copper</option>
-                        <option value='polished_copper'>polished_copper</option>
-                        <option value='gold'>gold</option>
-                        <option value='polished_gold'>polished_gold</option>
-                        <option value='pewter'>pewter</option>
-                        <option value='silver'>silver</option>
-                        <option value='polished_silver'>polished_silver</option>
+                            <option disabled>My Materials</option>
+                            <option selected value='plaster'>plaster</option>
+                            <option value='white_marble'>white marble</option>
+                            <option value='rose_marble'>rose marble</option>
 
-                        <option disabled>My Materials</option>
-                        <option selected value='plaster'>plaster</option>
-                        <option value='white_marble'>white marble</option>
-                        <option value='rose_marble'>rose marble</option>
+                            <option disabled>Plastic</option>
+                            <option value='black_plastic'>black</option>
+                            <option value='cyan_plastic'>cyan</option>
+                            <option value='green_plastic'>green</option>
+                            <option value='red_plastic'>red</option>
+                            <option value='white_plastic'>white</option>
+                            <option value='yellow_plastic'>yellow</option>
 
-                        <option disabled>Plastic</option>
-                        <option value='black_plastic'>black</option>
-                        <option value='cyan_plastic'>cyan</option>
-                        <option value='green_plastic'>green</option>
-                        <option value='red_plastic'>red</option>
-                        <option value='white_plastic'>white</option>
-                        <option value='yellow_plastic'>yellow</option>
+                            <option disabled>Rubber</option>
+                            <option value='black_rubber'>black</option>
+                            <option value='cyan_rubber'>cyan</option>
+                            <option value='green_rubber'>green</option>
+                            <option value='red_rubber'>red</option>
+                            <option value='white_rubber'>white</option>
+                            <option value='yellow_rubber'>yellow</option>
 
-                        <option disabled>Rubber</option>
-                        <option value='black_rubber'>black</option>
-                        <option value='cyan_rubber'>cyan</option>
-                        <option value='green_rubber'>green</option>
-                        <option value='red_rubber'>red</option>
-                        <option value='white_rubber'>white</option>
-                        <option value='yellow_rubber'>yellow</option>
+                            <option disabled>My Mats</option>
+                            <option value='black_mat'>black</option>
+                            <option value='cyan_mat'>cyan</option>
+                            <option value='green_mat'>green</option>
+                            <option value='red_mat'>red</option>
+                            <option value='white_mat'>white</option>
+                            <option value='yellow_mat'>yellow</option>
 
-                        <option disabled>My Mats</option>
-                        <option value='black_mat'>black</option>
-                        <option value='cyan_mat'>cyan</option>
-                        <option value='green_mat'>green</option>
-                        <option value='red_mat'>red</option>
-                        <option value='white_mat'>white</option>
-                        <option value='yellow_mat'>yellow</option>
+                        </select>
+                        
 
-                    </select>
-                    <div>
-                        <input type="color" id="CClearColor" name="CClearColor"
-                               value="#3663AB">
-                        <label for="CClearColor">CClearColor</label>
+                        <div>
+                            <input type="range" id="RAmbiantColor" name="RAmbiantColor"
+                                   min="0" max="100" value="40" step="10">
+                            <label for="RAmbiantColor">RAmbiantColor</label>
+                        </div>
+                        <div>
+                            <input type="range" id="RCameraLight" name="RCameraLight"
+                                   min="0" max="100" value="60" step="10">
+                            <label for="RCameraLight">RCameraLight</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="wireframe" name="wireframe">
+                            <label for="scales">Wireframe Mode</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                            <label for="scales">Back Face Culling</label>
+                        </div>
                     </div>
-
                     <div>
-                        <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                               min="0" max="100" value="40" step="10">
-                        <label for="RAmbiantColor">RAmbiantColor</label>
-                    </div>
-                    <div>
-                        <input type="range" id="RCameraLight" name="RCameraLight"
-                               min="0" max="100" value="60" step="10">
-                        <label for="RCameraLight">RCameraLight</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="wireframe" name="wireframe">
-                        <label for="scales">Wireframe Mode</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-                        <label for="scales">Back Face Culling</label>
-                    </div>
-
-                    <div>
-                        <input checked disabled type="checkbox" id="cbShowAxis" name="cbShowAxis">
+                        <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
                         <label for="cbShowAxis">Show Axis</label>
 
                     </div>
@@ -346,26 +349,26 @@
         boundingBox[5] = boundingBox[5] * 10 / maxBoundingLengh;
     }
 
-    var centerMesh = function () {
+    /* var centerMesh = function () {
 
-        var l0 = (boundingBox[3] - boundingBox[0]);
-        var l1 = (boundingBox[4] - boundingBox[1]);
-        var l2 = (boundingBox[5] - boundingBox[2]);
+         var l0 = (boundingBox[3] - boundingBox[0]);
+         var l1 = (boundingBox[4] - boundingBox[1]);
+         var l2 = (boundingBox[5] - boundingBox[2]);
 
-        var numberOfVertices = positions.length / 3;
-        for (var i = 0; i < numberOfVertices; i++) {
-            positions[i * 3 + 0] = positions[i * 3 + 0] + (10-l0) *0.5;
-            positions[i * 3 + 1] = positions[i * 3 + 1] + (10-l1) *0.5;
-            positions[i * 3 + 2] = positions[i * 3 + 2] + (10-l2) *0.5;
-        }
+         var numberOfVertices = positions.length / 3;
+         for (var i = 0; i < numberOfVertices; i++) {
+             positions[i * 3 + 0] = positions[i * 3 + 0] + (10-l0) *0.5;
+             positions[i * 3 + 1] = positions[i * 3 + 1] + (10-l1) *0.5;
+             positions[i * 3 + 2] = positions[i * 3 + 2] + (10-l2) *0.5;
+         }
 
-        boundingBox[0] = boundingBox[0] + (10 - l0) * 0.5;
-        boundingBox[1] = boundingBox[1] + (10 - l1) * 0.5;
-        boundingBox[2] = boundingBox[2] + (10 - l2) * 0.5;
-        boundingBox[3] = boundingBox[3] + (10 - l0) * 0.5;
-        boundingBox[4] = boundingBox[4] + (10 - l1) * 0.5;
-        boundingBox[5] = boundingBox[5] + (10 - l2) * 0.5;
-    }
+         boundingBox[0] = boundingBox[0] + (10 - l0) * 0.5;
+         boundingBox[1] = boundingBox[1] + (10 - l1) * 0.5;
+         boundingBox[2] = boundingBox[2] + (10 - l2) * 0.5;
+         boundingBox[3] = boundingBox[3] + (10 - l0) * 0.5;
+         boundingBox[4] = boundingBox[4] + (10 - l1) * 0.5;
+         boundingBox[5] = boundingBox[5] + (10 - l2) * 0.5;
+     }*/
 
     changeMeshOrientationYZ();
     resizeMesh();
@@ -455,8 +458,8 @@
         var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
         var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
 
-        customMesh.position.x = -meshMin.x + (10 - (meshMax.x-meshMin.x)) * 0.5;
-        customMesh.position.y = -meshMin.y/*+ (10 - (meshMax.x-meshMin.x)) * 0.5*/;
+        customMesh.position.x = -meshMin.x + (10 - (meshMax.x - meshMin.x)) * 0.5;
+        customMesh.position.y = -meshMin.y;
         customMesh.position.z = -meshMin.z + (10 - (meshMax.z - meshMin.z)) * 0.5;
 
 
@@ -611,6 +614,12 @@
          */
 
         var axesViewer = new BABYLON.AxesViewer(scene, 3);
+        axesViewer.dispose();;
+        $('#cbShowAxis').on('change', function () {
+            if (!this.checked) axesViewer.dispose();
+            else axesViewer = new BABYLON.AxesViewer(scene, 3);
+        });
+
 
         customMesh.showBoundingBox = false;
         $('#cbBoundingBox').on('change', function () {
@@ -636,6 +645,11 @@
         $('#gridMaterialBox').on('change', function () {
             if (this.checked) customMesh.material = gridSolidMaterial;
             else customMesh.material = myMaterial;
+            $('#material-select').prop("disabled", this.checked);
+            $('#RAmbiantColor').prop("disabled", this.checked);
+            $('#RCameraLight').prop("disabled", this.checked);
+            $('#wireframe').prop("disabled", this.checked);
+            $('#backFaceCulling').prop("disabled", this.checked);
         });
 
         // CAMERA Target

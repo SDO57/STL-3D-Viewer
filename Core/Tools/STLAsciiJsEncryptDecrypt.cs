@@ -16,21 +16,7 @@ namespace Core.Tools
         public STLAsciiJsEncryptDecrypt(byte[] data) : base(data) { }
 
 
-        // with SPRACHE : https://github.com/sprache/Sprache
-        // https://tlevesque.developpez.com/tutoriels/csharp/parser-texte-csharp-sprache/
-
-        // This class uses ANTLR (ANother Tool for Language Recognition)
-        // It Generate Lexer, Parser and Visitor from Grammar File .g4
-        // from 'Input' LEXER Generate 'Tokens'
-        // from 'Tokens' PARSER generate 'Parse Tree'
-        // from 'Parse Tree' VISITOR generate 'Output
-        // see more : https://learn.microsoft.com/fr-fr/events/dotnetconf-2020/create-a-text-parser-in-c-with-antlr
-        // see http://franckgaspoz.fr/en/first-steps-with-antlr4-in-csharp/
-
-        // see ANTLR4 tuto here : https://stackoverflow.com/questions/66152870/using-antlr4-in-net-core-without-the-use-of-external-java-library
-        // see https://tomassetti.me/getting-started-with-antlr-in-csharp/
-        // see https://compil-lyon.gitlabpages.inria.fr/compil-lyon/MIF081920_Lyon1/mif08_tp2.pdf
-        // https://fullboarllc.com/antlr4-dotnet-core-visitor/
+       
 
         protected override void DecriptDataOneShot()
         {

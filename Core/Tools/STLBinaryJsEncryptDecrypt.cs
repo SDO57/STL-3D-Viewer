@@ -119,7 +119,7 @@ namespace Core.Tools
         }
 
 
-        private byte[] _data;
+      //  private byte[] _data;
 
      
        
