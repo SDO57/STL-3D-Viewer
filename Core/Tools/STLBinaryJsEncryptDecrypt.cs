@@ -19,7 +19,7 @@ namespace Core.Tools
                 Commentaire80 = temp;
 
                 Compteur4 = BitConverter.ToUInt32(Data, 80);
-
+           
                 List<Triangle> triangles = new List<Triangle>();
                 for (int i = 0; i < Compteur4; i++)
                 {

@@ -24,7 +24,7 @@ namespace Core.Tools
 
             string[] lines = utfString.Split("\n");
 
-            string[] words = lines[0].Trim().Split(" ");
+            string[] words = lines[0].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
             if (words[0] != "solid") { throw new Exception("FORMAT INCORRECT"); }
             Commentaire80 = Encoding.ASCII.GetBytes(words[1]);
 
@@ -44,28 +44,28 @@ namespace Core.Tools
                     endfacet
                 */
 
-                words = lines[1 + triangleIndex * 7].Trim().Split(" ");
+                words = lines[1 + triangleIndex * 7].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 if (words[0] != "facet" && words[1] != "normal") { throw new Exception("FORMAT INCORRECT"); }
                 float ni = float.Parse(words[2], CultureInfo.InvariantCulture);
                 float nj = float.Parse(words[3], CultureInfo.InvariantCulture);
                 float nk = float.Parse(words[4], CultureInfo.InvariantCulture);
 
-                words = lines[1 + triangleIndex * 7 + 2].Trim().Split(" ");
+                words = lines[1 + triangleIndex * 7 + 2].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 if (words[0] != "vertex") { throw new Exception("FORMAT INCORRECT"); }
                 float v1x = float.Parse(words[1], CultureInfo.InvariantCulture);
                 float v1y = float.Parse(words[2], CultureInfo.InvariantCulture);
                 float v1z = float.Parse(words[3], CultureInfo.InvariantCulture);
 
-                words = lines[1 + triangleIndex * 7 + 3].Trim().Split(" ");
+                words = lines[1 + triangleIndex * 7 + 3].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 if (words[0] != "vertex") { throw new Exception("FORMAT INCORRECT"); }
                 float v2x = float.Parse(words[1], CultureInfo.InvariantCulture);
                 float v2y = float.Parse(words[2], CultureInfo.InvariantCulture);
                 float v2z = float.Parse(words[3], CultureInfo.InvariantCulture);
 
-                words = lines[1 + triangleIndex * 7 + 4].Trim().Split(" ");
+                words = lines[1 + triangleIndex * 7 + 4].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 if (words[0] != "vertex") { throw new Exception("FORMAT INCORRECT"); }
                 float v3x = float.Parse(words[1], CultureInfo.InvariantCulture);

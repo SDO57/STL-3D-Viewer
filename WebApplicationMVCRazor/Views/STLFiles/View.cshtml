@@ -24,15 +24,29 @@
             <form>
                 <fieldset>
                     <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Return to the Store</a></h2>
-                    <h5>
-                        <label>FileName : @Model.Desc.FileName</label>
-                    </h5>
+                    <div class='row'>
+                        <select name="store-select" id="store-select">
+
+                            <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
+
+                        </select>
+                    </div>
+
+                    <div class='row'>
+                        <select name="file-select" id="file-select">
+
+                            <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
+
+                        </select>
+
+                    </div>
+
                     <h5>
                         <label>Codage : @Model.Desc.FileCodage</label>
                     </h5>
 
-                    <h5><label>FileId : @Model.Desc.FileId</label></h5>
-                    <h5><label>FileSize : @Model.Desc.FileSize</label></h5>
+
+                    <h5><label>FileSize : @Model.Desc.FileSize</label> (bytes) </h5>
                     <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
 
                     <div>
@@ -104,7 +118,7 @@
                             <option value='yellow_mat'>yellow</option>
 
                         </select>
-                        
+
 
                         <div>
                             <input type="range" id="RAmbiantColor" name="RAmbiantColor"
@@ -393,7 +407,9 @@
     var engine = null;
     var scene = null;
     var sceneToRender = null;
-    var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
+    var createDefaultEngine = function () { 
+        return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); 
+    };
 
 
 
@@ -658,7 +674,7 @@
 
         var camera = new BABYLON.ArcRotateCamera("camera1",
             0, 0,
-            maxBoundingLengh * 2,
+            maxBoundingLengh * 2.5,
             new BABYLON.Vector3(0, 1, -1),
             scene);
 
@@ -674,8 +690,8 @@
             // else if (camera.beta > (Math.PI / 2) * 0.9) camera.beta = (Math.PI / 2) * 0.9;
 
             //Zoom
-            if (camera.radius > maxBoundingLengh * 2) camera.radius = maxBoundingLengh * 2;
-            if (camera.radius < maxBoundingLengh * 1) camera.radius = maxBoundingLengh * 1;
+            if (camera.radius > maxBoundingLengh * 2.5) camera.radius = maxBoundingLengh * 2.5;
+            if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
         };
         scene.registerBeforeRender(camerasBorderFunction);
 
