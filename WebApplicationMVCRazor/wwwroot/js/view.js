@@ -100,16 +100,46 @@ var showRGBDirectionalLight = function (intensity, scene) {
 
 var changeMeshOrientationYZ = function () {
 
-    var numberOfVertices = positions.length / 3;
-    for (var i = 0; i < numberOfVertices; i++) {
-        var newZ = positions[i * 3 + 1];
-        var newY = positions[i * 3 + 2];
-        positions[i * 3 + 1] = newY;
-        positions[i * 3 + 2] = newZ
+    var numberFaces = positions.length / 3;
+    var ind = 0;
+
+    var xmin = positions[0];
+    var ymin = positions[2];
+    var zmin = positions[1];
+
+    var xmax = positions[0];
+    var ymax = positions[2];
+    var zmax = positions[1];
+
+    for (var i = 0; i < numberFaces; i++) {
+
+        var newZ = positions[ind + 1];
+        var newY = positions[ind + 2];
+
+        positions[ind + 1] = newY;
+        positions[ind + 2] = newZ
+
+        xmin = Math.min(xmin, positions[ind]);
+        ymin = Math.min(ymin, positions[ind + 1]);
+        zmin = Math.min(zmin, positions[ind + 2]);
+
+        xmax = Math.max(xmax, positions[ind]);
+        ymax = Math.max(ymax, positions[ind + 1]);
+        zmax = Math.max(zmax, positions[ind + 2]);
+
+        ind += 3;
     }
+
+    boundingBox[0] = xmin;
+    boundingBox[1] = ymin;
+    boundingBox[2] = zmin;
+
+    boundingBox[3] = xmax;
+    boundingBox[4] = ymax;
+    boundingBox[5] = zmax;
 }
 
-var changeMeshOrientationYSign = function () {
+/*var changeMeshOrientationYSign = function () {
 
     var numberOfVertices = positions.length / 3;
     for (var i = 0; i < numberOfVertices; i++) {
@@ -117,59 +147,48 @@ var changeMeshOrientationYSign = function () {
         positions[i * 3 + 1] = -positions[i * 3 + 1];
 
     }
-}
+}*/
 
 
 var resizeMesh = function () {
-    var maxBoundingLengh = Math.max(
-        (boundingBox[3] - boundingBox[0]),
-        (boundingBox[4] - boundingBox[1]),
-        (boundingBox[5] - boundingBox[2]));
 
-    var numberOfVertices = positions.length / 3;
-    for (var i = 0; i < numberOfVertices; i++) {
-        positions[i * 3 + 0] = positions[i * 3 + 0] * 10 / maxBoundingLengh;
-        positions[i * 3 + 1] = positions[i * 3 + 1] * 10 / maxBoundingLengh;
-        positions[i * 3 + 2] = positions[i * 3 + 2] * 10 / maxBoundingLengh;
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+
+    var factor = 10.0 / Math.max(LX, LZ);
+
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+
+    var numberFaces = positions.length / 3;
+    var ind = 0;
+    for (var i = 0; i < numberFaces; i++) {
+        positions[ind + 0] = (positions[ind + 0] ); // * factor;
+        positions[ind + 1] = positions[ind + 1];// * factor;
+        positions[ind + 2] = (positions[ind + 2] );// * factor;
+        ind += 3;
     }
 
-    boundingBox[0] = boundingBox[0] * 10 / maxBoundingLengh;
-    boundingBox[1] = boundingBox[1] * 10 / maxBoundingLengh;
-    boundingBox[2] = boundingBox[2] * 10 / maxBoundingLengh;
-    boundingBox[3] = boundingBox[3] * 10 / maxBoundingLengh;
-    boundingBox[4] = boundingBox[4] * 10 / maxBoundingLengh;
-    boundingBox[5] = boundingBox[5] * 10 / maxBoundingLengh;
+    boundingBox[0] = 0;
+    boundingBox[1] = 0;
+    boundingBox[2] = 0;
+    boundingBox[3] = LX * factor;
+    boundingBox[4] = LY * factor;
+    boundingBox[5] = LZ * factor;
 }
 
-/* var centerMesh = function () {
- 
-     var l0 = (boundingBox[3] - boundingBox[0]);
-     var l1 = (boundingBox[4] - boundingBox[1]);
-     var l2 = (boundingBox[5] - boundingBox[2]);
- 
-     var numberOfVertices = positions.length / 3;
-     for (var i = 0; i < numberOfVertices; i++) {
-         positions[i * 3 + 0] = positions[i * 3 + 0] + (10-l0) *0.5;
-         positions[i * 3 + 1] = positions[i * 3 + 1] + (10-l1) *0.5;
-         positions[i * 3 + 2] = positions[i * 3 + 2] + (10-l2) *0.5;
-     }
- 
-     boundingBox[0] = boundingBox[0] + (10 - l0) * 0.5;
-     boundingBox[1] = boundingBox[1] + (10 - l1) * 0.5;
-     boundingBox[2] = boundingBox[2] + (10 - l2) * 0.5;
-     boundingBox[3] = boundingBox[3] + (10 - l0) * 0.5;
-     boundingBox[4] = boundingBox[4] + (10 - l1) * 0.5;
-     boundingBox[5] = boundingBox[5] + (10 - l2) * 0.5;
- }*/
+
 
 changeMeshOrientationYZ();
 resizeMesh();
-//centerMesh();
+
 
 
 BABYLON.VertexData.ComputeNormals(positions, indices, normals);
 
-//
+
 
 var Color3Red = new BABYLON.Color3(1, 0, 0);
 var Color3Green = new BABYLON.Color3(0, 1, 0);
@@ -251,27 +270,36 @@ const createSceneSTL = () => {
     vertexData.applyToMesh(customMesh);
 
     customMesh.convertToFlatShadedMesh();
-   /* var mat = new BABYLON.StandardMaterial("", scene);
-    mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
-    */
+    /* var mat = new BABYLON.StandardMaterial("", scene);
+     mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
+     */
     // Calculs Magiques recentrage
     var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
     var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
 
-    customMesh.position.x = -meshMin.x + (10 - (meshMax.x - meshMin.x)) * 0.5;
-    customMesh.position.y = -meshMin.y;
-    customMesh.position.z = -meshMin.z + (10 - (meshMax.z - meshMin.z)) * 0.5;
-
+    var LX = (meshMax.x - meshMin.x);
+    var LY = (meshMax.y - meshMin.y);
+    var LZ = (meshMax.z - meshMin.z);
 
     var cameraTarget = new BABYLON.Vector3(
-        (meshMax.x - meshMin.x) / 2 + (10 - (meshMax.x - meshMin.x)) * 0.5,
-        (meshMax.y - meshMin.y) / 2,
-        (meshMax.z - meshMin.z) / 2 + (10 - (meshMax.z - meshMin.z)) * 0.5);
+        LX * 0.5,
+        meshMax.y * 0.5,
+        LZ * 0.5);
 
+    customMesh.position.x = - meshMin.x;// + (10 - (meshMax.x - meshMin.x)) * 0.5;
+    customMesh.position.y = 0;// -meshMin.y;
+    customMesh.position.z = - meshMin.z;// + (10 - (meshMax.z - meshMin.z)) * 0.5;
+    
+
+    /*  var cameraTarget = new BABYLON.Vector3(
+           / 2 + (10 - (meshMax.x - meshMin.x)) * 0.5,
+          (meshMax.y - meshMin.y) / 2,
+          (meshMax.z - meshMin.z) / 2 + (10 - (meshMax.z - meshMin.z)) * 0.5);
+          */
     var maxBoundingLengh = Math.max(
-        (boundingBox[3] - boundingBox[0]),
-        (boundingBox[4] - boundingBox[1]),
-        (boundingBox[5] - boundingBox[2]));
+        LX,
+        LY,
+        LZ);
 
 
     // normals
@@ -336,23 +364,21 @@ const createSceneSTL = () => {
 
                 /* if (this.checked) */
                 customMesh.material = gridSolidMaterial;
-              /*  else customMesh.material = myMaterial;
-                $('#material-select').prop("disabled", this.checked);
-                $('#RAmbiantColor').prop("disabled", this.checked);
-                $('#RCameraLight').prop("disabled", this.checked);
-                $('#wireframe').prop("disabled", this.checked);
-                $('#backFaceCulling').prop("disabled", this.checked);*/
+                /*  else customMesh.material = myMaterial;
+                  $('#material-select').prop("disabled", this.checked);
+                  $('#RAmbiantColor').prop("disabled", this.checked);
+                  $('#RCameraLight').prop("disabled", this.checked);
+                  $('#wireframe').prop("disabled", this.checked);
+                  $('#backFaceCulling').prop("disabled", this.checked);*/
 
             }
             else if (mat == 'brick') {
                 customMesh.material = brickMaterial;
             }
-            else if (mat == 'wood')
-            {
+            else if (mat == 'wood') {
                 customMesh.material = woodMaterial;
             }
-            else if (mat == 'marble')
-            {
+            else if (mat == 'marble') {
                 customMesh.material = marbleMaterial;
             }
             else if (mat == 'road') {
@@ -439,26 +465,26 @@ const createSceneSTL = () => {
     gridSolidMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
     gridSolidMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
 
-  
+
     // WOOD MATERIAL
-   
+
     var woodMaterial = new BABYLON.StandardMaterial("woodMat", scene);
     var woodTexture = new BABYLON.WoodProceduralTexture("woodTex", 1024, scene);
     //woodTexture.woodColor = new BABYLON.Color3(0.3, 0.2, 0.05);
     woodTexture.ampScale = 80.0;
 
     woodMaterial.diffuseTexture = woodTexture;
-   
+
 
     var grassMaterial = new BABYLON.StandardMaterial("grassMat", scene);
     var grassTexture = new BABYLON.GrassProceduralTexture("grassTex", 256, scene);
     grassMaterial.ambientTexture = grassTexture;
 
-   /* grassMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
-    grassMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-    grassMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    grassMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
-    */
+    /* grassMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
+     grassMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+     grassMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+     grassMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+     */
 
     // MARBLE MATERIAL
     var marbleMaterial = new BABYLON.StandardMaterial("torus", scene);
@@ -497,27 +523,27 @@ const createSceneSTL = () => {
     var cloudMaterial = new BABYLON.StandardMaterial("cloudMat", scene);
 
     var cloudProcTexture = new BABYLON.CloudProceduralTexture("cloudTex", 1024, scene);
-   /* cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
-    cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);*/
+    /* cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
+     cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);*/
 
     cloudMaterial.emissiveTexture = cloudProcTexture;
     cloudMaterial.backFaceCulling = false;
 
-   
+
 
     cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
-   
+
     /* var script = document.createElement('script');
      script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
      document.getElementsByTagName('head')[0].appendChild(script);
      */
 
-    var axesViewer = new BABYLON.AxesViewer(scene, 3);
+    var axesViewer = new BABYLON.AxesViewer(scene, 10);
     axesViewer.dispose();;
     $('#cbShowAxis').on('change', function () {
         if (!this.checked) axesViewer.dispose();
-        else axesViewer = new BABYLON.AxesViewer(scene, 3);
+        else axesViewer = new BABYLON.AxesViewer(scene, 10);
     });
 
 
@@ -542,17 +568,17 @@ const createSceneSTL = () => {
     customMesh.edgesColor.copyFromFloats(0, 0, 1, 1);
     //customMesh.enableEdgesRendering(0.97);
     customMesh.disableEdgesRendering();
-    customMesh.edgesWidth = 1;
+    customMesh.edgesWidth = maxBoundingLengh * 0.1;
 
     $('#cbEdges').on('change', function () {
         if (this.checked) customMesh.enableEdgesRendering(1);
         else customMesh.disableEdgesRendering();
-       
+
     });
 
-   
 
-   
+
+
 
     // CAMERA Target
 
@@ -625,7 +651,7 @@ const createSceneSTL = () => {
 
     // SHOW CLOUDS ON/OFF
     const clouds = BABYLON.MeshBuilder.CreateCylinder("mycylinder", { height: 1000, diameterTop: 1000, diameterBottom: 1000, tessellation: 12, subdivisions: 1 }, scene);
-   // var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
+    // var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
     clouds.material = cloudMaterial;
     clouds.position = new BABYLON.Vector3(0, 0, 12);
 
@@ -637,7 +663,8 @@ const createSceneSTL = () => {
     // CLEAR COLOR
 
     scene.clearColor = BABYLON.Color3.FromHexString(clearColor);
-    $('#renderCanvas').css('background-color', '@ClearColor');
+    $('#renderCanvas').css('background-color', clearColor);
+
     $('#CClearColor').on('input', function () {
         var chex = this.value;
         scene.clearColor = new BABYLON.Color3.FromHexString(chex);
