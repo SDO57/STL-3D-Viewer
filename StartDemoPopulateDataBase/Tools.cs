@@ -45,9 +45,9 @@ public static class Tools
 
     public static string DetectFileCodage(Byte[] Data)
     {
-        string res = "BIN"; // STL Text ?
+        string res = "BIN"; 
         
-        if (new STLAsciiJsEncryptDecrypt(Data).IsDecryptable) res= "TEXT";
+        if (new STLAsciiJsEncryptDecrypt(Data).IsDecryptable) res= "ASCII";
    
         return res;
     }
