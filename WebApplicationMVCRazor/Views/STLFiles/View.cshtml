@@ -9,7 +9,7 @@
     var jnormals = String.Join(',', decrypt.jsNormals);
 }
 
-<h3>STLViewer</h3>
+
 
 <div class="container">
 
@@ -18,38 +18,58 @@
         <div class="col-3">
 
 
+            <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Go back to Store</a></h2>
+            <div class='row'>
+                <select disabled name="store-select" id="store-select">
+
+                    <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
+
+                </select>
+            </div>
+
+            <div class='row'>
+                <select disabled name="file-select" id="file-select">
+
+                    <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
+
+                </select>
+
+            </div>
 
 
+            <div class='row'>
+                <label>Codage : @Model.Desc.FileCodage</label>
 
-            <form>
-                <fieldset>
-                    <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Return to the Store</a></h2>
-                    <div class='row'>
-                        <select name="store-select" id="store-select">
+            </div>
+            <div class='row'>
+                <label>FileSize : @Model.Desc.FileSize (bytes) </label>
+                <label>NbTriangles : @decrypt.Compteur4</label>
+            </div>
+            <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
+        </div>
 
-                            <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
-
-                        </select>
-                    </div>
-
-                    <div class='row'>
-                        <select name="file-select" id="file-select">
-
-                            <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
-
-                        </select>
-
-                    </div>
-
-                    <h5>
-                        <label>Codage : @Model.Desc.FileCodage</label>
-                    </h5>
+        <div class="col-6">
+            <div class="container">
 
 
-                    <h5><label>FileSize : @Model.Desc.FileSize</label> (bytes) </h5>
-                    <h5><label>NbTriangles : @decrypt.Compteur4</label></h5>
+                <div class="row">
+                    <h3>@Model.Desc.FileName</h3>
 
-                    <div>
+                    <!-- RENDERING CANVAS-->
+                    <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+           
+                <div class="container">
+
+              
+
+                <div>
                         <input type="color" id="CClearColor" name="CClearColor"
                                value="#3663AB">
                         <label for="CClearColor">CClearColor</label>
@@ -66,79 +86,7 @@
 
                     </div>
 
-                    <div id="material-group">
 
-                        <select name="Material" id="material-select">
-                            <option disabled>Color Defined Materials</option>
-                            <option value='emerald'>emerald</option>
-                            <option value='jade'>jade</option>
-                            <option value='obsidian'>obsidian</option>
-                            <option value='pearl'>pearl</option>
-                            <option value='ruby'>ruby</option>
-                            <option value='turquoise'>turquoise</option>
-                            <option value='brass'>brass</option>
-                            <option value='bronze'>bronze</option>
-                            <option value='polished_bronze'>polished_bronze</option>
-                            <option value='chrome'>chrome</option>
-                            <option value='copper'>copper</option>
-                            <option value='polished_copper'>polished_copper</option>
-                            <option value='gold'>gold</option>
-                            <option value='polished_gold'>polished_gold</option>
-                            <option value='pewter'>pewter</option>
-                            <option value='silver'>silver</option>
-                            <option value='polished_silver'>polished_silver</option>
-
-                            <option disabled>My Materials</option>
-                            <option selected value='plaster'>plaster</option>
-                            <option value='white_marble'>white marble</option>
-                            <option value='rose_marble'>rose marble</option>
-
-                            <option disabled>Plastic</option>
-                            <option value='black_plastic'>black</option>
-                            <option value='cyan_plastic'>cyan</option>
-                            <option value='green_plastic'>green</option>
-                            <option value='red_plastic'>red</option>
-                            <option value='white_plastic'>white</option>
-                            <option value='yellow_plastic'>yellow</option>
-
-                            <option disabled>Rubber</option>
-                            <option value='black_rubber'>black</option>
-                            <option value='cyan_rubber'>cyan</option>
-                            <option value='green_rubber'>green</option>
-                            <option value='red_rubber'>red</option>
-                            <option value='white_rubber'>white</option>
-                            <option value='yellow_rubber'>yellow</option>
-
-                            <option disabled>My Mats</option>
-                            <option value='black_mat'>black</option>
-                            <option value='cyan_mat'>cyan</option>
-                            <option value='green_mat'>green</option>
-                            <option value='red_mat'>red</option>
-                            <option value='white_mat'>white</option>
-                            <option value='yellow_mat'>yellow</option>
-
-                        </select>
-
-
-                        <div>
-                            <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                                   min="0" max="100" value="40" step="10">
-                            <label for="RAmbiantColor">RAmbiantColor</label>
-                        </div>
-                        <div>
-                            <input type="range" id="RCameraLight" name="RCameraLight"
-                                   min="0" max="100" value="60" step="10">
-                            <label for="RCameraLight">RCameraLight</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="wireframe" name="wireframe">
-                            <label for="scales">Wireframe Mode</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-                            <label for="scales">Back Face Culling</label>
-                        </div>
-                    </div>
                     <div>
                         <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
                         <label for="cbShowAxis">Show Axis</label>
@@ -155,74 +103,143 @@
                         <label for="cbShowNormals">Show Normals</label>
 
                     </div>
-                    <!--
+                    <div>
+                        <input type="checkbox" id="wireframe" name="wireframe">
+                        <label for="scales">Wireframe Mode</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                        <label for="scales">Back Face Culling</label>
+                    </div>
+                </div>
 
+         
+                <div id="material-group">
 
-                                            <label for="fuel">Fuel level:</label>
+                    <select name="Material" id="material-select">
+                        <option disabled>Color Defined Materials</option>
+                        <option value='emerald'>emerald</option>
+                        <option value='jade'>jade</option>
+                        <option value='obsidian'>obsidian</option>
+                        <option value='pearl'>pearl</option>
+                        <option value='ruby'>ruby</option>
+                        <option value='turquoise'>turquoise</option>
+                        <option value='brass'>brass</option>
+                        <option value='bronze'>bronze</option>
+                        <option value='polished_bronze'>polished_bronze</option>
+                        <option value='chrome'>chrome</option>
+                        <option value='copper'>copper</option>
+                        <option value='polished_copper'>polished_copper</option>
+                        <option value='gold'>gold</option>
+                        <option value='polished_gold'>polished_gold</option>
+                        <option value='pewter'>pewter</option>
+                        <option value='silver'>silver</option>
+                        <option value='polished_silver'>polished_silver</option>
 
-                                            <meter id="fuel"
-                                                   min="0" max="100"
-                                                   low="33" high="66" optimum="80"
-                                                   value="50">
-                                                at 50/100
-                                            </meter>
-                                            <label for="file">File progress:</label>
+                        <option disabled>My Materials</option>
+                        <option selected value='plaster'>plaster</option>
+                        <option value='white_marble'>white marble</option>
+                        <option value='rose_marble'>rose marble</option>
 
-                                            <progress id="file" max="100" value="70"> 70% </progress>
+                        <option disabled>Plastic</option>
+                        <option value='black_plastic'>black</option>
+                        <option value='cyan_plastic'>cyan</option>
+                        <option value='green_plastic'>green</option>
+                        <option value='red_plastic'>red</option>
+                        <option value='white_plastic'>white</option>
+                        <option value='yellow_plastic'>yellow</option>
 
+                        <option disabled>Rubber</option>
+                        <option value='black_rubber'>black</option>
+                        <option value='cyan_rubber'>cyan</option>
+                        <option value='green_rubber'>green</option>
+                        <option value='red_rubber'>red</option>
+                        <option value='white_rubber'>white</option>
+                        <option value='yellow_rubber'>yellow</option>
 
-                                            <div>
-                                                <input type="file"
-                                                       id="meshFile" name="meshFile"
-                                                       accept=".stl">
-                                            </div>
+                        <option disabled>My Mats</option>
+                        <option value='black_mat'>black</option>
+                        <option value='cyan_mat'>cyan</option>
+                        <option value='green_mat'>green</option>
+                        <option value='red_mat'>red</option>
+                        <option value='white_mat'>white</option>
+                        <option value='yellow_mat'>yellow</option>
 
+                    </select>
 
-
-                    -->
-                    <!--
 
                     <div>
-                        <input type="color" id="head" name="head"
-                               value="#e66465">
-                        <label for="head">Head</label>
+                        <input type="range" id="RAmbiantColor" name="RAmbiantColor"
+                               min="0" max="100" value="40" step="10">
+                        <label for="RAmbiantColor">RAmbiantColor</label>
+                    </div>
+                    <div>
+                        <input type="range" id="RCameraLight" name="RCameraLight"
+                               min="0" max="100" value="60" step="10">
+                        <label for="RCameraLight">RCameraLight</label>
                     </div>
 
+                </div>
 
-                        <legend>Select a maintenance drone:</legend>
+                <a class="btn btn-warning" asp-action="Save" asp-route-id="@Model.Desc.FileId">Save preferences</a>
+        
 
-                        <div>
-                            <input type="radio" id="huey" name="drone" value="huey"
-                                   checked>
-                            <label for="huey">Huey</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="dewey" name="drone" value="dewey">
-                            <label for="dewey">Dewey</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="louie" name="drone" value="louie">
-                            <label for="louie">Louie</label>
-                        </div>-->
-                </fieldset>
-
-            </form>
-        </div>
-
-
-        <div class="col-9"
-
-
-            <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
-                <h2><a class="btn btn-primary" asp-action="Load" asp-route-id="@Model.Desc.FileId"> Download File</a></h2>
         </div>
 
     </div>
 </div>
 
+<!--
 
+
+                                           <label for="fuel">Fuel level:</label>
+
+                                           <meter id="fuel"
+                                                  min="0" max="100"
+                                                  low="33" high="66" optimum="80"
+                                                  value="50">
+                                               at 50/100
+                                           </meter>
+                                           <label for="file">File progress:</label>
+
+                                           <progress id="file" max="100" value="70"> 70% </progress>
+
+
+                                           <div>
+                                               <input type="file"
+                                                      id="meshFile" name="meshFile"
+                                                      accept=".stl">
+                                           </div>
+
+
+
+                   -->
+<!--
+
+<div>
+    <input type="color" id="head" name="head"
+           value="#e66465">
+    <label for="head">Head</label>
+</div>
+
+
+
+
+    <div>
+        <input type="radio" id="huey" name="drone" value="huey"
+               checked>
+        <label for="huey">Huey</label>
+    </div>
+
+    <div>
+        <input type="radio" id="dewey" name="drone" value="dewey">
+        <label for="dewey">Dewey</label>
+    </div>
+
+    <div>
+        <input type="radio" id="louie" name="drone" value="louie">
+        <label for="louie">Louie</label>
+    </div>-->
 
 <script>
 
@@ -407,8 +424,8 @@
     var engine = null;
     var scene = null;
     var sceneToRender = null;
-    var createDefaultEngine = function () { 
-        return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); 
+    var createDefaultEngine = function () {
+        return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false });
     };
 
 

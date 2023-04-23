@@ -2,7 +2,7 @@
 @*@model List<Core.Entities.STLFile>*@
 
 @{
-    ViewData["Title"] = "STLViewer";
+    ViewData["Title"] = "STL Store";
 }
 
 <h1>Index</h1>
@@ -55,9 +55,8 @@
                 <td>
                 </td>
                 <td>
-                    <a asp-action="View" asp-route-id="@item.FileId">View</a>|
-                    <a asp-action="Load" asp-route-id="@item.FileId">Load</a>
-
+                    <a class="btn btn-primary"  asp-action="View" asp-route-id="@item.FileId">Details</a>
+                   
                 </td>
             </tr>
         }
