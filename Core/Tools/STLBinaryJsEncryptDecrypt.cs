@@ -18,10 +18,10 @@ namespace Core.Tools
                 Array.Copy(Data, 0, temp, 0, 80);
                 Commentaire80 = temp;
 
-                Compteur4 = BitConverter.ToUInt32(Data, 80);
+                NbFaces = BitConverter.ToUInt32(Data, 80);
            
                 List<Triangle> triangles = new List<Triangle>();
-                for (int i = 0; i < Compteur4; i++)
+                for (int i = 0; i < NbFaces; i++)
                 {
                     int baseI = 84 + i * 50;
                     byte[] ctrl = new byte[2];
@@ -70,7 +70,9 @@ namespace Core.Tools
 
                 List<string> normals = new List<string>();
                 List<string> positions = new List<string>();
-                var iTri = 0;
+                List<string> indices = new List<string>();
+         
+                long indice = 0;
                 foreach (var tri in Triangles)
                 {
                     normals.Add((tri.xNormale).ToString().Replace(',', '.'));
@@ -89,20 +91,16 @@ namespace Core.Tools
                     positions.Add((tri.y3).ToString().Replace(',', '.'));
                     positions.Add((tri.z3).ToString().Replace(',', '.')); 
                   
-                    iTri += 1;
-                    if (iTri > maxJSTriangles) break;
+                    indices.Add($"{indice}");
+                    indices.Add($"{indice + 1}");
+                    indices.Add($"{indice + 2}");
+
+                indice += 3;
                 }
                 jsNormals = normals;
                 jsPositions = positions;
-
-
-                List<string> indices = new List<string>();
-                for (int i = 0; i < Math.Min(Triangles.Count, maxJSTriangles); i++)
-                {
-                    indices.Add($"{i * 3}");
-                    indices.Add($"{i * 3 + 1}");
-                    indices.Add($"{i * 3 + 2}");
-                }
+      
+             
                 jsIndices = indices;
             
                 List<string> boundings = new List<string>();

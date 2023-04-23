@@ -47,7 +47,7 @@ namespace Core.Tools
 
 
 
-        public uint Compteur4 { get; protected set; }
+        public uint NbFaces { get; protected set; }
 
         public List<Triangle> Triangles { get; protected set; }
 

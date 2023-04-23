@@ -233,18 +233,26 @@ const createSceneSTL = () => {
 
     // CUSTOM MESH
 
+    //take uv value relative to bottom left corner of roof (-4, -4) noting length and width of roof is 8
+    // base uv value on the x, z coordinates only
+    var uvs = [];
+    for (var p = 0; p < positions.length / 3; p++) {
+        uvs.push((positions[3 * p] - (-4)) / 8, (positions[3 * p + 2] - (-4)) / 8);
+    }
     var customMesh = new BABYLON.Mesh("custom", scene);
     var vertexData = new BABYLON.VertexData();
 
     vertexData.positions = positions;
     vertexData.indices = indices;
     vertexData.normals = normals;
+    vertexData.uvs = uvs;
 
     vertexData.applyToMesh(customMesh);
 
-
-
-
+    customMesh.convertToFlatShadedMesh();
+   /* var mat = new BABYLON.StandardMaterial("", scene);
+    mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
+    */
     // Calculs Magiques recentrage
     var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
     var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
@@ -322,52 +330,91 @@ const createSceneSTL = () => {
     $('#material-select').on('change',
         function () {
             var mat = this.value;
-            switch (mat) {
 
-                case 'emerald': SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0); break;
-                case 'jade': SetMaterial(MaterialsTable.jade, 0, 0, 0, 0, 0); break;
-                case 'obsidian': SetMaterial(MaterialsTable.obsidian, 0, 0, 0, 0, 0); break;
-                case 'pearl': SetMaterial(MaterialsTable.pearl, 0, 0, 0, 0, 0); break;
-                case 'ruby': SetMaterial(MaterialsTable.ruby, 0, 0, 0, 0, 0); break;
-                case 'turquoise': SetMaterial(MaterialsTable.turquoise, 0, 0, 0, 0, 0); break;
-                case 'brass': SetMaterial(MaterialsTable.brass, 0, 0, 0, 0, 0); break;
-                case 'bronze': SetMaterial(MaterialsTable.bronze, 0, 0, 0, 0, 0); break;
-                case 'polished_bronze': SetMaterial(MaterialsTable.polished_bronze, 0, 0, 0, 0, 0); break;
+            if (mat == 'grid') {
 
-                case 'chrome': SetMaterial(MaterialsTable.chrome, 0, 0, 0, 0, 0); break;
-                case 'copper': SetMaterial(MaterialsTable.copper, 0, 0, 0, 0, 0); break;
-                case 'polished_copper': SetMaterial(MaterialsTable.polished_copper, 0, 0, 0, 0, 0); break;
-                case 'gold': SetMaterial(MaterialsTable.gold, 0, 0, 0, 0, 0); break;
-                case 'polished_gold': SetMaterial(MaterialsTable.polished_gold, 0, 0, 0, 0, 0); break;
-                case 'pewter': SetMaterial(MaterialsTable.pewter, 0, 0, 0, 0, 0); break;
-                case 'silver': SetMaterial(MaterialsTable.silver, 0, 0, 0, 0, 0); break;
-                case 'polished_silver': SetMaterial(MaterialsTable.polished_silver, 0, 0, 0, 0, 0); break;
+                /* if (this.checked) */
+                customMesh.material = gridSolidMaterial;
+              /*  else customMesh.material = myMaterial;
+                $('#material-select').prop("disabled", this.checked);
+                $('#RAmbiantColor').prop("disabled", this.checked);
+                $('#RCameraLight').prop("disabled", this.checked);
+                $('#wireframe').prop("disabled", this.checked);
+                $('#backFaceCulling').prop("disabled", this.checked);*/
 
-                case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
-                case 'white_marble': SetMaterial(MaterialsTable.white_marble, 0, 0, 0, 0, 0); break;
-                case 'rose_marble': SetMaterial(MaterialsTable.rose_marble, 0, 0, 0, 0, 0); break;
+            }
+            else if (mat == 'brick') {
+                customMesh.material = brickMaterial;
+            }
+            else if (mat == 'wood')
+            {
+                customMesh.material = woodMaterial;
+            }
+            else if (mat == 'marble')
+            {
+                customMesh.material = marbleMaterial;
+            }
+            else if (mat == 'road') {
+                customMesh.material = roadMaterial;
+            }
+            else if (mat == 'grass') {
+                customMesh.material = grassMaterial;
+            }
+            else if (mat == 'fire') {
+                customMesh.material = fireMaterial;
+            }
+            else if (mat == 'cloud') {
+                customMesh.material = cloudMaterial;
+            }
+            else {
+                customMesh.material = myMaterial;
+                switch (mat) {
 
-                case 'black_plastic': SetMaterial(MaterialsTable.black_plastic, 0, 0, 0, 0, 0); break;
-                case 'cyan_plastic': SetMaterial(MaterialsTable.cyan_plastic, 0, 0, 0, 0, 0); break;
-                case 'green_plastic': SetMaterial(MaterialsTable.green_plastic, 0, 0, 0, 0, 0); break;
-                case 'red_plastic': SetMaterial(MaterialsTable.red_plastic, 0, 0, 0, 0, 0); break;
-                case 'white_plastic': SetMaterial(MaterialsTable.white_plastic, 0, 0, 0, 0, 0); break;
-                case 'yellow_plastic': SetMaterial(MaterialsTable.yellow_plastic, 0, 0, 0, 0, 0); break;
-                case 'black_rubber': SetMaterial(MaterialsTable.black_rubber, 0, 0, 0, 0, 0); break;
-                case 'cyan_rubber': SetMaterial(MaterialsTable.cyan_rubber, 0, 0, 0, 0, 0); break;
-                case 'green_rubber': SetMaterial(MaterialsTable.green_rubber, 0, 0, 0, 0, 0); break;
-                case 'red_rubber': SetMaterial(MaterialsTable.red_rubber, 0, 0, 0, 0, 0); break;
-                case 'white_rubber': SetMaterial(MaterialsTable.white_rubber, 0, 0, 0, 0, 0); break;
-                case 'yellow_rubber': SetMaterial(MaterialsTable.yellow_rubber, 0, 0, 0, 0, 0); break;
+                    case 'emerald': SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0); break;
+                    case 'jade': SetMaterial(MaterialsTable.jade, 0, 0, 0, 0, 0); break;
+                    case 'obsidian': SetMaterial(MaterialsTable.obsidian, 0, 0, 0, 0, 0); break;
+                    case 'pearl': SetMaterial(MaterialsTable.pearl, 0, 0, 0, 0, 0); break;
+                    case 'ruby': SetMaterial(MaterialsTable.ruby, 0, 0, 0, 0, 0); break;
+                    case 'turquoise': SetMaterial(MaterialsTable.turquoise, 0, 0, 0, 0, 0); break;
+                    case 'brass': SetMaterial(MaterialsTable.brass, 0, 0, 0, 0, 0); break;
+                    case 'bronze': SetMaterial(MaterialsTable.bronze, 0, 0, 0, 0, 0); break;
+                    case 'polished_bronze': SetMaterial(MaterialsTable.polished_bronze, 0, 0, 0, 0, 0); break;
 
-                case 'black_mat': SetMaterial(MaterialsTable.black_mat, 0, 0, 0, 0, 0); break;
-                case 'cyan_mat': SetMaterial(MaterialsTable.cyan_mat, 0, 0, 0, 0, 0); break;
-                case 'green_mat': SetMaterial(MaterialsTable.green_mat, 0, 0, 0, 0, 0); break;
-                case 'red_mat': SetMaterial(MaterialsTable.red_mat, 0, 0, 0, 0, 0); break;
-                case 'white_mat': SetMaterial(MaterialsTable.white_mat, 0, 0, 0, 0, 0); break;
-                case 'yellow_mat': SetMaterial(MaterialsTable.yellow_mat, 0, 0, 0, 0, 0); break;
+                    case 'chrome': SetMaterial(MaterialsTable.chrome, 0, 0, 0, 0, 0); break;
+                    case 'copper': SetMaterial(MaterialsTable.copper, 0, 0, 0, 0, 0); break;
+                    case 'polished_copper': SetMaterial(MaterialsTable.polished_copper, 0, 0, 0, 0, 0); break;
+                    case 'gold': SetMaterial(MaterialsTable.gold, 0, 0, 0, 0, 0); break;
+                    case 'polished_gold': SetMaterial(MaterialsTable.polished_gold, 0, 0, 0, 0, 0); break;
+                    case 'pewter': SetMaterial(MaterialsTable.pewter, 0, 0, 0, 0, 0); break;
+                    case 'silver': SetMaterial(MaterialsTable.silver, 0, 0, 0, 0, 0); break;
+                    case 'polished_silver': SetMaterial(MaterialsTable.polished_silver, 0, 0, 0, 0, 0); break;
 
-                default: SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
+                    case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
+                    case 'white_marble': SetMaterial(MaterialsTable.white_marble, 0, 0, 0, 0, 0); break;
+                    case 'rose_marble': SetMaterial(MaterialsTable.rose_marble, 0, 0, 0, 0, 0); break;
+
+                    case 'black_plastic': SetMaterial(MaterialsTable.black_plastic, 0, 0, 0, 0, 0); break;
+                    case 'cyan_plastic': SetMaterial(MaterialsTable.cyan_plastic, 0, 0, 0, 0, 0); break;
+                    case 'green_plastic': SetMaterial(MaterialsTable.green_plastic, 0, 0, 0, 0, 0); break;
+                    case 'red_plastic': SetMaterial(MaterialsTable.red_plastic, 0, 0, 0, 0, 0); break;
+                    case 'white_plastic': SetMaterial(MaterialsTable.white_plastic, 0, 0, 0, 0, 0); break;
+                    case 'yellow_plastic': SetMaterial(MaterialsTable.yellow_plastic, 0, 0, 0, 0, 0); break;
+                    case 'black_rubber': SetMaterial(MaterialsTable.black_rubber, 0, 0, 0, 0, 0); break;
+                    case 'cyan_rubber': SetMaterial(MaterialsTable.cyan_rubber, 0, 0, 0, 0, 0); break;
+                    case 'green_rubber': SetMaterial(MaterialsTable.green_rubber, 0, 0, 0, 0, 0); break;
+                    case 'red_rubber': SetMaterial(MaterialsTable.red_rubber, 0, 0, 0, 0, 0); break;
+                    case 'white_rubber': SetMaterial(MaterialsTable.white_rubber, 0, 0, 0, 0, 0); break;
+                    case 'yellow_rubber': SetMaterial(MaterialsTable.yellow_rubber, 0, 0, 0, 0, 0); break;
+
+                    case 'black_mat': SetMaterial(MaterialsTable.black_mat, 0, 0, 0, 0, 0); break;
+                    case 'cyan_mat': SetMaterial(MaterialsTable.cyan_mat, 0, 0, 0, 0, 0); break;
+                    case 'green_mat': SetMaterial(MaterialsTable.green_mat, 0, 0, 0, 0, 0); break;
+                    case 'red_mat': SetMaterial(MaterialsTable.red_mat, 0, 0, 0, 0, 0); break;
+                    case 'white_mat': SetMaterial(MaterialsTable.white_mat, 0, 0, 0, 0, 0); break;
+                    case 'yellow_mat': SetMaterial(MaterialsTable.yellow_mat, 0, 0, 0, 0, 0); break;
+
+                    default: SetMaterial(MaterialsTable.emerald, 0, 0, 0, 0, 0);
+                }
             }
 
         }
@@ -391,14 +438,78 @@ const createSceneSTL = () => {
     gridSolidMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
     gridSolidMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
 
+  
+    // WOOD MATERIAL
+   
+    var woodMaterial = new BABYLON.StandardMaterial("woodMat", scene);
+    var woodTexture = new BABYLON.WoodProceduralTexture("woodTex", 1024, scene);
+    woodTexture.woodColor = new BABYLON.Color3(0.3, 0.2, 0.05);
+    woodTexture.ampScale = 80.0;
+    woodMaterial.diffuseTexture = woodTexture;
+   /* woodMaterial.ambientColor = new BABYLON.Color3(0.9, 0.8, 0.2);
+    woodMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.8, 0.2);
+    woodMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    woodMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);*/
+   // woodMaterial.specularTexture = woodTexture;
+
+    var grassMaterial = new BABYLON.StandardMaterial("grassMat", scene);
+    var grassTexture = new BABYLON.GrassProceduralTexture("grassTex", 256, scene);
+    grassMaterial.ambientTexture = grassTexture;
+
+   /* grassMaterial.ambientColor = new BABYLON.Color3(1, 1, 1);
+    grassMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    grassMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    grassMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);
+    */
+
     // MARBLE MATERIAL
     var marbleMaterial = new BABYLON.StandardMaterial("torus", scene);
     var marbleTexture = new BABYLON.MarbleProceduralTexture("marble", 512, scene);
-    marbleTexture.numberOfTilesHeight = 3;
-    marbleTexture.numberOfTilesWidth = 3;
+    marbleTexture.numberOfTilesHeight = 2;
+    marbleTexture.numberOfTilesWidth = 1;
+
+    marbleTexture.jointColor = new BABYLON.Color3(0.9, 0.6, 0.6);
+    marbleTexture.marbleColor = new BABYLON.Color3(0.9, 0.6, 0.6);
     marbleMaterial.ambientTexture = marbleTexture;
 
+    // BRICK MATERIAL
+    var brickMaterial = new BABYLON.StandardMaterial("brickMat", scene);
+    var brickTexture = new BABYLON.BrickProceduralTexture("brickTex", 512, scene);
+    brickTexture.numberOfBricksHeight = 1;
+    brickTexture.numberOfBricksWidth = 1;
+    brickMaterial.diffuseTexture = brickTexture;
 
+    // ROAD MATERIAL
+    var roadMaterial = new BABYLON.StandardMaterial("roadMat", scene);
+    var roadmaterialpt = new BABYLON.RoadProceduralTexture("roadTex", 512, scene);
+    roadMaterial.diffuseTexture = roadmaterialpt;
+
+    // GRASS MATERIAL
+    var grassMaterial = new BABYLON.StandardMaterial("grassMat", scene);
+    var grassTexture = new BABYLON.GrassProceduralTexture("grassTex", 256, scene);
+    grassMaterial.ambientTexture = grassTexture;
+
+    // FIRE MATERIAL
+    var fireMaterial = new BABYLON.StandardMaterial("fireMat", scene);
+    var fireTexture = new BABYLON.FireProceduralTexture("fireTex", 256, scene);
+    fireMaterial.diffuseTexture = fireTexture;
+    fireMaterial.opacityTexture = fireTexture;
+
+    // CLOUD MATERIAL 
+    var cloudMaterial = new BABYLON.StandardMaterial("cloudMat", scene);
+    var cloudProcTexture = new BABYLON.CloudProceduralTexture("cloudTex", 1024, scene);
+
+    cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
+    cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);
+
+    cloudMaterial.emissiveTexture = cloudProcTexture;
+    cloudMaterial.backFaceCulling = false;
+
+   
+
+    cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+   
     /* var script = document.createElement('script');
      script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
      document.getElementsByTagName('head')[0].appendChild(script);
@@ -430,18 +541,8 @@ const createSceneSTL = () => {
 
 
     customMesh.material = myMaterial;
-    //customMesh.material = gridMaterial;
-    //customMesh.material = gridSolidMaterial;
-    // customMesh.material = defaultGridMaterial;
-    $('#gridMaterialBox').on('change', function () {
-        if (this.checked) customMesh.material = gridSolidMaterial;
-        else customMesh.material = myMaterial;
-        $('#material-select').prop("disabled", this.checked);
-        $('#RAmbiantColor').prop("disabled", this.checked);
-        $('#RCameraLight').prop("disabled", this.checked);
-        $('#wireframe').prop("disabled", this.checked);
-        $('#backFaceCulling').prop("disabled", this.checked);
-    });
+
+   
 
     // CAMERA Target
 
@@ -493,7 +594,7 @@ const createSceneSTL = () => {
 
     defineLightCamera();
 
-    // SHOW GRID GROUND ON/OFF
+    // SHOW GROUND ON/OFF
 
 
     var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000, subdivisions: 10 }, scene, false);
@@ -512,9 +613,18 @@ const createSceneSTL = () => {
         ground.setEnabled(this.checked);
     });
 
+    // SHOW CLOUDS ON/OFF
 
+    var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
+    clouds.material = cloudMaterial;
+    clouds.position = new BABYLON.Vector3(0, 0, 12);
 
+    clouds.setEnabled(false);
+    $('#cbShowCloud').on('change', function () {
+        clouds.setEnabled(this.checked);
+    });
 
+    // CLEAR COLOR
 
     scene.clearColor = BABYLON.Color3.FromHexString("#3663AB");
     $('#CClearColor').on('change', function () {
@@ -556,10 +666,10 @@ const createSceneSTL = () => {
 
 
 
-    
 
 
 
+/*
 const createSceneGRIDMAGICSTL = () => {
 
 
@@ -627,46 +737,46 @@ const createSceneGRIDMAGICSTL = () => {
 
 
 };
+*/
 
 
 
 
 
+window.initFunction = async function () {
 
-    window.initFunction = async function () {
 
-
-        var asyncEngineCreation = async function () {
-            try {
-                return createDefaultEngine();
-            } catch (e) {
-                console.log("the available createEngine function failed. Creating the default engine instead");
-                return createDefaultEngine();
-            }
+    var asyncEngineCreation = async function () {
+        try {
+            return createDefaultEngine();
+        } catch (e) {
+            console.log("the available createEngine function failed. Creating the default engine instead");
+            return createDefaultEngine();
         }
+    }
 
-        window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createSceneSTL();
+    window.engine = await asyncEngineCreation();
+    if (!engine) throw 'engine should not be null.';
+    startRenderLoop(engine, canvas);
+    window.scene = createSceneSTL();
 
 
 
-    };
+};
 
-    initFunction().then(() => {
-        sceneToRender = scene
-    });
+initFunction().then(() => {
+    sceneToRender = scene
+});
 
 // Resize
 window.addEventListener("resize", function () {
 
-   // 
+    // 
 
-   // canvas.style.width = window.innerWidth * 0.5;
-  //  canvas.style.height = canvas.style.width;
+    // canvas.style.width = window.innerWidth * 0.5;
+    //  canvas.style.height = canvas.style.width;
 
     engine.resize();
-   
+
 });
 //canvas = document.addEventListener("resize", function () { engine.resize(); });

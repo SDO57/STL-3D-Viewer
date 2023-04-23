@@ -14,63 +14,39 @@
 <div class="container">
     <div class="row">
 
-        <h3>@Model.Desc.FileName</h3>
-    </div>
-    <div class="row">
+        <div class="col-3">
+            <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Go back to Store</a></h2>
+
+        </div>
 
         <div class="col-3">
+            <select disabled name="store-select" id="store-select">
+                <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
+            </select>
+        </div>
 
+        <div class="col-3">
+            <select disabled name="file-select" id="file-select">
+                <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
+            </select>
+        </div>
 
-            <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Go back to Store</a></h2>
-            <div class='row'>
-                <select disabled name="store-select" id="store-select">
+       
 
-                    <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
-
-                </select>
-            </div>
-
-            <div class='row'>
-                <select disabled name="file-select" id="file-select">
-
-                    <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
-
-                </select>
-
-            </div>
-
-
-            <div class='row'>
-                <label>Codage : @Model.Desc.FileCodage</label>
-
-            </div>
-            <div class='row'>
-                <label>FileSize : @Model.Desc.FileSize (bytes) </label>
-                <label>NbTriangles : @decrypt.Compteur4</label>
-            </div>
+        <div class="col-3">
             <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
         </div>
 
-        <div class="col-6">
-            <div class="container">
+    </div>
 
 
-                <div class="row">
+    <div class="row">
 
+        <div class="col-2">
 
-                    <!-- RENDERING CANVAS-->
-                    <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
-
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-3">
+         
 
             <div class="container">
-
-
 
                 <div>
                     <input type="color" id="CClearColor" name="CClearColor"
@@ -79,17 +55,17 @@
                 </div>
                 <div>
                     <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
-                    <label for="cbShowGridGround">Grid Ground</label>
+                    <label for="cbShowGridGround">Ground</label>
 
                 </div>
 
                 <div>
-                    <input type="checkbox" id="gridMaterialBox" name="gridMaterialBox">
-                    <label for="gridMaterialBox">Grid Material</label>
+                    <input type="checkbox" id="cbShowCloud" name="cbShowCloud">
+                    <label for="cbShowCloud">Sky</label>
 
                 </div>
 
-
+               
                 <div>
                     <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
                     <label for="cbShowAxis">Show Axis</label>
@@ -114,12 +90,22 @@
                     <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
                     <label for="scales">Back Face Culling</label>
                 </div>
+
             </div>
 
 
             <div id="material-group">
 
                 <select name="Material" id="material-select">
+                    <option disabled>Procedural Texture Materials</option>
+                    <option value='grid'>grid</option>
+                    <option value='brick'>brick</option>
+                    <option value='wood'>wood</option>
+                    <option value='marble'>marble</option>
+                    <option value='road'>road</option>
+                    <option value='grass'>grass</option>
+                    <option value='fire'>fire</option>
+                    <option value='cloud'>cloud</option>
                     <option disabled>Color Defined Materials</option>
                     <option value='emerald'>emerald</option>
                     <option value='jade'>jade</option>
@@ -188,7 +174,32 @@
 
 
         </div>
+        <div class="col-10">
+            <div class="container">
+              
 
+                <div class="row">
+
+
+                    <!-- RENDERING CANVAS-->
+                    <div id="canvasZone">
+                        <canvas id="renderCanvas"></canvas>  
+                        
+                    </div>
+
+
+                </div>
+                <div class="row">
+                  
+                    <div class="col-12">
+                                        
+                        <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
+                   
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

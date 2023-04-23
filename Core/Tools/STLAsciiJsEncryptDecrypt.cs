@@ -30,7 +30,7 @@ namespace Core.Tools
 
             List<Triangle> triangles = new List<Triangle>();
 
-            Compteur4 = 0;
+            NbFaces = 0;
 
             for (long triangleIndex = 0; triangleIndex < (lines.Length - 1) / 7; triangleIndex++)
             {
@@ -96,7 +96,7 @@ namespace Core.Tools
 
                 triangles.Add(triangle);
 
-                Compteur4++;
+                NbFaces+=3;
             }
             Triangles = triangles;
 
@@ -115,8 +115,10 @@ namespace Core.Tools
             boundingBox = box;
 
             List<string> normals = new List<string>();
-            List<string> positions = new List<string>();
-            var iTri = 0;
+            List<string> positions = new List<string>(); 
+            List<string> indices = new List<string>();
+
+            long indice = 0;
             foreach (var tri in Triangles)
             {
                 normals.Add((tri.xNormale).ToString().Replace(',', '.'));
@@ -134,21 +136,15 @@ namespace Core.Tools
                 positions.Add((tri.x3).ToString().Replace(',', '.'));
                 positions.Add((tri.y3).ToString().Replace(',', '.'));
                 positions.Add((tri.z3).ToString().Replace(',', '.'));
-
-                iTri += 1;
-                if (iTri > maxJSTriangles) break;
+             
+                indices.Add($"{indice}");
+                indices.Add($"{indice + 1}");
+                indices.Add($"{indice + 2}");
+                indice += 3;
             }
             jsNormals = normals;
             jsPositions = positions;
 
-
-            List<string> indices = new List<string>();
-            for (int i = 0; i < Math.Min(Triangles.Count, maxJSTriangles); i++)
-            {
-                indices.Add($"{i * 3}");
-                indices.Add($"{i * 3 + 1}");
-                indices.Add($"{i * 3 + 2}");
-            }
             jsIndices = indices;
 
             List<string> boundings = new List<string>();
