@@ -1,4 +1,5 @@
 
+var clearColor;
 var boundingBox;
 var positions;
 var indices;
@@ -443,14 +444,11 @@ const createSceneSTL = () => {
    
     var woodMaterial = new BABYLON.StandardMaterial("woodMat", scene);
     var woodTexture = new BABYLON.WoodProceduralTexture("woodTex", 1024, scene);
-    woodTexture.woodColor = new BABYLON.Color3(0.3, 0.2, 0.05);
+    //woodTexture.woodColor = new BABYLON.Color3(0.3, 0.2, 0.05);
     woodTexture.ampScale = 80.0;
+
     woodMaterial.diffuseTexture = woodTexture;
-   /* woodMaterial.ambientColor = new BABYLON.Color3(0.9, 0.8, 0.2);
-    woodMaterial.diffuseColor = new BABYLON.Color3(0.9, 0.8, 0.2);
-    woodMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    woodMaterial.emissiveColor = new BABYLON.Color3(0, 0, 0);*/
-   // woodMaterial.specularTexture = woodTexture;
+   
 
     var grassMaterial = new BABYLON.StandardMaterial("grassMat", scene);
     var grassTexture = new BABYLON.GrassProceduralTexture("grassTex", 256, scene);
@@ -497,10 +495,10 @@ const createSceneSTL = () => {
 
     // CLOUD MATERIAL 
     var cloudMaterial = new BABYLON.StandardMaterial("cloudMat", scene);
-    var cloudProcTexture = new BABYLON.CloudProceduralTexture("cloudTex", 1024, scene);
 
-    cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
-    cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);
+    var cloudProcTexture = new BABYLON.CloudProceduralTexture("cloudTex", 1024, scene);
+   /* cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
+    cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);*/
 
     cloudMaterial.emissiveTexture = cloudProcTexture;
     cloudMaterial.backFaceCulling = false;
@@ -528,6 +526,8 @@ const createSceneSTL = () => {
         customMesh.showBoundingBox = this.checked;
     });
 
+    customMesh.material = myMaterial;
+
     myMaterial.backFaceCulling = true;
     $('#backFaceCulling').on('change', function () {
         myMaterial.backFaceCulling = this.checked;
@@ -538,9 +538,19 @@ const createSceneSTL = () => {
         myMaterial.wireframe = this.checked;
     });
 
+    customMesh.enableEdgesRendering();
+    customMesh.edgesColor.copyFromFloats(0, 0, 1, 1);
+    //customMesh.enableEdgesRendering(0.97);
+    customMesh.disableEdgesRendering();
+    customMesh.edgesWidth = 1;
 
+    $('#cbEdges').on('change', function () {
+        if (this.checked) customMesh.enableEdgesRendering(1);
+        else customMesh.disableEdgesRendering();
+       
+    });
 
-    customMesh.material = myMaterial;
+   
 
    
 
@@ -587,7 +597,7 @@ const createSceneSTL = () => {
 
 
         lightCamera.intensity = 0.6;
-        $('#RCameraLight').on('change', function () {
+        $('#RCameraLight').on('input', function () {
             lightCamera.intensity = 0.01 * this.value;
         });
     }
@@ -614,8 +624,8 @@ const createSceneSTL = () => {
     });
 
     // SHOW CLOUDS ON/OFF
-
-    var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
+    const clouds = BABYLON.MeshBuilder.CreateCylinder("mycylinder", { height: 1000, diameterTop: 1000, diameterBottom: 1000, tessellation: 12, subdivisions: 1 }, scene);
+   // var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
     clouds.material = cloudMaterial;
     clouds.position = new BABYLON.Vector3(0, 0, 12);
 
@@ -626,16 +636,17 @@ const createSceneSTL = () => {
 
     // CLEAR COLOR
 
-    scene.clearColor = BABYLON.Color3.FromHexString("#3663AB");
-    $('#CClearColor').on('change', function () {
+    scene.clearColor = BABYLON.Color3.FromHexString(clearColor);
+    $('#renderCanvas').css('background-color', '@ClearColor');
+    $('#CClearColor').on('input', function () {
         var chex = this.value;
         scene.clearColor = new BABYLON.Color3.FromHexString(chex);
-
+        $('#renderCanvas').css('background-color', chex);
     });
 
     // AMBIANT COLOR
     scene.ambientColor = new BABYLON.Color3(0.4, 0.4, 0.4);
-    $('#RAmbiantColor').on('change', function () {
+    $('#RAmbiantColor').on('input', function () {
         var x = 0.01 * this.value;
         scene.ambientColor = new BABYLON.Color3(x, x, x);
 

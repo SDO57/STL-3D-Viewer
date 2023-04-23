@@ -7,6 +7,8 @@
     var jindices = String.Join(',', decrypt.jsIndices);
     var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
     var jnormals = String.Join(',', decrypt.jsNormals);
+    var ClearColor = "#354155";
+
 }
 
 
@@ -19,7 +21,7 @@
 
         </div>
 
-        <div class="col-3">
+      @*  <div class="col-3">
             <select disabled name="store-select" id="store-select">
                 <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
             </select>
@@ -29,14 +31,20 @@
             <select disabled name="file-select" id="file-select">
                 <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
             </select>
-        </div>
+        </div>*@
 
        
 
-        <div class="col-3">
+        <div class="col-7">
             <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
         </div>
+        <div class="col-2">
 
+            <input type="color" id="CClearColor" name="CClearColor"
+                   value="@ClearColor">
+            <label for="CClearColor">CClearColor</label>
+
+        </div>
     </div>
 
 
@@ -48,11 +56,7 @@
 
             <div class="container">
 
-                <div>
-                    <input type="color" id="CClearColor" name="CClearColor"
-                           value="#3663AB">
-                    <label for="CClearColor">CClearColor</label>
-                </div>
+               
                 <div>
                     <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
                     <label for="cbShowGridGround">Ground</label>
@@ -68,23 +72,27 @@
                
                 <div>
                     <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
-                    <label for="cbShowAxis">Show Axis</label>
+                    <label for="cbShowAxis">Axis</label>
 
                 </div>
                 <div>
                     <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
-                    <label for="cbBoundingBox">Show BoundingBox</label>
+                    <label for="cbBoundingBox">BoundingBox</label>
 
                 </div>
+                <div>
+                    <input type="checkbox" id="cbEdges" name="cbEdges">
+                    <label for="cbEdges">Edges</label>
 
+                </div>
                 <div>
                     <input type="checkbox" id="cbShowNormals" name="cbShowNormals">
-                    <label for="cbShowNormals">Show Normals</label>
+                    <label for="cbShowNormals">Normals</label>
 
                 </div>
                 <div>
                     <input type="checkbox" id="wireframe" name="wireframe">
-                    <label for="scales">Wireframe Mode</label>
+                    <label for="scales">Wireframe</label>
                 </div>
                 <div>
                     <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
@@ -183,8 +191,7 @@
 
                     <!-- RENDERING CANVAS-->
                     <div id="canvasZone">
-                        <canvas id="renderCanvas"></canvas>  
-                        
+                        <canvas id="renderCanvas"></canvas>                
                     </div>
 
 
@@ -196,7 +203,7 @@
                         <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
                    
                     </div>
-
+                    
                 </div>
             </div>
         </div>
@@ -257,10 +264,15 @@
 
 <script>
 
+    clearColor = '@ClearColor';
     boundingBox = [@jboundingBox];
     positions = [@jpositions];
     indices = [@jindices];
     normals = [@jnormals];
+
+
+   
+                
 
 </script>
 
