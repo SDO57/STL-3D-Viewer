@@ -46,6 +46,9 @@ const MaterialsTable = {
 
     //my materials
     'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
+
+    'inca_stone': [0.5, 0.5, 0.3, 0.5, 0.5, 0.2, 0.4, 0.3, 0.1, 0.4],
+
     'white_marble': [1, 0.95, 0.85, 1, 0.9, 0.8, 1, 1, 1, 1.4],
     'rose_marble': [1, 0.8, 0.8, 1, 0.7, 0.7, 1, 1, 1, 1.4],
 
@@ -65,38 +68,9 @@ var startRenderLoop = function (engine, canvas) {
     });
 }
 
-var showRGBDirectionalLight = function (intensity, scene) {
-
-    var lightDRed = new BABYLON.DirectionalLight("lightDRed", new BABYLON.Vector3(0, 1, 1), scene);
-    // Default intensity is 1. Let's dim the light a small amount
-    lightDRed.intensity = intensity;
-    lightDRed.diffuse = new BABYLON.Color3(1, 0, 0);
-    //lightDRed.specular = new BABYLON.Color3( 1,0, 0);
-
-
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var lightDGreen = new BABYLON.DirectionalLight("lightDGreen", new BABYLON.Vector3(1, 0, 1), scene);
-    // Default intensity is 1. Let's dim the light a small amount
-    lightDGreen.intensity = intensity;
-    lightDGreen.diffuse = new BABYLON.Color3(0, 1, 0);
-    //lightDGreen.specular = new BABYLON.Color3(0, 1, 0);
-
-
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var lightDBlue = new BABYLON.DirectionalLight("lightDBlue", new BABYLON.Vector3(1, 1, 0), scene);
-    // Default intensity is 1. Let's dim the light a small amount
-    lightDBlue.intensity = intensity;
-    lightDBlue.diffuse = new BABYLON.Color3(0, 0, 1);
-    //lightDBlue.specular = new BABYLON.Color3(0, 0, 1);
-
-
-
-}
 
 
 // REPOSITIONNEMENT
-
-
 
 var changeMeshOrientationYZ = function () {
 
@@ -139,16 +113,6 @@ var changeMeshOrientationYZ = function () {
     boundingBox[5] = zmax;
 }
 
-/*var changeMeshOrientationYSign = function () {
-
-    var numberOfVertices = positions.length / 3;
-    for (var i = 0; i < numberOfVertices; i++) {
-
-        positions[i * 3 + 1] = -positions[i * 3 + 1];
-
-    }
-}*/
-
 
 var resizeMesh = function () {
 
@@ -165,9 +129,9 @@ var resizeMesh = function () {
     var numberFaces = positions.length / 3;
     var ind = 0;
     for (var i = 0; i < numberFaces; i++) {
-        positions[ind + 0] = (positions[ind + 0] ); // * factor;
+        positions[ind + 0] = (positions[ind + 0]); // * factor;
         positions[ind + 1] = positions[ind + 1];// * factor;
-        positions[ind + 2] = (positions[ind + 2] );// * factor;
+        positions[ind + 2] = (positions[ind + 2]);// * factor;
         ind += 3;
     }
 
@@ -182,7 +146,7 @@ var resizeMesh = function () {
 
 
 changeMeshOrientationYZ();
-resizeMesh();
+//resizeMesh();
 
 
 
@@ -241,6 +205,25 @@ var showAmbiantLight = function (intensity, scene) {
     return lightAmbiant;
 }
 
+function showNormals(mesh, size, color, sc) {
+    var normals = mesh.getVerticesData(BABYLON.VertexBuffer.NormalKind);
+    var positions = mesh.getVerticesData(BABYLON.VertexBuffer.PositionKind);
+    color = color || BABYLON.Color3.White();
+    sc = sc || scene;
+    size = size || 1;
+
+    var lines = [];
+    for (var i = 0; i < normals.length; i += 3) {
+        var v1 = BABYLON.Vector3.FromArray(positions, i);
+        var v2 = v1.add(BABYLON.Vector3.FromArray(normals, i).scaleInPlace(size));
+        lines.push([v1.add(mesh.position), v2.add(mesh.position)]);
+    }
+    var normalLines = BABYLON.MeshBuilder.CreateLineSystem("normalLines", { lines: lines }, sc);
+    normalLines.color = color;
+    return normalLines;
+}
+
+
 
 
 
@@ -273,6 +256,11 @@ const createSceneSTL = () => {
     /* var mat = new BABYLON.StandardMaterial("", scene);
      mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
      */
+
+
+
+
+
     // Calculs Magiques recentrage
     var meshMin = customMesh.getBoundingInfo().boundingBox.minimum;
     var meshMax = customMesh.getBoundingInfo().boundingBox.maximum;
@@ -281,57 +269,21 @@ const createSceneSTL = () => {
     var LY = (meshMax.y - meshMin.y);
     var LZ = (meshMax.z - meshMin.z);
 
-    var cameraTarget = new BABYLON.Vector3(
-        LX * 0.5,
-        meshMax.y * 0.5,
-        LZ * 0.5);
+
 
     customMesh.position.x = - meshMin.x;// + (10 - (meshMax.x - meshMin.x)) * 0.5;
-    customMesh.position.y = 0;// -meshMin.y;
+    customMesh.position.y = - meshMin.y;
     customMesh.position.z = - meshMin.z;// + (10 - (meshMax.z - meshMin.z)) * 0.5;
-    
 
-    /*  var cameraTarget = new BABYLON.Vector3(
-           / 2 + (10 - (meshMax.x - meshMin.x)) * 0.5,
-          (meshMax.y - meshMin.y) / 2,
-          (meshMax.z - meshMin.z) / 2 + (10 - (meshMax.z - meshMin.z)) * 0.5);
-          */
+    var cameraTarget = new BABYLON.Vector3(
+        LX * 0.5,
+        LY * 0.5,
+        LZ * 0.5);
+
     var maxBoundingLengh = Math.max(
         LX,
         LY,
         LZ);
-
-
-    // normals
-
-
-
-    function showNormals(mesh, size, color, sc) {
-        var normals = mesh.getVerticesData(BABYLON.VertexBuffer.NormalKind);
-        var positions = mesh.getVerticesData(BABYLON.VertexBuffer.PositionKind);
-        color = color || BABYLON.Color3.White();
-        sc = sc || scene;
-        size = size || 1;
-
-        var lines = [];
-        for (var i = 0; i < normals.length; i += 3) {
-            var v1 = BABYLON.Vector3.FromArray(positions, i);
-            var v2 = v1.add(BABYLON.Vector3.FromArray(normals, i).scaleInPlace(size));
-            lines.push([v1.add(mesh.position), v2.add(mesh.position)]);
-        }
-        var normalLines = BABYLON.MeshBuilder.CreateLineSystem("normalLines", { lines: lines }, sc);
-        normalLines.color = color;
-        return normalLines;
-    }
-
-
-    var normalLines = showNormals(customMesh, 0.010 * maxBoundingLengh, new BABYLON.Color3(1, 0, 0));
-
-    //ground.material = gridTransparentMaterial;
-    normalLines.setEnabled(false);
-    $('#cbShowNormals').on('change', function () {
-        normalLines.setEnabled(this.checked);
-    });
 
     // MATERIAL
 
@@ -354,23 +306,16 @@ const createSceneSTL = () => {
         //myMaterial.alpha = 0.8;
     }
 
-    SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0);
+    SetMaterial(MaterialsTable.inca_stone, 0.2, 0.1, 0.05, 0, 0);
 
     $('#material-select').on('change',
         function () {
             var mat = this.value;
-
-            if (mat == 'grid') {
-
-                /* if (this.checked) */
+            if (mat == 'stone') {
+                customMesh.material = stoneMaterial;
+            }
+            else if (mat == 'grid') {
                 customMesh.material = gridSolidMaterial;
-                /*  else customMesh.material = myMaterial;
-                  $('#material-select').prop("disabled", this.checked);
-                  $('#RAmbiantColor').prop("disabled", this.checked);
-                  $('#RCameraLight').prop("disabled", this.checked);
-                  $('#wireframe').prop("disabled", this.checked);
-                  $('#backFaceCulling').prop("disabled", this.checked);*/
-
             }
             else if (mat == 'brick') {
                 customMesh.material = brickMaterial;
@@ -390,9 +335,7 @@ const createSceneSTL = () => {
             else if (mat == 'fire') {
                 customMesh.material = fireMaterial;
             }
-            else if (mat == 'cloud') {
-                customMesh.material = cloudMaterial;
-            }
+           
             else {
                 customMesh.material = myMaterial;
                 switch (mat) {
@@ -417,6 +360,7 @@ const createSceneSTL = () => {
                     case 'polished_silver': SetMaterial(MaterialsTable.polished_silver, 0, 0, 0, 0, 0); break;
 
                     case 'plaster': SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0); break;
+                    case 'inca_stone': SetMaterial(MaterialsTable.inca_stone, 0.2, 0.1, 0.05, 0, 0); break;
                     case 'white_marble': SetMaterial(MaterialsTable.white_marble, 0, 0, 0, 0, 0); break;
                     case 'rose_marble': SetMaterial(MaterialsTable.rose_marble, 0, 0, 0, 0, 0); break;
 
@@ -448,9 +392,34 @@ const createSceneSTL = () => {
     );
 
 
+    // STONE MATERIAL
+    var brickWallDiffURL = "images/a1.png";
+    var brickWallNHURL = "images/a2.png";
+    var stoneDiffURL = "images/pebble.jpg";
+    var stoneNHURL = "images/a3.png";
+
+    var stoneDiffuseTexture = new BABYLON.Texture(stoneDiffURL, scene);
+
+    var stoneNormalsHeightTexture = new BABYLON.Texture(stoneNHURL, scene);
+
+    var wallDiffuseTexture = new BABYLON.Texture(brickWallDiffURL, scene);
+
+    var wallNormalsHeightTexture = new BABYLON.Texture(brickWallNHURL, scene);
+
+    var normalsHeightTexture = stoneNormalsHeightTexture;
+
+    var stoneMaterial = new BABYLON.StandardMaterial("mtl01", scene);
+    stoneMaterial.diffuseTexture = wallDiffuseTexture;
+    stoneMaterial.bumpTexture = wallNormalsHeightTexture;
+
+    stoneMaterial.useParallax = true;
+    stoneMaterial.useParallaxOcclusion = true;
+    stoneMaterial.parallaxScaleBias = 0.1;
+    stoneMaterial.specularPower = 1000.0;
+    stoneMaterial.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+   
 
     // GRID MATERIAL
-
 
     var gridSolidMaterial = new BABYLON.GridMaterial("gridSolidMaterial", scene);
     gridSolidMaterial.majorUnitFrequency = 5;
@@ -523,8 +492,8 @@ const createSceneSTL = () => {
     var cloudMaterial = new BABYLON.StandardMaterial("cloudMat", scene);
 
     var cloudProcTexture = new BABYLON.CloudProceduralTexture("cloudTex", 1024, scene);
-    /* cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
-     cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);*/
+    // cloudProcTexture.skyColor = new BABYLON.Color3(0., 0., 0.7);
+    // cloudProcTexture.cloudColor = new BABYLON.Color3(0.8, 0.75, 0.7);
 
     cloudMaterial.emissiveTexture = cloudProcTexture;
     cloudMaterial.backFaceCulling = false;
@@ -532,18 +501,18 @@ const createSceneSTL = () => {
 
 
     cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-
+    
 
     /* var script = document.createElement('script');
      script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
      document.getElementsByTagName('head')[0].appendChild(script);
      */
 
-    var axesViewer = new BABYLON.AxesViewer(scene, 10);
+    var axesViewer = new BABYLON.AxesViewer(scene, 0.1 * maxBoundingLengh);
     axesViewer.dispose();;
     $('#cbShowAxis').on('change', function () {
         if (!this.checked) axesViewer.dispose();
-        else axesViewer = new BABYLON.AxesViewer(scene, 10);
+        else axesViewer = new BABYLON.AxesViewer(scene, 0.1 * maxBoundingLengh);
     });
 
 
@@ -564,12 +533,12 @@ const createSceneSTL = () => {
         myMaterial.wireframe = this.checked;
     });
 
-    customMesh.enableEdgesRendering();
-    customMesh.edgesColor.copyFromFloats(0, 0, 1, 1);
-    //customMesh.enableEdgesRendering(0.97);
-    customMesh.disableEdgesRendering();
-    customMesh.edgesWidth = maxBoundingLengh * 0.1;
 
+
+    // EDGES
+
+    customMesh.edgesColor.copyFromFloats(0, 0, 1, 1);
+    customMesh.edgesWidth = maxBoundingLengh * 0.05;
     $('#cbEdges').on('change', function () {
         if (this.checked) customMesh.enableEdgesRendering(1);
         else customMesh.disableEdgesRendering();
@@ -577,13 +546,15 @@ const createSceneSTL = () => {
     });
 
 
-
+    // NORMALS
+    var normalLines;
+    $('#cbShowNormals').on('change', function () {
+        if (!this.checked) normalLines.dispose();
+        else normalLines = showNormals(customMesh, 0.010 * maxBoundingLengh, new BABYLON.Color3(1, 0, 0));
+    });
 
 
     // CAMERA Target
-
-
-
     var camera = new BABYLON.ArcRotateCamera("camera1",
         0, 0,
         maxBoundingLengh * 2.5,
@@ -595,7 +566,6 @@ const createSceneSTL = () => {
 
     // CAMERA LIMITATIONS
     camera.radius = maxBoundingLengh;
-
     var camerasBorderFunction = function () {
         //Angle
         // if (camera.beta < 0.1) camera.beta = 0.1;
@@ -605,6 +575,7 @@ const createSceneSTL = () => {
         if (camera.radius > maxBoundingLengh * 2.5) camera.radius = maxBoundingLengh * 2.5;
         if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
     };
+
     scene.registerBeforeRender(camerasBorderFunction);
 
 
@@ -649,6 +620,22 @@ const createSceneSTL = () => {
         ground.setEnabled(this.checked);
     });
 
+    /*//skybox
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 100.0, scene);
+
+    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    skyboxMaterial.backFaceCulling = false;
+
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("images/cubetexture/skybox", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+
+    skyboxMaterial.disableLighting = true;
+    skybox.material = skyboxMaterial;*/
+
     // SHOW CLOUDS ON/OFF
     const clouds = BABYLON.MeshBuilder.CreateCylinder("mycylinder", { height: 1000, diameterTop: 1000, diameterBottom: 1000, tessellation: 12, subdivisions: 1 }, scene);
     // var clouds = BABYLON.MeshBuilder.CreateSphere("cloud", { segments: 100, diameter: 1000 }, scene);
@@ -661,7 +648,6 @@ const createSceneSTL = () => {
     });
 
     // CLEAR COLOR
-
     scene.clearColor = BABYLON.Color3.FromHexString(clearColor);
     $('#renderCanvas').css('background-color', clearColor);
 
@@ -700,10 +686,60 @@ const createSceneSTL = () => {
 };
 
 
+/*
+var createSceneCUBE = function () {
+    // This creates a basic Babylon Scene object (non-mesh)
+    var scene = new BABYLON.Scene(engine);
 
+    // This creates and positions a free camera (non-mesh)
+    var camera = new BABYLON.ArcRotateCamera("camera1", 0, Math.PI / 2, 100, new BABYLON.Vector3(0, 0, 0), scene);
+    camera.attachControl(canvas, false);
 
+    // This targets the camera to scene origin
+    camera.setTarget(BABYLON.Vector3.Zero());
 
+    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+    var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
 
+    // Default intensity is 1. Let's dim the light a small amount
+    light.intensity = 0.7;
+
+    var mesh = BABYLON.Mesh.CreateBox("box01", 25, scene);
+    mesh.position = new BABYLON.Vector3(0, 0, 0);
+
+    var brickWallDiffURL = "images/a1.png";
+    var brickWallNHURL = "images/a2.png";
+    var stoneDiffURL = "images/pebble.jpg";
+    var stoneNHURL = "images/a3.png";
+
+    var stoneDiffuseTexture = new BABYLON.Texture(stoneDiffURL, scene);
+
+    var stoneNormalsHeightTexture = new BABYLON.Texture(stoneNHURL, scene);
+
+    var wallDiffuseTexture = new BABYLON.Texture(brickWallDiffURL, scene);
+
+    var wallNormalsHeightTexture = new BABYLON.Texture(brickWallNHURL, scene);
+
+    var normalsHeightTexture = stoneNormalsHeightTexture;
+
+    var material = new BABYLON.StandardMaterial("mtl01", scene);
+    material.diffuseTexture = stoneDiffuseTexture;
+    material.bumpTexture = stoneNormalsHeightTexture;
+
+    material.useParallax = true;
+    material.useParallaxOcclusion = true;
+    material.parallaxScaleBias = 0.1;
+    material.specularPower = 1000.0;
+    material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+    mesh.material = material;
+    return scene;
+};
+var scene = createScene();
+engine.runRenderLoop(function () {
+    scene.render();
+});
+
+*/
 
 
 
