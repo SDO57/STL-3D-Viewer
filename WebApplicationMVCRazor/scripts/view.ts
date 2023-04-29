@@ -119,7 +119,7 @@ var resizeMesh = function () {
 
     var numberFaces = positions.length / 3;
     var ind = 0;
-    for (var i = 0; i < numberFaces; i++) {
+    for (var i = 0; i < numberPlots; i++) {
         positions[ind + 0] = (positions[ind + 0]); // * factor;
         positions[ind + 1] = positions[ind + 1];// * factor;
         positions[ind + 2] = (positions[ind + 2]);// * factor;
