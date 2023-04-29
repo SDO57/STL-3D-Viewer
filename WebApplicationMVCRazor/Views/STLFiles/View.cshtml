@@ -16,27 +16,27 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-3">
-            <h2><a class="btn btn-primary" asp-action="Index" asp-route-id="">Go back to Store</a></h2>
+        <div class="col-2">
+            <h2><a class="btn btn-primary" href="/STLFiles/Files?StoreId=@Model.Desc.StoreId">Go back to Store</a></h2>
 
         </div>
 
-      @*  <div class="col-3">
-            <select disabled name="store-select" id="store-select">
-                <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
-            </select>
+        @*  <div class="col-3">
+        <select disabled name="store-select" id="store-select">
+        <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
+        </select>
         </div>
 
         <div class="col-3">
-            <select disabled name="file-select" id="file-select">
-                <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
-            </select>
+        <select disabled name="file-select" id="file-select">
+        <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
+        </select>
         </div>*@
 
-       
 
-        <div class="col-7">
-            <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
+
+        <div class="col-2">
+           
         </div>
         <div class="col-2">
 
@@ -45,6 +45,28 @@
             <label for="CClearColor">CClearColor</label>
 
         </div>
+        <div class="col-2">
+            <div>
+                <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
+                <label for="cbShowGridGround">Ground</label>
+
+            </div>
+        </div>
+        <div class="col-2">
+            <div>
+                <input type="checkbox" id="cbShowCloud" name="cbShowCloud">
+                <label for="cbShowCloud">Sky</label>
+
+            </div>
+
+        </div>
+        <div class="col-2">
+            <div>
+                <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
+                <label for="cbShowAxis">Axis</label>
+
+            </div>
+        </div>
     </div>
 
 
@@ -52,29 +74,12 @@
 
         <div class="col-2">
 
-         
+
 
             <div class="container">
 
-               
-                <div>
-                    <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
-                    <label for="cbShowGridGround">Ground</label>
 
-                </div>
 
-                <div>
-                    <input type="checkbox" id="cbShowCloud" name="cbShowCloud">
-                    <label for="cbShowCloud">Sky</label>
-
-                </div>
-
-               
-                <div>
-                    <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
-                    <label for="cbShowAxis">Axis</label>
-
-                </div>
                 <div>
                     <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
                     <label for="cbBoundingBox">BoundingBox</label>
@@ -117,7 +122,7 @@
                     <option value='road'>road</option>
                     <option value='grass'>grass</option>
                     <option value='fire'>fire</option>
-                  
+
                     <option disabled>Color Defined Materials</option>
                     <option value='emerald'>emerald</option>
                     <option value='jade'>jade</option>
@@ -138,8 +143,8 @@
                     <option value='polished_silver'>polished_silver</option>
 
                     <option disabled>My Materials</option>
-                    <option value='plaster'>plaster</option>
-                    <option selected value='inca_stone'>inca stone</option>
+                    <option selected value='plaster'>plaster</option>
+                    <option value='inca_stone'>inca stone</option>
                     <option value='white_marble'>white marble</option>
                     <option value='rose_marble'>rose marble</option>
 
@@ -177,7 +182,7 @@
                 </div>
                 <div>
                     <input type="range" id="RCameraLight" name="RCameraLight"
-                           min="0" max="100" value="60" step="10">
+                           min="0" max="100" value="50" step="10">
                     <label for="RCameraLight">RCameraLight</label>
                 </div>
 
@@ -189,30 +194,56 @@
         </div>
         <div class="col-10">
             <div class="container">
-              
+
 
                 <div class="row">
 
 
                     <!-- RENDERING CANVAS-->
                     <div id="canvasZone">
-                        <canvas id="renderCanvas"></canvas>                
+                        <canvas id="renderCanvas"></canvas>
                     </div>
 
 
                 </div>
                 <div class="row">
-                  
+
                     <div class="col-12">
-                                        
+
                         <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
-                   
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+
+        <div class="col-10">
+           
+        </div>
+
+        @*  <div class="col-3">
+        <select disabled name="store-select" id="store-select">
+        <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
+        </select>
+        </div>
+
+        <div class="col-3">
+        <select disabled name="file-select" id="file-select">
+        <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
+        </select>
+        </div>*@
+
+
+
+        <div class="col-2">
+            <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
+        </div>
+       
+    </div>
+
 </div>
 
 <!--
@@ -276,9 +307,12 @@
     normals = [@jnormals];
     $('#renderCanvas').css('background-color', clearColor);
 
-   
-                
+
+
 
 </script>
 
+
 <script src="~/js/view.js" asp-append-version="true"></script>
+
+<script src="~/js/viewVanilla.js" asp-append-version="true"></script>

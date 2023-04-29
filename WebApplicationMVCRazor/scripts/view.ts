@@ -1,9 +1,11 @@
+﻿
 var clearColor;
 var boundingBox;
 var positions;
 var indices;
 var normals;
-var MaterialsTable = {
+
+const MaterialsTable = {
     'emerald': [0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.633, 0.727811, 0.633, 0.6],
     'jade': [0.135, 0.2225, 0.1575, 0.54, 0.89, 0.63, 0.316228, 0.316228, 0.316228, 0.1],
     'obsidian': [0.05375, 0.05, 0.06625, 0.18275, 0.17, 0.22525, 0.332741, 0.328634, 0.346435, 0.3],
@@ -13,31 +15,41 @@ var MaterialsTable = {
     'brass': [0.329412, 0.223529, 0.027451, 0.780392, 0.568627, 0.113725, 0.992157, 0.941176, 0.807843, 0.21794872],
     'bronze': [0.2125, 0.1275, 0.054, 0.714, 0.4284, 0.18144, 0.393548, 0.271906, 0.166721, 0.2],
     'polished_bronze': [0.25, 0.148, 0.06475, 0.4, 0.2368, 0.1036, 0.774597, 0.458561, 0.200621, 76.8],
+
     'chrome': [0.25, 0.25, 0.25, 0.4, 0.4, 0.4, 0.774597, 0.774597, 0.774597, 0.6],
     'copper': [0.19125, 0.0735, 0.0225, 0.7038, 0.27048, 0.0828, 0.256777, 0.137622, 0.086014, 0.1],
     'polished_copper': [0.2295, 0.08825, 0.0275, 0.5508, 0.2118, 0.066, 0.580594, 0.223257, 0.0695701, 51.2],
     'gold': [0.24725, 0.1995, 0.0745, 0.75164, 0.60648, 0.22648, 0.628281, 0.555802, 0.366065, 0.4],
     'polished_gold': [0.24725, 0.2245, 0.0645, 0.34615, 0.3143, 0.0903, 0.797357, 0.723991, 0.208006, 83.2],
+
     'pewter': [0.105882, 0.058824, 0.113725, 0.427451, 0.470588, 0.541176, 0.333333, 0.333333, 0.521569, 9.84615],
     'silver': [0.19225, 0.19225, 0.19225, 0.50754, 0.50754, 0.50754, 0.508273, 0.508273, 0.508273, 0.4],
     'polished_silver': [0.23125, 0.23125, 0.23125, 0.2775, 0.2775, 0.2775, 0.773911, 0.773911, 0.773911, 89.6],
+
+
+
     'black_plastic': [0.0, 0.0, 0.0, 0.01, 0.01, 0.01, 0.50, 0.50, 0.50, .25],
     'cyan_plastic': [0.0, 0.1, 0.06, 0.0, 0.50980392, 0.50980392, 0.50196078, 0.50196078, 0.50196078, .25],
     'green_plastic': [0.0, 0.0, 0.0, 0.1, 0.35, 0.1, 0.45, 0.55, 0.45, .25],
     'red_plastic': [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.7, 0.6, 0.6, .25],
     'white_plastic': [0.0, 0.0, 0.0, 0.55, 0.55, 0.55, 0.70, 0.70, 0.70, .25],
     'yellow_plastic': [0.0, 0.0, 0.0, 0.5, 0.5, 0.0, 0.60, 0.60, 0.50, .25],
+
     'black_rubber': [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.4, 0.4, 0.4, .078125],
     'cyan_rubber': [0.0, 0.05, 0.05, 0.4, 0.5, 0.5, 0.04, 0.7, 0.7, .078125],
     'green_rubber': [0.0, 0.05, 0.0, 0.4, 0.5, 0.4, 0.04, 0.7, 0.04, .078125],
     'red_rubber': [0.05, 0.0, 0.0, 0.5, 0.4, 0.4, 0.7, 0.04, 0.04, .078125],
     'white_rubber': [0.05, 0.05, 0.05, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, .078125],
     'yellow_rubber': [0.05, 0.05, 0.0, 0.5, 0.5, 0.4, 0.7, 0.7, 0.04, .078125],
+
     //my materials
     'plaster': [1, 1, 1, 1, 1, 1, 0, 0, 0, 0.4],
+
     'inca_stone': [0.5, 0.5, 0.3, 0.5, 0.5, 0.2, 0.4, 0.3, 0.1, 0.4],
+
     'white_marble': [1, 0.95, 0.85, 1, 0.9, 0.8, 1, 1, 1, 1.4],
     'rose_marble': [1, 0.8, 0.8, 1, 0.7, 0.7, 1, 1, 1, 1.4],
+
     'black_mat': [0.01, 0.01, 0.01, 0.15, 0.15, 0.15, 0., 0., 0., .25],
     'cyan_mat': [0.01, 0.23, 0.23, 0.2, 0.3, 0.3, 0., 0., 0., .25],
     'green_mat': [0.01, 0.06, 0.01, 0.2, 0.6, 0.2, 0., 0., 0., .25],
@@ -45,76 +57,108 @@ var MaterialsTable = {
     'white_mat': [0.06, 0.06, 0.06, 0.6, 0.6, 0.6, 0., 0., 0., .25],
     'yellow_mat': [0.06, 0.06, 0.01, 0.6, 0.6, 0.2, 0., 0., 0., .25]
 };
+
+
+
+
 // REPOSITIONNEMENT
+
 var changeMeshOrientationYZ = function () {
+
     var numberFaces = positions.length / 3;
     var ind = 0;
+
     var xmin = positions[0];
     var ymin = positions[2];
     var zmin = positions[1];
+
     var xmax = positions[0];
     var ymax = positions[2];
     var zmax = positions[1];
+
     for (var i = 0; i < numberFaces; i++) {
+
         var newZ = positions[ind + 1];
         var newY = positions[ind + 2];
+
         positions[ind + 1] = newY;
-        positions[ind + 2] = newZ;
+        positions[ind + 2] = newZ
+
         xmin = Math.min(xmin, positions[ind]);
         ymin = Math.min(ymin, positions[ind + 1]);
         zmin = Math.min(zmin, positions[ind + 2]);
+
         xmax = Math.max(xmax, positions[ind]);
         ymax = Math.max(ymax, positions[ind + 1]);
         zmax = Math.max(zmax, positions[ind + 2]);
+
         ind += 3;
     }
+
     boundingBox[0] = xmin;
     boundingBox[1] = ymin;
     boundingBox[2] = zmin;
+
     boundingBox[3] = xmax;
     boundingBox[4] = ymax;
     boundingBox[5] = zmax;
-};
+}
+
+
 var resizeMesh = function () {
+
     var LX = (boundingBox[3] - boundingBox[0]);
     var LY = (boundingBox[4] - boundingBox[1]);
     var LZ = (boundingBox[5] - boundingBox[2]);
+
     var factor = 10.0 / Math.max(LX, LZ);
+
     var LXmilieu = LX * 0.5;
     var LYmilieu = LY * 0.5;
     var LZmilieu = LZ * 0.5;
+
     var numberFaces = positions.length / 3;
     var ind = 0;
     for (var i = 0; i < numberFaces; i++) {
         positions[ind + 0] = (positions[ind + 0]); // * factor;
-        positions[ind + 1] = positions[ind + 1]; // * factor;
-        positions[ind + 2] = (positions[ind + 2]); // * factor;
+        positions[ind + 1] = positions[ind + 1];// * factor;
+        positions[ind + 2] = (positions[ind + 2]);// * factor;
         ind += 3;
     }
+
     boundingBox[0] = 0;
     boundingBox[1] = 0;
     boundingBox[2] = 0;
     boundingBox[3] = LX * factor;
     boundingBox[4] = LY * factor;
     boundingBox[5] = LZ * factor;
-};
+}
+
+
 /* ############################################################################### */
 // HERE IS SAMPLE CODE FROM https://learn.microsoft.com/en-us/visualstudio/javascript/tutorial-aspnet-with-typescript?view=vs-2022
+
 function TSButton() {
-    var name = "Fred";
+    let name: string = "Fred";
     document.getElementById("ts-example").innerHTML = greeter(user);
 }
-var Student = /** @class */ (function () {
-    function Student(firstName, middleInitial, lastName) {
-        this.firstName = firstName;
-        this.middleInitial = middleInitial;
-        this.lastName = lastName;
+
+class Student {
+    fullName: string;
+    constructor(public firstName: string, public middleInitial: string, public lastName: string) {
         this.fullName = firstName + " " + middleInitial + " " + lastName;
     }
-    return Student;
-}());
-function greeter(person) {
+}
+
+interface Person {
+    firstName: string;
+    lastName: string;
+}
+
+function greeter(person: Person) {
     return "Hello, " + person.firstName + " " + person.lastName;
 }
-var user = new Student("Fred", "M.", "Smith");
-//# sourceMappingURL=view.js.map
+
+let user = new Student("Fred", "M.", "Smith");
+
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Model.STLFileModelView>
+@*@model List<Core.Entities.STLFile>*@
+
+@{
+    ViewData["Title"] = "STL Store";
+}
+
+
+
+
+
+<div class="col-3">
+    <h2><a class="btn btn-primary" href="/STLFiles">Go back to Stores Index</a></h2>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.FileSize)
+            </th>
+            <th>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileSize)
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a class="btn btn-primary"  asp-action="View" asp-route-id="@item.FileId">Details</a>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

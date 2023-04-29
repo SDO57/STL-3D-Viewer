@@ -7,6 +7,8 @@ namespace Model
        
         public int StoreId { get; set; }
 
+        public string StoreName { get; set; }
+
         public string Owner { get; set; }
         public List<STLFileModelView> Files { get; set; }
     }

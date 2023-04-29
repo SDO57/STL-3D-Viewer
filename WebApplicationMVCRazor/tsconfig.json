@@ -1,0 +1,27 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outDir": "wwwroot/js"
+  },
+  "include": [
+    "scripts/**/*"
+  ]
+}
+/*{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}*/

@@ -19,26 +19,52 @@ namespace WebApplicationMVC.Controllers
         // GET: STLFiles
         public async Task<IActionResult> Index()
         {
-            var resFiles = new List<Model.STLFileModelView>() { };//on vide les datas en attendant
+            var resStores = new List<Model.STLStoreModelView>() { };//on vide les datas en attendant
          
             
             var _stores = _fileDescriptionRepository.GetAllStores();
             foreach (var _store in _stores)
-            { if (_store.Files != null)
-           // var _store = _fileDescriptionRepository.GetLastStore();
-            foreach (var file in _store.Files)
-                {
-                    var resFile = new Model.STLFileModelView()
+            {
+             
+                        var resStore = new Model.STLStoreModelView()
+                        {
+                            StoreId = _store.StoreId,
+                            StoreName = string.IsNullOrEmpty(_store.Owner)?"(Root)":_store.Owner,
+                           
+                        };
+                        resStores.Add(resStore);
+                  
+            }
+
+            return View(resStores);
+
+        }
+
+        // GET: STLFiles
+        public async Task<IActionResult> Files(int StoreID)
+        {
+            var resFiles = new List<Model.STLFileModelView>() { };//on vide les datas en attendant
+
+
+            var _store = _fileDescriptionRepository.GetStore(StoreID);
+           /* foreach (var _store in _stores)
+            {*/
+                if (_store.Files != null)
+                    // var _store = _fileDescriptionRepository.GetLastStore();
+                    foreach (var file in _store.Files)
                     {
-                        StoreId = _store.StoreId,
-                        StoreName = _store.Owner,
-                        FileId = file.FileId,
-                        FileName = file.FileName,
-                        FileSize = file.FileSize,
-                        Codage = file.FileCodage
-                    };
-                    resFiles.Add(resFile);
-                } }
+                        var resFile = new Model.STLFileModelView()
+                        {
+                            StoreId = _store.StoreId,
+                            StoreName = _store.Owner,
+                            FileId = file.FileId,
+                            FileName = file.FileName,
+                            FileSize = file.FileSize,
+                            Codage = file.FileCodage
+                        };
+                        resFiles.Add(resFile);
+                    }
+           // }
 
             return View(resFiles);
 

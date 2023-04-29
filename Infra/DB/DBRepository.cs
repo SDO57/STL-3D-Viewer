@@ -46,5 +46,22 @@ namespace Infra.DB
             return store;
         }
 
+
+        public STLStore? GetStore(int id)
+        {
+            using var db = new CAD_DBContext();
+
+            //Acces a tous les stores du plus recent au plus ancien
+            var store = db.STLStores
+            .Where(x=>x.StoreId == id)
+            .FirstOrDefault();
+
+            var files = db.STLFileDescriptions.ToArray();
+
+            return store;
+        }
+
+       
+
     }
 }

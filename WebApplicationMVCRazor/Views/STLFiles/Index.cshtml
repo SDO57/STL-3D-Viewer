@@ -1,64 +1,44 @@
-﻿@model IEnumerable<Model.STLFileModelView>
+﻿@model IEnumerable<Model.STLStoreModelView>
 @*@model List<Core.Entities.STLFile>*@
 
 @{
     ViewData["Title"] = "STL Store";
 }
 
-<h1>Index</h1>
+<h1>Stores Index</h1>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StoreId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StoreName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Codage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FileName)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.FileSize)
-            </th>
-            <th>
-
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+@{
+    var i = 0;
+    foreach (var item in Model)
+    {
+        if (i % 4 == 0)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StoreId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StoreName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Codage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FileName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FileSize)
-                </td>
-                <td>
-                </td>
-                <td>
-                    <a class="btn btn-primary"  asp-action="View" asp-route-id="@item.FileId">Details</a>
-                   
-                </td>
-            </tr>
+           @: <div class="row">
         }
-    </tbody>
-</table>
+
+        <div class="col-3">
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"> @item.StoreName</h5>
+                    <p class="card-text">desc</p>
+                    <a href="/STLFiles/Files?StoreId=@item.StoreId" class="btn btn-primary">Explore</a>
+                </div>
+
+            </div>
+        </div>
+        i++;
+
+        if (i % 4 == 0)
+        {
+           @: </div>
+        }
+
+
+    }
+}
+
+
+
+
+
+

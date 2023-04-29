@@ -8,5 +8,7 @@
 
         public List<STLStore> GetAllStores();
 
+        public STLStore GetStore(int id);
+
     }
 }
