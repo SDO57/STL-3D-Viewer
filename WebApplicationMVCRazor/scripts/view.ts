@@ -4,6 +4,7 @@ var boundingBox;
 var positions;
 var indices;
 var normals;
+var colors;
 
 const MaterialsTable = {
     'emerald': [0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.633, 0.727811, 0.633, 0.6],
@@ -59,13 +60,174 @@ const MaterialsTable = {
 };
 
 
+const solidPalette = ["#FFFFFF"];
+const lunarPalette = [
+    "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
+    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
 
+const earthEonTodayPalette = [
+    "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
+    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+
+
+
+const earthEonHadeenPalette = [];/*["#FF0000", "#404040"]; //*/
+for (var i = 0; i < 256; i++) earthEonHadeenPalette.push("#" + (256-i).toString(16) + Math.max((256-i*2),0).toString(16) + "00");
+const earthEonArcheenPalette = ["#FFB080"];
+const earthEonProterozoiquenPalette = ["#00005F", "#00006F", "#00007F", "#00008F", "#A0A0FF", "#C0C0FF", "#D0D0FF", "#E0E0FF", "#FFFFFF", "#FFFFFF", "#FFFFFF",
+    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+const earthEonPhanerozoiquePalette = ["#80FF80"];
+
+var moonPalette = []; for (var i = 64; i < 256; i++) moonPalette.push("#" + i.toString(16) + i.toString(16) + i.toString(16));
+const mercuryPalette = []; for (var i = 128; i < 256; i++) mercuryPalette.push("#" + (256 - i).toString(16) + (256 - i).toString(16) + (256 - i).toString(16));
+const venusPalette = [
+    "#2F2000", "#2F2000", 
+    "#3F2000", "#3F2000", 
+    "#6F3000", "#6F3000", 
+    "#8F3000", "#8F3000",
+    //"#00FF00",
+    "#FFA040", "#FFA040", "#FFA040",
+    "#FFC050", "#FFC050", "#FFC050",
+    "#FFD060", "#FFD060", "#FFD060",
+    "#FFE070", "#FFE070", "#FFE070",
+    "#FFFF80", "#FFFF80", 
+    "#FFFF80", "#FFFF80", "#FFFF80",
+    "#FFFF80", "#FFFF80", "#FFFF80",
+    "#FFFF80", "#FFFF80"];
+
+const marsPalette = []; for (var i = 0; i < 256; i++) marsPalette.push("#" + ( 64+Math.round(i / 1.5)).toString(16) + ( 32+Math.round(i / 2)).toString(16) + ( 16+Math.round(i / 4)).toString(16));
+const plutoPalette = ["#2F2000", "#2F2000", "#2F2000", "#2F2000", "#3F2000", "#3F2000", "#3F2000", "#6F3000", "#6F3000", "#6F3000", "#8F3000", "#8F3000", "#FFA0A0", "#FFC0C0", "#FFD0D0", "#FFE0E0", "#FFFFFF", "#FFFFFF", "#FFFFFF",
+    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+
+function mixRgb(a,pa,b,pb) {
+      return {
+        r: a.r * pa + b.r * pb,
+        g: a.g * pa + b.g * pb,
+        b: a.b * pa + b.b * pb
+    };
+}
+
+
+// elevation palette
+const elevationcolors_earthToday = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -101, rgb: hexToRgb("#4040FF") },
+    { alt: -100, rgb: hexToRgb("#FFB000") },
+    { alt: 100, rgb: hexToRgb("#FFB000") },
+    { alt: 1000, rgb: hexToRgb("#203020") },
+    { alt: 2000, rgb: hexToRgb("#208010") },
+    
+    { alt: 3000, rgb: hexToRgb("#302020") },
+    { alt: 4000, rgb: hexToRgb("#B0A080") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }];
+
+var elevationColorsComparaison = function (a, b) {
+
+    if (a.alt < b.alt) { return -1 }
+    if (a.alt == b.alt) { return 0}
+    if (a.alt > b.alt) { return 1 }
+
+}
+
+
+
+var elevationComputeColor = function (elevationColors, elevation) {
+    
+    var indMin = 0;
+    while (elevationColors[indMin].alt < elevation) { indMin++ }
+    indMin = Math.min(elevationColors.length - 1, indMin );
+
+    var indMax = elevationColors.length - 1;
+    while (elevationColors[indMax].alt > elevation) { indMax-- }
+    indMax = Math.max(0, indMax );
+
+    var distanceA = (elevation - elevationColors[indMin].alt);
+    var distanceB = (elevationColors[indMax].alt - elevation);
+    var distanceTot = distanceA + distanceB;
+
+    return mixRgb(
+        elevationColors[indMin].rgb,
+        1 - distanceA / distanceTot,
+        elevationColors[indMax].rgb,
+        1 - distanceB / distanceTot);
+   
+}
+
+var elevationColorization = function (elevationColors) {
+
+    var sorted = elevationColors.sort(elevationColorsComparaison);
+
+    var minElevation = sorted[0].alt;
+    var maxElevation = sorted[sorted.length - 1].alt;
+
+    for (var i = 0; i < sorted.length; i++) {
+        sorted[i].alt = (sorted[i].alt - minElevation) / (maxElevation - minElevation);
+    }
+
+
+    ///-------------------
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+
+    var colors = [];
+    var normes = [];
+    //premiere passe pour calculer min max 
+    var NumberPlots = positions.length / 3;
+
+    var ind = 0;
+
+    var minRadius = Number.MAX_VALUE;
+    var maxRadius = 0;
+
+    for (var i = 0; i < NumberPlots; i++) {
+        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
+        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
+        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
+
+        var norme = Math.sqrt(x * x + y * y + z * z);
+        normes.push(norme);
+        minRadius = Math.min(minRadius, norme);
+        maxRadius = Math.max(maxRadius, norme);
+        ind += 3;
+    }
+    var facteur = 1 / (maxRadius - minRadius);
+
+
+    //var nbIndex = palette.length - 1;
+    //deuxieme passe calcul des couleurs de chaque plot
+    for (var i = 0; i < NumberPlots; i++) {
+        var elevation = ((normes[i] - minRadius) * facteur);
+
+        var color = elevationComputeColor(sorted, elevation);
+
+        colors.push(color.r/256, color.g/256, color.b/256, 1);
+
+    }
+
+    return colors;
+}
 
 // REPOSITIONNEMENT
 
 var changeMeshOrientationYZ = function () {
 
-    var numberFaces = positions.length / 3;
+    var numberPlots = positions.length / 3;
     var ind = 0;
 
     var xmin = positions[0];
@@ -76,7 +238,7 @@ var changeMeshOrientationYZ = function () {
     var ymax = positions[2];
     var zmax = positions[1];
 
-    for (var i = 0; i < numberFaces; i++) {
+    for (var i = 0; i < numberPlots; i++) {
 
         var newZ = positions[ind + 1];
         var newY = positions[ind + 2];
@@ -117,7 +279,7 @@ var resizeMesh = function () {
     var LYmilieu = LY * 0.5;
     var LZmilieu = LZ * 0.5;
 
-    var numberFaces = positions.length / 3;
+    var numberPlots = positions.length / 3;
     var ind = 0;
     for (var i = 0; i < numberPlots; i++) {
         positions[ind + 0] = (positions[ind + 0]); // * factor;
@@ -133,6 +295,8 @@ var resizeMesh = function () {
     boundingBox[4] = LY * factor;
     boundingBox[5] = LZ * factor;
 }
+
+
 
 
 /* ############################################################################### */
