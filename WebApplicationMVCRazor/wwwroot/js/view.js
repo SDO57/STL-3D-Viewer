@@ -51,23 +51,12 @@ var lunarPalette = [
     "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
     "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"
 ];
-var earthEonTodayPalette = [
-    "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
-    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"
-];
-var earthEonHadeenPalette = []; /*["#FF0000", "#404040"]; //*/
-for (var i = 0; i < 256; i++)
-    earthEonHadeenPalette.push("#" + (256 - i).toString(16) + Math.max((256 - i * 2), 0).toString(16) + "00");
-var earthEonArcheenPalette = ["#FFB080"];
-var earthEonProterozoiquenPalette = ["#00005F", "#00006F", "#00007F", "#00008F", "#A0A0FF", "#C0C0FF", "#D0D0FF", "#E0E0FF", "#FFFFFF", "#FFFFFF", "#FFFFFF",
-    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
-var earthEonPhanerozoiquePalette = ["#80FF80"];
 var moonPalette = [];
 for (var i = 64; i < 256; i++)
     moonPalette.push("#" + i.toString(16) + i.toString(16) + i.toString(16));
 var mercuryPalette = [];
 for (var i = 128; i < 256; i++)
-    mercuryPalette.push("#" + (256 - i).toString(16) + (256 - i).toString(16) + (256 - i).toString(16));
+    mercuryPalette.push("#" + (255 - i).toString(16) + (255 - i).toString(16) + (255 - i).toString(16));
 var venusPalette = [
     "#2F2000", "#2F2000",
     "#3F2000", "#3F2000",
@@ -103,16 +92,99 @@ function mixRgb(a, pa, b, pb) {
         b: a.b * pa + b.b * pb
     };
 }
-// elevation palette
-var elevationcolors_earthToday = [
+//Elevation palettes
+var elevationcolors_earthEonHadeenBegin = [
+    { alt: -10000, rgb: hexToRgb("#FFFF00") },
+    { alt: -5000, rgb: hexToRgb("#FF0000") },
+    { alt: 100, rgb: hexToRgb("#000000") },
+    { alt: 8000, rgb: hexToRgb("#505050") }
+];
+var elevationcolors_earthEonHadeenEnd = [
     { alt: -10000, rgb: hexToRgb("#00005F") },
-    { alt: -101, rgb: hexToRgb("#4040FF") },
-    { alt: -100, rgb: hexToRgb("#FFB000") },
-    { alt: 100, rgb: hexToRgb("#FFB000") },
-    { alt: 1000, rgb: hexToRgb("#203020") },
-    { alt: 2000, rgb: hexToRgb("#208010") },
-    { alt: 3000, rgb: hexToRgb("#302020") },
-    { alt: 4000, rgb: hexToRgb("#B0A080") },
+    { alt: 0, rgb: hexToRgb("#00005F") },
+    { alt: 1500, rgb: hexToRgb("#2F7A97") },
+    { alt: 1600, rgb: hexToRgb("#3D6469") },
+    { alt: 1700, rgb: hexToRgb("#89A299") },
+    { alt: 1800, rgb: hexToRgb("#008000") },
+    { alt: 1900, rgb: hexToRgb("#800000") },
+    { alt: 2000, rgb: hexToRgb("#63776F") },
+    { alt: 2200, rgb: hexToRgb("#63776F") },
+    { alt: 2300, rgb: hexToRgb("#6A6652") },
+    { alt: 4000, rgb: hexToRgb("#ABA79E") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonArcheen = [
+    { alt: -10000, rgb: hexToRgb("#002F00") },
+    { alt: 0, rgb: hexToRgb("#002F00") },
+    { alt: 1300, rgb: hexToRgb("#006F00") },
+    { alt: 1500, rgb: hexToRgb("#2F977A") },
+    { alt: 1600, rgb: hexToRgb("#3D6964") },
+    { alt: 1700, rgb: hexToRgb("#8999A2") },
+    { alt: 1800, rgb: hexToRgb("#008000") },
+    { alt: 1900, rgb: hexToRgb("#800000") },
+    { alt: 2000, rgb: hexToRgb("#63776F") },
+    { alt: 2200, rgb: hexToRgb("#63776F") },
+    { alt: 2300, rgb: hexToRgb("#6A6652") },
+    { alt: 4000, rgb: hexToRgb("#ABA79E") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonProterozoiquen = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -6000, rgb: hexToRgb("#00005F") },
+    { alt: -4000, rgb: hexToRgb("#00D0FF") },
+    { alt: -3000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonPhanerozoique_Paleozoique = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -2501, rgb: hexToRgb("#4040FF") },
+    { alt: -2500, rgb: hexToRgb("#FFB000") },
+    { alt: -2000, rgb: hexToRgb("#203020") },
+    { alt: 0, rgb: hexToRgb("#40B010") },
+    { alt: 500, rgb: hexToRgb("#208010") },
+    { alt: 2000, rgb: hexToRgb("#204020") },
+    { alt: 3000, rgb: hexToRgb("#B0A080") },
+    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonPhanerozoique_Mesozoique = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -2501, rgb: hexToRgb("#4040FF") },
+    { alt: -2500, rgb: hexToRgb("#FFB000") },
+    { alt: -2000, rgb: hexToRgb("#203020") },
+    { alt: 0, rgb: hexToRgb("#40B010") },
+    { alt: 500, rgb: hexToRgb("#208010") },
+    { alt: 2000, rgb: hexToRgb("#204020") },
+    { alt: 3000, rgb: hexToRgb("#B0A080") },
+    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonPhanerozoique_Cenozoique = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -2501, rgb: hexToRgb("#4040FF") },
+    { alt: -2500, rgb: hexToRgb("#FFB000") },
+    { alt: -2000, rgb: hexToRgb("#203020") },
+    { alt: 0, rgb: hexToRgb("#40B010") },
+    { alt: 500, rgb: hexToRgb("#208010") },
+    { alt: 2000, rgb: hexToRgb("#204020") },
+    { alt: 3000, rgb: hexToRgb("#B0A080") },
+    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_earthEonToday = [
+    { alt: -10000, rgb: hexToRgb("#00005F") },
+    { alt: -2501, rgb: hexToRgb("#4040FF") },
+    { alt: -2500, rgb: hexToRgb("#FFB000") },
+    { alt: -2000, rgb: hexToRgb("#203020") },
+    { alt: 0, rgb: hexToRgb("#40B010") },
+    { alt: 500, rgb: hexToRgb("#208010") },
+    { alt: 2000, rgb: hexToRgb("#204020") },
+    { alt: 3000, rgb: hexToRgb("#B0A080") },
+    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_Encelade = [
+    { alt: -10000, rgb: hexToRgb("#00D0FF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
 ];
 var elevationColorsComparaison = function (a, b) {
@@ -127,20 +199,20 @@ var elevationColorsComparaison = function (a, b) {
     }
 };
 var elevationComputeColor = function (elevationColors, elevation) {
-    var indMin = 0;
-    while (elevationColors[indMin].alt < elevation) {
-        indMin++;
+    var indInf = 0;
+    while (elevationColors[indInf].alt < elevation) {
+        indInf++;
     }
-    indMin = Math.min(elevationColors.length - 1, indMin);
-    var indMax = elevationColors.length - 1;
-    while (elevationColors[indMax].alt > elevation) {
-        indMax--;
+    indInf = Math.max(0, indInf - 1);
+    var indSup = elevationColors.length - 1;
+    while (elevationColors[indSup].alt > elevation) {
+        indSup--;
     }
-    indMax = Math.max(0, indMax);
-    var distanceA = (elevation - elevationColors[indMin].alt);
-    var distanceB = (elevationColors[indMax].alt - elevation);
+    indSup = Math.min(elevationColors.length - 1, indSup + 1);
+    var distanceA = (elevation - elevationColors[indInf].alt);
+    var distanceB = (elevationColors[indSup].alt - elevation);
     var distanceTot = distanceA + distanceB;
-    return mixRgb(elevationColors[indMin].rgb, 1 - distanceA / distanceTot, elevationColors[indMax].rgb, 1 - distanceB / distanceTot);
+    return mixRgb(elevationColors[indInf].rgb, 1 - distanceA / distanceTot, elevationColors[indSup].rgb, 1 - distanceB / distanceTot);
 };
 var elevationColorization = function (elevationColors) {
     var sorted = elevationColors.sort(elevationColorsComparaison);

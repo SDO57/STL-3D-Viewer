@@ -7,7 +7,7 @@
     var jindices = String.Join(',', decrypt.jsIndices);
     var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
     var jnormals = String.Join(',', decrypt.jsNormals);
-    var ClearColor = "#354155";
+    var ClearColor = "#24282D";
 
 }
 
@@ -111,18 +111,33 @@
                 <select name="PlanetColorization" id="PlanetColorization-select">
                     <option value='solid'>solid</option>
                     <option disabled>Earth</option>
-                    <option value='earthTodayPalette'>earthTodayPalette</option>
-                    <option value='earthHadeenPalette'>earthHadeenPalette</option>
-                    <option value='earthArcheenPalette'>earthArcheenPalette</option>
-                    <option value='earthProterozoiquenPalette'>earthProterozoiquenPalette</option>
-                    <option value='earthPhanerozoiquePalette'>earthPhanerozoiquePalette</option>
+                    <option value='earthHadeenBeginPalette'>earth - 4,51 MA - Hadeen - Debut</option>
+                    <option value='earthHadeenEndPalette'>earth - 3,8 MA - Hadeen - Fin</option>
+                    <option value='earthArcheenPalette'>earth - 3,8 MA - Archeen</option>
+                    <option value='earthProterozoiquenPalette'>earth - 2,52 MA - Proterozoiquen</option>
+                    <option value='elevationcolors_earthEonPhanerozoique_Paleozoique'>earth - 542 MO - Paleozoique </option>
+                    <option value='elevationcolors_earthEonPhanerozoique_Mesozoique'>earth - 250 MO - Mesozoique </option>
+                    <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>
+
+
+
+                    <option value='earthTodayPalette'>earth - Today</option>
                     <option disabled>Others</option>
-                    <option value='moon'>moon</option>
+                   
                     <option value='mercury'>mercury</option>
                     <option value='venus'>venus</option>
                     <option value='mars'>mars</option>
                     <option value='pluto'>pluto</option>
+                    <option disabled>Satellites</option>
+                    <option value='moon'>moon</option>
+                    <option value='Encelade'>Encelade</option>
+                    
+
                 </select>
+
+
+
+
                 <select name="Material" id="material-select">
 
                     <option disabled>Image Texture Materials</option>

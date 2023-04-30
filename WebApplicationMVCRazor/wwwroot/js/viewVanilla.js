@@ -101,7 +101,7 @@ var earthColorization = function (palette) {
     var LZ = (boundingBox[5] - boundingBox[2]);
 
 
-  
+
 
     var LXmilieu = LX * 0.5;
     var LYmilieu = LY * 0.5;
@@ -129,7 +129,7 @@ var earthColorization = function (palette) {
         ind += 3;
     }
     var facteur = 1 / (maxRadius - minRadius);
- 
+
 
     var nbIndex = palette.length - 1;
     //deuxieme passe calcul des couleurs de chaque plot
@@ -139,7 +139,7 @@ var earthColorization = function (palette) {
         colors.push(color.r, color.g, color.b, 1);
 
     }
-  
+
     return colors;
 }
 
@@ -151,7 +151,7 @@ var lunarColorization = function (mesh) {
     var LZ = (boundingBox[5] - boundingBox[2]);
 
 
-  
+
 
     var LXmilieu = LX * 0.5;
     var LYmilieu = LY * 0.5;
@@ -179,10 +179,10 @@ var lunarColorization = function (mesh) {
         ind += 3;
     }
     var facteur = 1 / (maxRadius - minRadius);
-  
+
     for (var i = 0; i < NumberPlots; i++) {
         var index = (normes[i] - minRadius) * facteur;
-       
+
         colors.push(index, index, index, 1);
 
     }
@@ -215,7 +215,7 @@ const createSceneSTL = () => {
     vertexData.normals = normals;
     vertexData.uvs = uvs;
 
- 
+
     vertexData.applyToMesh(customMesh);
 
     customMesh.convertToFlatShadedMesh();
@@ -239,31 +239,38 @@ const createSceneSTL = () => {
     */
 
     //customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
-    colors = elevationColorization(elevationcolors_earthToday)
-    customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, colors );
+
+    customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonToday));
 
     $('#PlanetColorization-select').on('change',
         function () {
             var mat = this.value;
-          
-          
-                customMesh.material = myMaterial;
-                switch (mat) {
 
-                    case 'earthTodayPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(earthEonTodayPalette)); break;
-                    case 'earthHadeenPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(earthEonHadeenPalette)); break;
-                    case 'earthArcheenPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(earthEonArcheenPalette)); break;
-                    case 'earthProterozoiquenPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(earthEonProterozoiquenPalette)); break;
-                    case 'earthPhanerozoiquePalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(earthEonPhanerozoiquePalette)); break;
-                    case 'moon': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(moonPalette)); break;
-                    case 'mercury': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(mercuryPalette)); break;
-                    case 'venus': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(venusPalette)); break;
-                    case 'mars': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(marsPalette)); break;
 
-                    case 'pluto': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(plutoPalette)); break;
+            customMesh.material = myMaterial;
+            switch (mat) {
 
-                    default: customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
-               
+                case 'earthTodayPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonToday)); break;
+                case 'earthHadeenBeginPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonHadeenBegin)); break;
+                case 'earthHadeenEndPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonHadeenEnd)); break;
+                case 'earthArcheenPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonArcheen)); break;
+                case 'earthProterozoiquenPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonProterozoiquen)); break;
+
+                case 'elevationcolors_earthEonPhanerozoique_Paleozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Paleozoique)); break;
+                case 'elevationcolors_earthEonPhanerozoique_Mesozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Mesozoique)); break;
+                case 'elevationcolors_earthEonPhanerozoique_Cenozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Cenozoique)); break;
+
+                case 'mercury': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(mercuryPalette)); break;
+                case 'venus': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(venusPalette)); break;
+                case 'mars': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(marsPalette)); break;
+
+                case 'pluto': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(plutoPalette)); break;
+                case 'moon': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(moonPalette)); break;
+                case 'Encelade': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Encelade)); break;
+
+
+                default: customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
+
             }
 
         }
@@ -348,7 +355,7 @@ const createSceneSTL = () => {
             else if (mat == 'fire') {
                 customMesh.material = fireMaterial;
             }
-           
+
             else {
                 customMesh.material = myMaterial;
                 switch (mat) {
@@ -430,7 +437,7 @@ const createSceneSTL = () => {
     stoneMaterial.parallaxScaleBias = 0.1;
     stoneMaterial.specularPower = 1000.0;
     stoneMaterial.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-   
+
 
     // GRID MATERIAL
 
@@ -514,7 +521,7 @@ const createSceneSTL = () => {
 
 
     cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-    
+
 
     /* var script = document.createElement('script');
      script.src = 'https://code.jquery.com/jquery-3.6.3.min.js'; // Check https://jquery.com/ for the current version
