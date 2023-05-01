@@ -47,7 +47,7 @@
         </div>
         <div class="col-2">
             <div>
-                <input checked type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
+                <input type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
                 <label for="cbShowGridGround">Ground</label>
 
             </div>
@@ -55,10 +55,17 @@
         <div class="col-2">
             <div>
                 <input type="checkbox" id="cbShowCloud" name="cbShowCloud">
-                <label for="cbShowCloud">Sky</label>
+                <label for="cbShowCloud">Clouds</label>
 
             </div>
 
+        </div> 
+        <div class="col-2">
+            <div>
+                <input type="checkbox" id="cbShowSkyBox" name="cbShowSkyBox">
+                <label for="cbShowSkyBox">SkyBox</label>
+
+            </div>
         </div>
         <div class="col-2">
             <div>
@@ -67,6 +74,39 @@
 
             </div>
         </div>
+
+
+        <div class="col-2">
+            <div>
+                <input type="checkbox" id="cbAtmospheric" name="cbAtmospheric">
+                <label for="cbAtmospheric">Atmosphere</label>
+
+            </div>
+        </div>
+
+
+        <div>
+            <input type="range" id="RAtmosphere" name="RAtmosphere"
+                   min="0" max="100" value="100" step="2">
+            <label for="RAtmosphere">RAtmosphere</label>
+        </div>
+
+
+        <div class="col-2">
+            <div>
+                <input type="checkbox" id="cbOcean" name="cbOcean">
+                <label for="cbOcean">Ocean</label>
+
+            </div>
+        </div>  
+
+
+        <div>
+            <input type="range" id="ROcean" name="ROcean"
+                   min="0" max="100" value="96" step="2">
+            <label for="ROcean">ROcean</label>
+        </div>
+       
     </div>
 
 
@@ -85,6 +125,13 @@
                     <label for="cbBoundingBox">BoundingBox</label>
 
                 </div>
+
+                <div>
+                    <input type="checkbox" id="cbBoundingSphere" name="cbBoundingSphere">
+                    <label for="cbBoundingSphere">BoundingSphere</label>
+
+                </div>
+                
                 <div>
                     <input type="checkbox" id="cbEdges" name="cbEdges">
                     <label for="cbEdges">Edges</label>
@@ -108,8 +155,10 @@
 
 
             <div id="material-group">
-                <select name="PlanetColorization" id="PlanetColorization-select">
-                    <option value='solid'>solid</option>
+                <select name="PlanetColorization" id="preset-select">
+                    <option value='white'>white</option>
+                    
+                    <option value='aztecCalendarPalette'>AZTEC CALENDAR</option>
                     <option disabled>Earth</option>
                     <option value='earthHadeenBeginPalette'>earth - 4,51 MA - Hadeen - Debut</option>
                     <option value='earthHadeenEndPalette'>earth - 3,8 MA - Hadeen - Fin</option>
@@ -117,13 +166,8 @@
                     <option value='earthProterozoiquenPalette'>earth - 2,52 MA - Proterozoiquen</option>
                     <option value='elevationcolors_earthEonPhanerozoique_Paleozoique'>earth - 542 MO - Paleozoique </option>
                     <option value='elevationcolors_earthEonPhanerozoique_Mesozoique'>earth - 250 MO - Mesozoique </option>
-                    <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>
-
-
-
-                    <option value='earthTodayPalette'>earth - Today</option>
-                    <option disabled>Others</option>
-                   
+                    <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>         
+                    <option disabled>Others</option>              
                     <option value='mercury'>mercury</option>
                     <option value='venus'>venus</option>
                     <option value='mars'>mars</option>
@@ -131,11 +175,13 @@
                     <option disabled>Satellites</option>
                     <option value='moon'>moon</option>
                     <option value='Encelade'>Encelade</option>
+                    <option disabled>SF</option>
+                    <option value='earthTodayPalette'>Arakis</option>
                     
 
                 </select>
-
-
+                
+             
 
 
                 <select name="Material" id="material-select">

@@ -4,6 +4,9 @@ var positions;
 var indices;
 var normals;
 var colors;
+var normes;
+var insideBoundingRadius;
+var outsideBoundingRadius;
 var MaterialsTable = {
     'emerald': [0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.633, 0.727811, 0.633, 0.6],
     'jade': [0.135, 0.2225, 0.1575, 0.54, 0.89, 0.63, 0.316228, 0.316228, 0.316228, 0.1],
@@ -46,7 +49,7 @@ var MaterialsTable = {
     'white_mat': [0.06, 0.06, 0.06, 0.6, 0.6, 0.6, 0., 0., 0., .25],
     'yellow_mat': [0.06, 0.06, 0.01, 0.6, 0.6, 0.2, 0., 0., 0., .25]
 };
-var solidPalette = ["#FFFFFF"];
+var whitePalette = ["#FFFFFF"];
 var lunarPalette = [
     "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
     "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"
@@ -93,6 +96,20 @@ function mixRgb(a, pa, b, pb) {
     };
 }
 //Elevation palettes
+var elevationcolors_aztecCalendar = [
+    { alt: 0, rgb: hexToRgb("#FFFF00") },
+    { alt: 180, rgb: hexToRgb("#FFFF00") },
+    { alt: 181, rgb: hexToRgb("#FFFFFF") },
+    { alt: 410, rgb: hexToRgb("#FFFFFF") },
+    { alt: 411, rgb: hexToRgb("#FFFF00") },
+    { alt: 500, rgb: hexToRgb("#FFFF00") },
+    { alt: 501, rgb: hexToRgb("#FFFFFF") },
+    { alt: 580, rgb: hexToRgb("#FFFFFF") },
+    { alt: 581, rgb: hexToRgb("#FFFF00") },
+    { alt: 800, rgb: hexToRgb("#FFFF00") },
+    { alt: 801, rgb: hexToRgb("#FFFFFF") },
+    { alt: 1000, rgb: hexToRgb("#FFFFFF") }
+];
 var elevationcolors_earthEonHadeenBegin = [
     { alt: -10000, rgb: hexToRgb("#FFFF00") },
     { alt: -5000, rgb: hexToRgb("#FF0000") },
@@ -162,23 +179,29 @@ var elevationcolors_earthEonPhanerozoique_Mesozoique = [
 var elevationcolors_earthEonPhanerozoique_Cenozoique = [
     { alt: -10000, rgb: hexToRgb("#00005F") },
     { alt: -2501, rgb: hexToRgb("#4040FF") },
-    { alt: -2500, rgb: hexToRgb("#FFB000") },
-    { alt: -2000, rgb: hexToRgb("#203020") },
-    { alt: 0, rgb: hexToRgb("#40B010") },
-    { alt: 500, rgb: hexToRgb("#208010") },
-    { alt: 2000, rgb: hexToRgb("#204020") },
-    { alt: 3000, rgb: hexToRgb("#B0A080") },
+    { alt: -2500, rgb: hexToRgb("#4090B0") },
+    { alt: -2000, rgb: hexToRgb("#FF9060") },
+    { alt: -1000, rgb: hexToRgb("#40B010") },
+    { alt: 500, rgb: hexToRgb("#408040") },
+    { alt: 2000, rgb: hexToRgb("#bb8050") },
+    { alt: 3000, rgb: hexToRgb("#FFFFFF") },
     { alt: 4000, rgb: hexToRgb("#FFFFFF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
 ];
-var elevationcolors_earthEonToday = [
+var elevationcolors_arrakis = [
     { alt: -10000, rgb: hexToRgb("#00005F") },
     { alt: -2501, rgb: hexToRgb("#4040FF") },
     { alt: -2500, rgb: hexToRgb("#FFB000") },
     { alt: -2000, rgb: hexToRgb("#203020") },
-    { alt: 0, rgb: hexToRgb("#40B010") },
-    { alt: 500, rgb: hexToRgb("#208010") },
-    { alt: 2000, rgb: hexToRgb("#204020") },
+    { alt: 0, rgb: hexToRgb("#FFB000") },
+    { alt: 500, rgb: hexToRgb("#804030") },
+    { alt: 600, rgb: hexToRgb("#FFB000") },
+    { alt: 800, rgb: hexToRgb("#408010") },
+    { alt: 900, rgb: hexToRgb("#806020") },
+    { alt: 1000, rgb: hexToRgb("#408010") },
+    { alt: 1300, rgb: hexToRgb("#804030") },
+    { alt: 1500, rgb: hexToRgb("#506050") },
+    { alt: 2000, rgb: hexToRgb("#706060") },
     { alt: 3000, rgb: hexToRgb("#B0A080") },
     { alt: 4000, rgb: hexToRgb("#FFFFFF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
@@ -214,6 +237,29 @@ var elevationComputeColor = function (elevationColors, elevation) {
     var distanceTot = distanceA + distanceB;
     return mixRgb(elevationColors[indInf].rgb, 1 - distanceA / distanceTot, elevationColors[indSup].rgb, 1 - distanceB / distanceTot);
 };
+var elevationIOBoundingRadius = function () {
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+    normes = [];
+    var NumberPlots = positions.length / 3;
+    var ind = 0;
+    insideBoundingRadius = Number.MAX_VALUE;
+    outsideBoundingRadius = 0;
+    for (var i = 0; i < NumberPlots; i++) {
+        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
+        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
+        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
+        var norme = Math.sqrt(x * x + y * y + z * z);
+        normes.push(norme);
+        insideBoundingRadius = Math.min(insideBoundingRadius, norme);
+        outsideBoundingRadius = Math.max(outsideBoundingRadius, norme);
+        ind += 3;
+    }
+};
 var elevationColorization = function (elevationColors) {
     var sorted = elevationColors.sort(elevationColorsComparaison);
     var minElevation = sorted[0].alt;
@@ -221,35 +267,13 @@ var elevationColorization = function (elevationColors) {
     for (var i = 0; i < sorted.length; i++) {
         sorted[i].alt = (sorted[i].alt - minElevation) / (maxElevation - minElevation);
     }
-    ///-------------------
-    var LX = (boundingBox[3] - boundingBox[0]);
-    var LY = (boundingBox[4] - boundingBox[1]);
-    var LZ = (boundingBox[5] - boundingBox[2]);
-    var LXmilieu = LX * 0.5;
-    var LYmilieu = LY * 0.5;
-    var LZmilieu = LZ * 0.5;
-    var colors = [];
-    var normes = [];
-    //premiere passe pour calculer min max 
+    colors = [];
+    var facteur = 1 / (outsideBoundingRadius - insideBoundingRadius);
     var NumberPlots = positions.length / 3;
-    var ind = 0;
-    var minRadius = Number.MAX_VALUE;
-    var maxRadius = 0;
-    for (var i = 0; i < NumberPlots; i++) {
-        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
-        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
-        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
-        var norme = Math.sqrt(x * x + y * y + z * z);
-        normes.push(norme);
-        minRadius = Math.min(minRadius, norme);
-        maxRadius = Math.max(maxRadius, norme);
-        ind += 3;
-    }
-    var facteur = 1 / (maxRadius - minRadius);
     //var nbIndex = palette.length - 1;
     //deuxieme passe calcul des couleurs de chaque plot
     for (var i = 0; i < NumberPlots; i++) {
-        var elevation = ((normes[i] - minRadius) * facteur);
+        var elevation = ((normes[i] - insideBoundingRadius) * facteur);
         var color = elevationComputeColor(sorted, elevation);
         colors.push(color.r / 256, color.g / 256, color.b / 256, 1);
     }

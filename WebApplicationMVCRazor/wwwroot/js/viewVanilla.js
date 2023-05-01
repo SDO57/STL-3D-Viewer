@@ -219,6 +219,10 @@ const createSceneSTL = () => {
     vertexData.applyToMesh(customMesh);
 
     customMesh.convertToFlatShadedMesh();
+
+  
+    elevationIOBoundingRadius();
+
     /* var mat = new BABYLON.StandardMaterial("", scene);
      mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
      */
@@ -238,18 +242,25 @@ const createSceneSTL = () => {
     customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, colors);
     */
 
+
+  
     //customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
 
-    customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonToday));
 
-    $('#PlanetColorization-select').on('change',
+
+
+    customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(whitePalette));
+
+    $('#preset-select').on('change',
         function () {
             var mat = this.value;
 
 
             customMesh.material = myMaterial;
             switch (mat) {
+                case 'aztecCalendarPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_aztecCalendar)); break;
 
+                
                 case 'earthTodayPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonToday)); break;
                 case 'earthHadeenBeginPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonHadeenBegin)); break;
                 case 'earthHadeenEndPalette': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonHadeenEnd)); break;
@@ -268,8 +279,9 @@ const createSceneSTL = () => {
                 case 'moon': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(moonPalette)); break;
                 case 'Encelade': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Encelade)); break;
 
+                case 'Arakis': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_arrakis)); break;
 
-                default: customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
+                default: customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(whitePalette));
 
             }
 
@@ -303,6 +315,93 @@ const createSceneSTL = () => {
         LY,
         LZ);
 
+    // ATMOSPHERE
+    var atmosphericMat = new BABYLON.StandardMaterial("airMat", scene);
+    atmosphericMat.diffuseColor = new BABYLON.Color3(1, 1, 1);
+    atmosphericMat.ambiantColor = new BABYLON.Color3(1, 1, 1);
+    atmosphericMat.specularColor = new BABYLON.Color3(0,0,0);
+    //atmosphericMat.emissiveColor = new BABYLON.Color3(0.2,0.2,0.2);
+    atmosphericMat.alpha = 0.3;
+
+    var athmosphericElevation = 1.03;
+    var athmosphericSphere = BABYLON.MeshBuilder.CreateSphere("airSphere", { diameterX: LX * athmosphericElevation, diameterY: LY * athmosphericElevation, diameterZ: LZ * athmosphericElevation }, scene);
+    athmosphericSphere.material = atmosphericMat;
+
+    athmosphericSphere.position.x = LX * 0.5;
+    athmosphericSphere.position.y = LY * 0.5;
+    athmosphericSphere.position.z = LZ * 0.5;
+
+    athmosphericSphere.setEnabled(false);
+    $('#cbAtmospheric').on('change', function () {
+        athmosphericSphere.setEnabled(this.checked);
+    });
+
+    // BOUNDING SPHERE
+    var boundinSphereMat = new BABYLON.StandardMaterial("boundingSphereMat", scene);
+    boundinSphereMat.diffuseColor = new BABYLON.Color3(1, 0.04, 0.04);
+    boundinSphereMat.ambiantColor = new BABYLON.Color3(1,0.9, 0.9);
+    boundinSphereMat.specularColor = new BABYLON.Color3(0.9, 1, 0.6);
+    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
+    boundinSphereMat.alpha = 0.7;
+
+    //customMesh.showBoundingBox = true;
+    customMesh.showBoundingSphere = true;
+
+    var boundingSphere1 = customMesh.getBoundingInfo().boundingSphere;
+    var boundingSphereRadius = boundingSphere1.radius;
+    boundingSphereRadius = outsideBoundingRadius;
+
+    var boundingSphereRed = BABYLON.MeshBuilder.CreateSphere("boudingSphereRed",
+        {diameter: boundingSphereRadius* 2 }, scene);
+    boundingSphereRed.material = boundinSphereMat;
+
+    boundingSphereRed.position.x = LX * 0.5;
+    boundingSphereRed.position.y = LY * 0.5;
+    boundingSphereRed.position.z = LZ * 0.5;
+
+    boundingSphereRed.setEnabled(false);
+    $('#cbBoundingSphere').on('change', function () {
+        boundingSphereRed.setEnabled(this.checked);
+    });
+
+    // BOUNDING SPHERE ON/OFF
+   
+    
+
+
+    // OCEAN
+    var oceanMat = new BABYLON.StandardMaterial("materMat", scene);
+    oceanMat.diffuseColor = new BABYLON.Color3(0.04, 0.04, 1);
+    oceanMat.ambiantColor = new BABYLON.Color3(0.9, 0.9, 1);
+    oceanMat.specularColor = new BABYLON.Color3(0.9, 1, 0.6);
+   // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
+    oceanMat.alpha = 0.7;
+
+   
+   // var CurrentROceanPourcent = 1;
+    var CurrentROceanRadius = outsideBoundingRadius;
+    var oceanSphere = BABYLON.MeshBuilder.CreateSphere("waterSphere",
+        { diameterX: CurrentROceanRadius*2, diameterY: CurrentROceanRadius*2, diameterZ: CurrentROceanRadius*2 }, scene);
+    oceanSphere.material = oceanMat;	
+
+    oceanSphere.position.x = LX * 0.5;
+    oceanSphere.position.y = LY * 0.5;
+    oceanSphere.position.z = LZ * 0.5;
+
+    oceanSphere.setEnabled(false);
+    $('#cbOcean').on('change', function () {
+        oceanSphere.setEnabled(this.checked);
+    });
+
+    $('#ROcean').on('input', function () {
+        var pourcentage = 0.01 * this.value;      
+        var amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+        var scale = 1 - amplitudeR + amplitudeR * pourcentage;
+        oceanSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+      
+    });
+  
+
     // MATERIAL
 
     var myMaterial = new BABYLON.StandardMaterial("mat", scene);
@@ -323,9 +422,9 @@ const createSceneSTL = () => {
         myMaterial.emissiveColor = new BABYLON.Color3(er, eg, eb);
         //myMaterial.alpha = 0.8;
     }
-
-    SetMaterial(MaterialsTable.plaster, 0.2, 0.1, 0.05, 0, 0);
-
+    customMesh.material = myMaterial;
+    //SetMaterial(MaterialsTable.plaster, 0.2, 0.1, 0.05, 0, 0);
+    SetMaterial(MaterialsTable.plaster, 0, 0, 0, 0, 0);
 
 
     $('#material-select').on('change',
@@ -518,9 +617,17 @@ const createSceneSTL = () => {
     cloudMaterial.emissiveTexture = cloudProcTexture;
     cloudMaterial.backFaceCulling = false;
 
-
-
     cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
+    // SKYBOX
+    
+    var skybox = BABYLON.Mesh.CreateBox('SkyBox', 1000, scene, false, BABYLON.Mesh.BACKSIDE);
+    skybox.material = new BABYLON.SkyMaterial('sky', scene);
+    skybox.material.inclination = -0.35;
+    skybox.setEnabled(false);
+    $('#cbShowSkyBox').on('change', function () {
+        skybox.setEnabled(this.checked);
+    });
 
 
     /* var script = document.createElement('script');
@@ -535,28 +642,32 @@ const createSceneSTL = () => {
         else axesViewer = new BABYLON.AxesViewer(scene, 0.1 * maxBoundingLengh);
     });
 
-
+    // BOUNDING BOX ON/OFF
     customMesh.showBoundingBox = false;
     $('#cbBoundingBox').on('change', function () {
         customMesh.showBoundingBox = this.checked;
     });
 
-    customMesh.material = myMaterial;
+   
 
+    //customMesh.material = myMaterial;
+
+
+    // BACK FACE CULLING ON/OFF
     myMaterial.backFaceCulling = true;
     $('#backFaceCulling').on('change', function () {
         myMaterial.backFaceCulling = this.checked;
     });
 
+
+    // WIREFRAME ON/OFF  
     myMaterial.wireframe = false;
     $('#wireframe').on('change', function () {
         myMaterial.wireframe = this.checked;
     });
 
 
-
-    // EDGES
-
+    // EDGES ON/OFF
     customMesh.edgesColor.copyFromFloats(0, 0, 1, 1);
     customMesh.edgesWidth = maxBoundingLengh * 0.05;
     $('#cbEdges').on('change', function () {
@@ -566,7 +677,7 @@ const createSceneSTL = () => {
     });
 
 
-    // NORMALS
+    // NORMALS ON/OFF
     var normalLines;
     $('#cbShowNormals').on('change', function () {
         if (!this.checked) normalLines.dispose();
@@ -635,26 +746,12 @@ const createSceneSTL = () => {
     gridGroundMaterial.useMaxLine = true;
 
     ground.material = gridGroundMaterial;
-    ground.setEnabled(true);
+    ground.setEnabled(false);
     $('#cbShowGridGround').on('change', function () {
         ground.setEnabled(this.checked);
     });
 
-    /*//skybox
-    var skybox = BABYLON.Mesh.CreateBox("skyBox", 100.0, scene);
-
-    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-    skyboxMaterial.backFaceCulling = false;
-
-    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("images/cubetexture/skybox", scene);
-    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-
-    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-
-    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-
-    skyboxMaterial.disableLighting = true;
-    skybox.material = skyboxMaterial;*/
+   
 
     // SHOW CLOUDS ON/OFF
     const clouds = BABYLON.MeshBuilder.CreateCylinder("mycylinder", { height: 1000, diameterTop: 1000, diameterBottom: 1000, tessellation: 12, subdivisions: 1 }, scene);
@@ -666,6 +763,9 @@ const createSceneSTL = () => {
     $('#cbShowCloud').on('change', function () {
         clouds.setEnabled(this.checked);
     });
+
+
+    
 
     // CLEAR COLOR
     scene.clearColor = BABYLON.Color3.FromHexString(clearColor);
