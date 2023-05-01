@@ -7,19 +7,27 @@
     var jindices = String.Join(',', decrypt.jsIndices);
     var jboundingBox = String.Join(',', decrypt.jsBoundingBox);
     var jnormals = String.Join(',', decrypt.jsNormals);
-    var ClearColor = "#24282D";
+    var ClearColor = "#000000";
 
 }
 
 
 
 <div class="container">
+    
     <div class="row">
 
         <div class="col-2">
+           
             <h2><a class="btn btn-primary" href="/STLFiles/Files?StoreId=@Model.Desc.StoreId">Go back to Store</a></h2>
 
         </div>
+
+    </div>
+
+    <div class="row">
+
+     
 
         @*  <div class="col-3">
         <select disabled name="store-select" id="store-select">
@@ -75,6 +83,10 @@
             </div>
         </div>
 
+       
+    </div>
+
+    <div class="row">
 
         <div class="col-2">
             <div>
@@ -85,9 +97,9 @@
         </div>
 
 
-        <div>
+        <div class="col-2">
             <input type="range" id="RAtmosphere" name="RAtmosphere"
-                   min="0" max="100" value="100" step="2">
+                   min="0" max="100" value="100" step="1">
             <label for="RAtmosphere">RAtmosphere</label>
         </div>
 
@@ -98,17 +110,22 @@
                 <label for="cbOcean">Ocean</label>
 
             </div>
-        </div>  
+        </div>
 
 
-        <div>
+        <div class="col-2">
             <input type="range" id="ROcean" name="ROcean"
-                   min="0" max="100" value="96" step="2">
+                   min="0" max="100" value="40" step="1">
             <label for="ROcean">ROcean</label>
         </div>
-       
-    </div>
 
+
+        <div class="col-2">
+            <input type="range" id="ROceanOpacity" name="ROceanOpacity"
+                   min="0" max="100" value="70" step="1">
+            <label for="ROceanOpacity">ROceanOpacity</label>
+        </div>
+    </div>
 
     <div class="row">
 
@@ -292,7 +309,10 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+
     <div class="row">
 
         <div class="col-10">

@@ -5,8 +5,34 @@ var indices;
 var normals;
 var colors;
 var normes;
+// IOBOUNDINGRADIUS
 var insideBoundingRadius;
 var outsideBoundingRadius;
+var computeIOBoundingRadius = function () {
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+    normes = [];
+    var NumberPlots = positions.length / 3;
+    var ind = 0;
+    insideBoundingRadius = Number.MAX_VALUE;
+    outsideBoundingRadius = 0;
+    for (var i = 0; i < NumberPlots; i++) {
+        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
+        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
+        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
+        var norme = Math.sqrt(x * x + y * y + z * z);
+        normes.push(norme);
+        insideBoundingRadius = Math.min(insideBoundingRadius, norme);
+        outsideBoundingRadius = Math.max(outsideBoundingRadius, norme);
+        ind += 3;
+    }
+    outsideBoundingRadius = outsideBoundingRadius * 1.01;
+};
+// MATERIALS
 var MaterialsTable = {
     'emerald': [0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.633, 0.727811, 0.633, 0.6],
     'jade': [0.135, 0.2225, 0.1575, 0.54, 0.89, 0.63, 0.316228, 0.316228, 0.316228, 0.1],
@@ -157,7 +183,7 @@ var elevationcolors_earthEonPhanerozoique_Paleozoique = [
     { alt: -2501, rgb: hexToRgb("#4040FF") },
     { alt: -2500, rgb: hexToRgb("#FFB000") },
     { alt: -2000, rgb: hexToRgb("#203020") },
-    { alt: 0, rgb: hexToRgb("#40B010") },
+    { alt: 0, rgb: hexToRgb("#2080FF") },
     { alt: 500, rgb: hexToRgb("#208010") },
     { alt: 2000, rgb: hexToRgb("#204020") },
     { alt: 3000, rgb: hexToRgb("#B0A080") },
@@ -166,14 +192,19 @@ var elevationcolors_earthEonPhanerozoique_Paleozoique = [
 ];
 var elevationcolors_earthEonPhanerozoique_Mesozoique = [
     { alt: -10000, rgb: hexToRgb("#00005F") },
-    { alt: -2501, rgb: hexToRgb("#4040FF") },
+    /*{ alt: -2501, rgb: hexToRgb("#4040FF") },
     { alt: -2500, rgb: hexToRgb("#FFB000") },
-    { alt: -2000, rgb: hexToRgb("#203020") },
-    { alt: 0, rgb: hexToRgb("#40B010") },
-    { alt: 500, rgb: hexToRgb("#208010") },
-    { alt: 2000, rgb: hexToRgb("#204020") },
-    { alt: 3000, rgb: hexToRgb("#B0A080") },
-    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
+    { alt: -2000, rgb: hexToRgb("#203020") },*/
+    { alt: 0, rgb: hexToRgb("#2080FF") },
+    { alt: 1, rgb: hexToRgb("#FFB010") },
+    /* { alt: 1, rgb: hexToRgb("#FF0000") },
+     { alt: 499, rgb: hexToRgb("#FF0000") },
+     */
+    { alt: 525, rgb: hexToRgb("#FFB010") },
+    { alt: 526, rgb: hexToRgb("#204020") },
+    { alt: 1700, rgb: hexToRgb("#40B010") },
+    { alt: 1800, rgb: hexToRgb("#D0A080") },
+    { alt: 3000, rgb: hexToRgb("#FFFFFF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
 ];
 var elevationcolors_earthEonPhanerozoique_Cenozoique = [
@@ -182,8 +213,9 @@ var elevationcolors_earthEonPhanerozoique_Cenozoique = [
     { alt: -2500, rgb: hexToRgb("#4090B0") },
     { alt: -2000, rgb: hexToRgb("#FF9060") },
     { alt: -1000, rgb: hexToRgb("#40B010") },
+    { alt: 0, rgb: hexToRgb("#2080FF") },
     { alt: 500, rgb: hexToRgb("#408040") },
-    { alt: 2000, rgb: hexToRgb("#bb8050") },
+    { alt: 2000, rgb: hexToRgb("#D08050") },
     { alt: 3000, rgb: hexToRgb("#FFFFFF") },
     { alt: 4000, rgb: hexToRgb("#FFFFFF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
@@ -236,29 +268,6 @@ var elevationComputeColor = function (elevationColors, elevation) {
     var distanceB = (elevationColors[indSup].alt - elevation);
     var distanceTot = distanceA + distanceB;
     return mixRgb(elevationColors[indInf].rgb, 1 - distanceA / distanceTot, elevationColors[indSup].rgb, 1 - distanceB / distanceTot);
-};
-var elevationIOBoundingRadius = function () {
-    var LX = (boundingBox[3] - boundingBox[0]);
-    var LY = (boundingBox[4] - boundingBox[1]);
-    var LZ = (boundingBox[5] - boundingBox[2]);
-    var LXmilieu = LX * 0.5;
-    var LYmilieu = LY * 0.5;
-    var LZmilieu = LZ * 0.5;
-    normes = [];
-    var NumberPlots = positions.length / 3;
-    var ind = 0;
-    insideBoundingRadius = Number.MAX_VALUE;
-    outsideBoundingRadius = 0;
-    for (var i = 0; i < NumberPlots; i++) {
-        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
-        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
-        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
-        var norme = Math.sqrt(x * x + y * y + z * z);
-        normes.push(norme);
-        insideBoundingRadius = Math.min(insideBoundingRadius, norme);
-        outsideBoundingRadius = Math.max(outsideBoundingRadius, norme);
-        ind += 3;
-    }
 };
 var elevationColorization = function (elevationColors) {
     var sorted = elevationColors.sort(elevationColorsComparaison);
