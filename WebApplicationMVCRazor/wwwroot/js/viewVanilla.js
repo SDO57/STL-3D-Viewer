@@ -1,5 +1,7 @@
 //@ts-check
 
+changeMeshOrientationYZ();
+//resizeMesh();
 
 var startRenderLoop = function (engine, canvas) {
     engine.runRenderLoop(function () {
@@ -12,8 +14,8 @@ var startRenderLoop = function (engine, canvas) {
 
 
 
-changeMeshOrientationYZ();
-//resizeMesh();
+
+
 
 
 
@@ -72,6 +74,8 @@ var showAmbiantLight = function (intensity, scene) {
     return lightAmbiant;
 }
 
+
+
 function showNormals(mesh, size, color, sc) {
     var normals = mesh.getVerticesData(BABYLON.VertexBuffer.NormalKind);
     var positions = mesh.getVerticesData(BABYLON.VertexBuffer.PositionKind);
@@ -92,16 +96,10 @@ function showNormals(mesh, size, color, sc) {
 
 
 
-
-
-
 var earthColorization = function (palette) {
     var LX = (boundingBox[3] - boundingBox[0]);
     var LY = (boundingBox[4] - boundingBox[1]);
     var LZ = (boundingBox[5] - boundingBox[2]);
-
-
-
 
     var LXmilieu = LX * 0.5;
     var LYmilieu = LY * 0.5;
@@ -151,8 +149,6 @@ var lunarColorization = function (mesh) {
     var LZ = (boundingBox[5] - boundingBox[2]);
 
 
-
-
     var LXmilieu = LX * 0.5;
     var LYmilieu = LY * 0.5;
     var LZmilieu = LZ * 0.5;
@@ -192,64 +188,18 @@ var lunarColorization = function (mesh) {
 }
 
 
-const createOcean = function (scene, LX, LY, LZ) {
-    // OCEAN
-    let oceanMat = new BABYLON.StandardMaterial("materMat", scene);
-    oceanMat.diffuseColor = new BABYLON.Color3(0.04, 0.04, 1);
-    oceanMat.ambiantColor = new BABYLON.Color3(0.9, 0.9, 1);
-    oceanMat.specularColor = new BABYLON.Color3(0.9, 1, 0.6);
-    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
-    oceanMat.alpha = 0.7;
 
-    // var CurrentROceanPourcent = 1;
-    let CurrentROceanRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius) * 0.1;
-    let oceanSphere = BABYLON.MeshBuilder.CreateSphere("waterSphere",
-        { diameterX: CurrentROceanRadius * 2, diameterY: CurrentROceanRadius * 2, diameterZ: CurrentROceanRadius * 2 }, scene);
-    oceanSphere.material = oceanMat;
-
-    oceanSphere.position.x = LX * 0.5;
-    oceanSphere.position.y = LY * 0.5;
-    oceanSphere.position.z = LZ * 0.5;
-
-    oceanSphere.setEnabled(false);
-    $('#cbOcean').on('change', function () {
-        oceanSphere.setEnabled(this.checked);
-    });
-
-    let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
-    let scale = 1 - amplitudeR + amplitudeR * 0.4;
-    oceanSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
-
-    $('#ROcean').on('input', function () {
-        let pourcentage = 0.01 * this.value;
-        let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
-        let scale = 1 - amplitudeR + amplitudeR * pourcentage;
-        oceanSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
-
-    });
-
-    $('#ROceanOpacity').on('input', function () {
-        oceanMat.alpha = 0.01 * this.value;
-    });
-    
-
-}
 
 
 const createBoundingSphere = function (scene, LX, LY, LZ) {
-    // BOUNDING SPHERE
+   
     var boundinSphereMat = new BABYLON.StandardMaterial("boundingSphereMat", scene);
     boundinSphereMat.diffuseColor = new BABYLON.Color3(1, 0.04, 0.04);
     boundinSphereMat.ambiantColor = new BABYLON.Color3(1, 0.9, 0.9);
     boundinSphereMat.specularColor = new BABYLON.Color3(0.9, 1, 0.6);
-    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
+
     boundinSphereMat.alpha = 0.7;
-
-    //customMesh.showBoundingBox = true;
-    //customMesh.showBoundingSphere = true;
-
-   // var boundingSphere1 = customMesh.getBoundingInfo().boundingSphere;
-    //var boundingSphereRadius = boundingSphere1.radius;
+ 
     boundingSphereRadius = outsideBoundingRadius;
 
     var boundingSphereRed = BABYLON.MeshBuilder.CreateSphere("boudingSphereRed",
@@ -267,19 +217,59 @@ const createBoundingSphere = function (scene, LX, LY, LZ) {
 
 }
 
+const createOcean = function (scene, LX, LY, LZ) {
+    // OCEAN
+    let oceanMat = new BABYLON.StandardMaterial("materMat", scene);
+    oceanMat.diffuseColor = new BABYLON.Color3(0.04, 0.04, 1);
+    oceanMat.ambiantColor = new BABYLON.Color3(0.9, 0.9, 1);
+    oceanMat.specularColor = new BABYLON.Color3(0.9, 1, 0.6);
+    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
+    oceanMat.alpha = 0.5;
+
+    let CurrentROceanRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius) * 0.1;
+    let oceanSphere = BABYLON.MeshBuilder.CreateSphere("waterSphere",
+        { diameterX: CurrentROceanRadius * 2, diameterY: CurrentROceanRadius * 2, diameterZ: CurrentROceanRadius * 2 }, scene);
+    oceanSphere.material = oceanMat;
+
+    oceanSphere.position.x = LX * 0.5;
+    oceanSphere.position.y = LY * 0.5;
+    oceanSphere.position.z = LZ * 0.5;
+
+    oceanSphere.setEnabled(false);
+    $('#cbOcean').on('change', function () {
+        oceanSphere.setEnabled(this.checked);
+    });
+
+    let amplitudeR = (outsideBoundingRadius - insideBoundingRadius)  / outsideBoundingRadius;
+    let scale = 1 - amplitudeR + amplitudeR * 0.5;
+    oceanSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    $('#ROcean').on('input', function () {
+        let pourcentage = 0.01 * this.value;
+        let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+        let scale = 1 - amplitudeR + amplitudeR * pourcentage;
+        oceanSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    });
+
+    $('#ROceanOpacity').on('input', function () {
+        oceanMat.alpha = 0.01 * this.value;
+    });
+    
+
+}
 
 const createAtmosphere = function (scene, LX, LY, LZ) {
     // ATMOSPHERE
     var atmosphericMat = new BABYLON.StandardMaterial("airMat", scene);
-    atmosphericMat.diffuseColor = new BABYLON.Color3(1, 1, 1);
-    atmosphericMat.ambiantColor = new BABYLON.Color3(1, 1, 1);
+    /*atmosphericMat.diffuseColor = new BABYLON.Color3(0, 0.8, 1);
+    atmosphericMat.ambiantColor = new BABYLON.Color3(1, 1, 1);*/
     atmosphericMat.specularColor = new BABYLON.Color3(0, 0, 0);
-    //atmosphericMat.emissiveColor = new BABYLON.Color3(0.2,0.2,0.2);
-    atmosphericMat.alpha = 0.3;
+    atmosphericMat.emissiveColor = new BABYLON.Color3(0.05, 0.05, 0.05);
+    atmosphericMat.alpha = 0.5;
 
-    var CurrentRAtmosphereRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius);
-    //var athmosphericElevation = outsideBoundingRadius;
-    //var athmosphericSphere = BABYLON.MeshBuilder.CreateSphere("airSphere", { diameterX: LX * athmosphericElevation, diameterY: LY * athmosphericElevation, diameterZ: LZ * athmosphericElevation }, scene);
+    var CurrentRAtmosphereRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius) * 0.1;
+
     var athmosphericSphere = BABYLON.MeshBuilder.CreateSphere("airSphere",
         { diameterX: CurrentRAtmosphereRadius * 2, diameterY: CurrentRAtmosphereRadius * 2, diameterZ: CurrentRAtmosphereRadius * 2 }, scene);
 
@@ -296,10 +286,14 @@ const createAtmosphere = function (scene, LX, LY, LZ) {
 
     $('#RAtmosphere').on('input', function () {
         var pourcentage = 0.01 * this.value;
-        var amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+        var amplitudeR = (outsideBoundingRadius - insideBoundingRadius)  / outsideBoundingRadius;
         var scale = 1 - amplitudeR + amplitudeR * pourcentage;
         athmosphericSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
 
+    });
+
+    $('#RAtmosphereOpacity').on('input', function () {
+        atmosphericMat.alpha = 0.01 * this.value;
     });
 }
 
@@ -337,30 +331,7 @@ const createSceneSTL = () => {
 
     computeIOBoundingRadius();
 
-    /* var mat = new BABYLON.StandardMaterial("", scene);
-     mat.diffuseTexture = new BABYLON.Texture("wood.jpg")
-     */
-
-    // TEST COLOURS
-    /*
-    var colors = customMesh.getVerticesData(BABYLON.VertexBuffer.ColorKind);
-    if (!colors) {
-        colors = [];
-
-        var positionsCols = customMesh.getVerticesData(BABYLON.VertexBuffer.PositionKind);
-
-            }
-    }
-
-
-    customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, colors);
-    */
-
-
-
-    //customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(solidPalette));
-
-
+ 
 
 
     customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(whitePalette));
@@ -386,6 +357,9 @@ const createSceneSTL = () => {
                 case 'elevationcolors_earthEonPhanerozoique_Cenozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Cenozoique)); break;
 
                 case 'mercury': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(mercuryPalette)); break;
+                case 'neptune': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Neptune)); break;
+
+
                 case 'venus': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(venusPalette)); break;
                 case 'mars': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(marsPalette)); break;
 
@@ -839,132 +813,6 @@ const createSceneSTL = () => {
 };
 
 
-/*
-var createSceneCUBE = function () {
-    // This creates a basic Babylon Scene object (non-mesh)
-    var scene = new BABYLON.Scene(engine);
-
-    // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.ArcRotateCamera("camera1", 0, Math.PI / 2, 100, new BABYLON.Vector3(0, 0, 0), scene);
-    camera.attachControl(canvas, false);
-
-    // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
-
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-
-    // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 0.7;
-
-    var mesh = BABYLON.Mesh.CreateBox("box01", 25, scene);
-    mesh.position = new BABYLON.Vector3(0, 0, 0);
-
-    var brickWallDiffURL = "images/a1.png";
-    var brickWallNHURL = "images/a2.png";
-    var stoneDiffURL = "images/pebble.jpg";
-    var stoneNHURL = "images/a3.png";
-
-    var stoneDiffuseTexture = new BABYLON.Texture(stoneDiffURL, scene);
-
-    var stoneNormalsHeightTexture = new BABYLON.Texture(stoneNHURL, scene);
-
-    var wallDiffuseTexture = new BABYLON.Texture(brickWallDiffURL, scene);
-
-    var wallNormalsHeightTexture = new BABYLON.Texture(brickWallNHURL, scene);
-
-    var normalsHeightTexture = stoneNormalsHeightTexture;
-
-    var material = new BABYLON.StandardMaterial("mtl01", scene);
-    material.diffuseTexture = stoneDiffuseTexture;
-    material.bumpTexture = stoneNormalsHeightTexture;
-
-    material.useParallax = true;
-    material.useParallaxOcclusion = true;
-    material.parallaxScaleBias = 0.1;
-    material.specularPower = 1000.0;
-    material.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-    mesh.material = material;
-    return scene;
-};
-var scene = createScene();
-engine.runRenderLoop(function () {
-    scene.render();
-});
-
-*/
-
-
-
-/*
-const createSceneGRIDMAGICSTL = () => {
-
-
-    // This creates a basic Babylon Scene object (non-mesh)
-    var scene = new BABYLON.Scene(engine);
-
-    // This creates and positions a free camera (non-mesh)
-    //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
-    var camera = new BABYLON.ArcRotateCamera("camera1",
-        0, 0,
-        10,
-        new BABYLON.Vector3(0, 5, -10),
-        scene);
-
-    // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
-
-    // This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
-
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-
-    // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 0.4;
-
-    var light2 = new BABYLON.PointLight("light", new BABYLON.Vector3(-3, 4, -4), scene);
-
-    light2.intensity = 1;
-
-    // Our built-in 'sphere' shape.
-    var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", { diameter: 2, segments: 32 }, scene);
-
-    // Move the sphere upward 1/2 its height
-    sphere.position.y = 1;
-    sphere.position.x = -1;
-
-    var cube = BABYLON.MeshBuilder.CreateBox("box", { size: 1.5 }, scene);
-
-    cube.position.y = 1;
-    cube.position.x = 1.5;
-    cube.position.z = -1.5;
-
-    // Our built-in 'ground' shape.
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 6, height: 6 }, scene);
-
-    BABYLON.NodeMaterial.ParseFromSnippetAsync("#I4DJ9Z", scene).then(nodeMaterial => {
-        sphere.material = nodeMaterial;
-        ground.material = nodeMaterial;
-        cube.material = nodeMaterial.clone("node2");
-
-        cube.material.getBlockByName("Diffuse color").value = new BABYLON.Color3(1, 146 / 255, 18 / 255);
-        cube.material.getBlockByName("Line color").value = new BABYLON.Color3(0, 0, 1);
-        cube.material.getBlockByName("Major unit frequency").value = 4;
-        cube.material.getBlockByName("Grid ratio").value = 0.25;
-        cube.material.getBlockByName("Minor unit visibility").value = 0.65;
-
-        scene.debugLayer.show({ showExplorer: true, embedMode: true }).then(() => {
-            scene.debugLayer.select(sphere.material, "INPUTS");
-        });
-    });
-
-
-    return scene;
-
-
-};
-*/
 
 
 

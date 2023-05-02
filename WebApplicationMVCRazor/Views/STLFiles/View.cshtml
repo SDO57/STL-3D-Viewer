@@ -103,6 +103,12 @@
             <label for="RAtmosphere">RAtmosphere</label>
         </div>
 
+        <div class="col-2">
+            <input type="range" id="RAtmosphereOpacity" name="RAtmosphereOpacity"
+                   min="0" max="100" value="50" step="1">
+            <label for="RAtmosphereOpacity">RAtmosphereOpacity</label>
+        </div>
+
 
         <div class="col-2">
             <div>
@@ -115,14 +121,14 @@
 
         <div class="col-2">
             <input type="range" id="ROcean" name="ROcean"
-                   min="0" max="100" value="40" step="1">
+                   min="0" max="100" value="50" step="1">
             <label for="ROcean">ROcean</label>
         </div>
 
 
         <div class="col-2">
             <input type="range" id="ROceanOpacity" name="ROceanOpacity"
-                   min="0" max="100" value="70" step="1">
+                   min="0" max="100" value="50" step="1">
             <label for="ROceanOpacity">ROceanOpacity</label>
         </div>
     </div>
@@ -186,6 +192,7 @@
                     <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>         
                     <option disabled>Others</option>              
                     <option value='mercury'>mercury</option>
+                    <option value='neptune'>neptune</option>
                     <option value='venus'>venus</option>
                     <option value='mars'>mars</option>
                     <option value='pluto'>pluto</option>
@@ -269,12 +276,12 @@
 
                 <div>
                     <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                           min="0" max="100" value="40" step="10">
+                           min="0" max="100" value="40" step="1">
                     <label for="RAmbiantColor">RAmbiantColor</label>
                 </div>
                 <div>
                     <input type="range" id="RCameraLight" name="RCameraLight"
-                           min="0" max="100" value="50" step="10">
+                           min="0" max="100" value="50" step="1">
                     <label for="RCameraLight">RCameraLight</label>
                 </div>
 

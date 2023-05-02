@@ -195,12 +195,12 @@ var elevationcolors_earthEonPhanerozoique_Mesozoique = [
     /*{ alt: -2501, rgb: hexToRgb("#4040FF") },
     { alt: -2500, rgb: hexToRgb("#FFB000") },
     { alt: -2000, rgb: hexToRgb("#203020") },*/
-    { alt: 0, rgb: hexToRgb("#2080FF") },
-    { alt: 1, rgb: hexToRgb("#FFB010") },
+    // { alt: 0, rgb: hexToRgb("#2080FF") },
+    { alt: 1, rgb: hexToRgb("#FFB080") },
     /* { alt: 1, rgb: hexToRgb("#FF0000") },
      { alt: 499, rgb: hexToRgb("#FF0000") },
      */
-    { alt: 525, rgb: hexToRgb("#FFB010") },
+    { alt: 525, rgb: hexToRgb("#FFD0B0") },
     { alt: 526, rgb: hexToRgb("#204020") },
     { alt: 1700, rgb: hexToRgb("#40B010") },
     { alt: 1800, rgb: hexToRgb("#D0A080") },
@@ -227,7 +227,7 @@ var elevationcolors_arrakis = [
     { alt: -2000, rgb: hexToRgb("#203020") },
     { alt: 0, rgb: hexToRgb("#FFB000") },
     { alt: 500, rgb: hexToRgb("#804030") },
-    { alt: 600, rgb: hexToRgb("#FFB000") },
+    { alt: 600, rgb: hexToRgb("#FFB080") },
     { alt: 800, rgb: hexToRgb("#408010") },
     { alt: 900, rgb: hexToRgb("#806020") },
     { alt: 1000, rgb: hexToRgb("#408010") },
@@ -241,6 +241,13 @@ var elevationcolors_arrakis = [
 var elevationcolors_Encelade = [
     { alt: -10000, rgb: hexToRgb("#00D0FF") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_Neptune = [
+    { alt: -10000, rgb: hexToRgb("#7070BF") },
+    { alt: 0, rgb: hexToRgb("#50E0FF") },
+    { alt: 1000, rgb: hexToRgb("#50E0FF") },
+    { alt: 4000, rgb: hexToRgb("#EFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#EFFFFF") }
 ];
 var elevationColorsComparaison = function (a, b) {
     if (a.alt < b.alt) {
