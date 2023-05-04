@@ -14,173 +14,89 @@
 
 
 <div class="container">
-    
+
     <div class="row">
 
         <div class="col-2">
-           
+
             <h2><a class="btn btn-primary" href="/STLFiles/Files?StoreId=@Model.Desc.StoreId">Go back to Store</a></h2>
 
         </div>
+        <div class="col-2">
+            <a class="btn btn-warning" asp-action="Save" asp-route-id="@Model.Desc.FileId">Save preferences</a>
 
+        </div>
+        <div class="col-2">
+            <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
+        </div>
     </div>
 
     <div class="row">
 
-     
-
-        @*  <div class="col-3">
-        <select disabled name="store-select" id="store-select">
-        <option value='@Model.Desc.StoreId'>@Model.Desc.StoreId</option>
-        </select>
-        </div>
-
-        <div class="col-3">
-        <select disabled name="file-select" id="file-select">
-        <option value='@Model.Desc.FileId'>@Model.Desc.FileName</option>
-        </select>
-        </div>*@
 
 
 
-        <div class="col-2">
-           
-        </div>
+
+
         <div class="col-2">
 
             <input type="color" id="CClearColor" name="CClearColor"
                    value="@ClearColor">
             <label for="CClearColor">CClearColor</label>
 
-        </div>
-        <div class="col-2">
+       
             <div>
                 <input type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
                 <label for="cbShowGridGround">Ground</label>
 
             </div>
-        </div>
-        <div class="col-2">
-            <div>
-                <input type="checkbox" id="cbShowCloud" name="cbShowCloud">
-                <label for="cbShowCloud">Clouds</label>
+       
 
-            </div>
-
-        </div> 
-        <div class="col-2">
+       
             <div>
                 <input type="checkbox" id="cbShowSkyBox" name="cbShowSkyBox">
                 <label for="cbShowSkyBox">SkyBox</label>
 
             </div>
-        </div>
-        <div class="col-2">
-            <div>
-                <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
-                <label for="cbShowAxis">Axis</label>
-
-            </div>
-        </div>
-
-       
-    </div>
-
-    <div class="row">
-
-        <div class="col-2">
-            <div>
-                <input type="checkbox" id="cbAtmospheric" name="cbAtmospheric">
-                <label for="cbAtmospheric">Atmosphere</label>
-
-            </div>
-        </div>
-
-
-        <div class="col-2">
-            <input type="range" id="RAtmosphere" name="RAtmosphere"
-                   min="0" max="100" value="100" step="1">
-            <label for="RAtmosphere">RAtmosphere</label>
-        </div>
-
-        <div class="col-2">
-            <input type="range" id="RAtmosphereOpacity" name="RAtmosphereOpacity"
-                   min="0" max="100" value="50" step="1">
-            <label for="RAtmosphereOpacity">RAtmosphereOpacity</label>
-        </div>
-
-
-        <div class="col-2">
-            <div>
-                <input type="checkbox" id="cbOcean" name="cbOcean">
-                <label for="cbOcean">Ocean</label>
-
-            </div>
-        </div>
-
-
-        <div class="col-2">
-            <input type="range" id="ROcean" name="ROcean"
-                   min="0" max="100" value="50" step="1">
-            <label for="ROcean">ROcean</label>
-        </div>
-
-
-        <div class="col-2">
-            <input type="range" id="ROceanOpacity" name="ROceanOpacity"
-                   min="0" max="100" value="50" step="1">
-            <label for="ROceanOpacity">ROceanOpacity</label>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-2">
+     
 
 
 
-            <div class="container">
+  
 
 
 
-                <div>
-                    <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
-                    <label for="cbBoundingBox">BoundingBox</label>
 
-                </div>
 
-                <div>
-                    <input type="checkbox" id="cbBoundingSphere" name="cbBoundingSphere">
-                    <label for="cbBoundingSphere">BoundingSphere</label>
 
-                </div>
-                
-                <div>
-                    <input type="checkbox" id="cbEdges" name="cbEdges">
-                    <label for="cbEdges">Edges</label>
+         
+            <div id="skybox-group">
 
-                </div>
-                <div>
-                    <input type="checkbox" id="cbShowNormals" name="cbShowNormals">
-                    <label for="cbShowNormals">Normals</label>
 
-                </div>
-                <div>
-                    <input type="checkbox" id="wireframe" name="wireframe">
-                    <label for="scales">Wireframe</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-                    <label for="scales">Back Face Culling</label>
-                </div>
+                <label> SkyBox</label>
+                <select class="form-select" name="SkyTexture2" id="sky-select">
+                    <option disabled>Space</option>
+                    <option selected value='voie lactee.jpeg'>voie lactee</option>
 
+                    <option value='industrial_sunset_02_puresky.jpg'>industrial_sunset_02_puresky</option>
+                    <option value='sunflowers_puresky.jpg'>sunflowers_puresky</option>
+                    <option value='blaubeuren_night.jpg'>blaubeuren_night</option>
+                    <option value='shanghai_bund.jpg'>shanghai_bund</option>
+                    <option value='snowy_field.jpg'>snowy_field</option>
+                    <option value='symmetrical_garden.jpg'>symmetrical_garden</option>
+                    <option value='narrow_moonlit_road.jpg'>narrow_moonlit_road</option>
+                    <option value='umhlanga_sunrise.jpg'>umhlanga_sunrise</option>
+                    <option value='hilltop_construction.jpg'>hilltop_construction</option>
+
+                </select>
             </div>
 
+            <div id="planet-group">
 
-            <div id="material-group">
-                <select name="PlanetColorization" id="preset-select">
-                    <option value='white'>white</option>
-                    
+                <label> Planet Colorization</label>
+                <select class="form-select" name="PlanetColorization" id="preset-select">
+                    <option selected value='white'>white</option>
+
                     <option value='aztecCalendarPalette'>AZTEC CALENDAR</option>
                     <option disabled>Earth</option>
                     <option value='earthHadeenBeginPalette'>earth - 4,51 MA - Hadeen - Debut</option>
@@ -189,8 +105,8 @@
                     <option value='earthProterozoiquenPalette'>earth - 2,52 MA - Proterozoiquen</option>
                     <option value='elevationcolors_earthEonPhanerozoique_Paleozoique'>earth - 542 MO - Paleozoique </option>
                     <option value='elevationcolors_earthEonPhanerozoique_Mesozoique'>earth - 250 MO - Mesozoique </option>
-                    <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>         
-                    <option disabled>Others</option>              
+                    <option value='elevationcolors_earthEonPhanerozoique_Cenozoique'>earth - 65 MO - Cenozoique </option>
+                    <option disabled>Others</option>
                     <option value='mercury'>mercury</option>
                     <option value='neptune'>neptune</option>
                     <option value='venus'>venus</option>
@@ -201,14 +117,71 @@
                     <option value='Encelade'>Encelade</option>
                     <option disabled>SF</option>
                     <option value='earthTodayPalette'>Arakis</option>
-                    
+
 
                 </select>
                 
+                    <div>
+                        <input type="checkbox" id="cbAtmospheric" name="cbAtmospheric">
+                        <label for="cbAtmospheric">Atmosphere</label>
+
+                    </div>
+              
+
+
+                
+                    <input type="range" id="RAtmosphere" name="RAtmosphere"
+                           min="0" max="100" value="100" step="1">
+                    <label for="RAtmosphere">RAtmosphere</label>
+            
+
+             
+                    <input type="range" id="RAtmosphereOpacity" name="RAtmosphereOpacity"
+                           min="0" max="100" value="50" step="1">
+                    <label for="RAtmosphereOpacity">RAtmosphereOpacity</label>
+              
+
+              
+                    <div>
+                        <input type="checkbox" id="cbOcean" name="cbOcean">
+                        <label for="cbOcean">Ocean</label>
+
+                    </div>
              
 
 
-                <select name="Material" id="material-select">
+                    <input type="range" id="ROcean" name="ROcean"
+                           min="0" max="100" value="50" step="1">
+                    <label for="ROcean">ROcean</label>
+            
+
+
+                
+                    <input type="range" id="ROceanOpacity" name="ROceanOpacity"
+                           min="0" max="100" value="50" step="1">
+                    <label for="ROceanOpacity">ROceanOpacity</label>
+             
+            </div>
+
+            <div id="material-group">
+
+
+
+                <div>
+                    <input type="range" id="RAmbiantColor" name="RAmbiantColor"
+                           min="0" max="100" value="40" step="1">
+                    <label for="RAmbiantColor">RAmbiantColor</label>
+                </div>
+                <div>
+                    <input type="range" id="RCameraLight" name="RCameraLight"
+                           min="0" max="100" value="50" step="1">
+                    <label for="RCameraLight">RCameraLight</label>
+                </div>
+
+
+
+
+                <select class="form-select" name="Material" id="material-select">
 
                     <option disabled>Image Texture Materials</option>
                     <option value='stone'>stone</option>
@@ -274,20 +247,53 @@
                 </select>
 
 
-                <div>
-                    <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                           min="0" max="100" value="40" step="1">
-                    <label for="RAmbiantColor">RAmbiantColor</label>
-                </div>
-                <div>
-                    <input type="range" id="RCameraLight" name="RCameraLight"
-                           min="0" max="100" value="50" step="1">
-                    <label for="RCameraLight">RCameraLight</label>
-                </div>
+
 
             </div>
 
-            <a class="btn btn-warning" asp-action="Save" asp-route-id="@Model.Desc.FileId">Save preferences</a>
+
+
+              <div id="lowlevel-group">
+
+                <div class="col-2">
+                    <div>
+                        <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
+                        <label for="cbShowAxis">Axis</label>
+
+                    </div>
+                </div>
+                <div>
+                    <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
+                    <label for="cbBoundingBox">BoundingBox</label>
+
+                </div>
+
+                <div>
+                    <input type="checkbox" id="cbBoundingSphere" name="cbBoundingSphere">
+                    <label for="cbBoundingSphere">BoundingSphere</label>
+
+                </div>
+
+                <div>
+                    <input type="checkbox" id="cbEdges" name="cbEdges">
+                    <label for="cbEdges">Edges</label>
+
+                </div>
+                <div>
+                    <input type="checkbox" id="cbShowNormals" name="cbShowNormals">
+                    <label for="cbShowNormals">Normals</label>
+
+                </div>
+                <div>
+                    <input type="checkbox" id="wireframe" name="wireframe">
+                    <label for="scales">Wireframe</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                    <label for="scales">Back Face Culling</label>
+                </div>
+
+            </div>
 
 
         </div>
@@ -323,7 +329,6 @@
     <div class="row">
 
         <div class="col-10">
-           
         </div>
 
         @*  <div class="col-3">
@@ -340,10 +345,8 @@
 
 
 
-        <div class="col-2">
-            <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
-        </div>
-       
+     
+
     </div>
 
 </div>
@@ -408,7 +411,7 @@
     indices = [@jindices];
     normals = [@jnormals];
     $('#renderCanvas').css('background-color', clearColor);
-
+    __urlbase = "https://localhost:7233"; //@Url.Content("~/");
 
 
 
@@ -417,4 +420,4 @@
 
 <script src="~/js/view.js" asp-append-version="true"></script>
 
-<script src="~/js/viewVanilla.js" asp-append-version="true"></script>
+<script src="~/js/viewBabylon.js" asp-append-version="true"></script>

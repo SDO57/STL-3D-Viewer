@@ -151,6 +151,104 @@ function mixRgb(a, pa, b, pb) {
     };
 }
 
+var ImageExist = function(url) {
+    var img = new Image();
+    img.src = url;
+    return img.height != 0;
+}
+
+
+var lunarColorization = function (mesh) {
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+
+
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+
+    var colors = [];
+    var normes = [];
+    //premiere passe pour calculer min max 
+    var NumberPlots = positions.length / 3;
+
+    var ind = 0;
+
+    var minRadius = Number.MAX_VALUE;
+    var maxRadius = 0;
+
+    for (var i = 0; i < NumberPlots; i++) {
+        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
+        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
+        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
+
+        var norme = Math.sqrt(x * x + y * y + z * z);
+        normes.push(norme);
+        minRadius = Math.min(minRadius, norme);
+        maxRadius = Math.max(maxRadius, norme);
+        ind += 3;
+    }
+    var facteur = 1 / (maxRadius - minRadius);
+
+    for (var i = 0; i < NumberPlots; i++) {
+        var index = (normes[i] - minRadius) * facteur;
+
+        colors.push(index, index, index, 1);
+
+    }
+
+
+    return colors;
+}
+
+var earthColorization = function (palette) {
+    var LX = (boundingBox[3] - boundingBox[0]);
+    var LY = (boundingBox[4] - boundingBox[1]);
+    var LZ = (boundingBox[5] - boundingBox[2]);
+
+    var LXmilieu = LX * 0.5;
+    var LYmilieu = LY * 0.5;
+    var LZmilieu = LZ * 0.5;
+
+    var colors = [];
+    var normes = [];
+    //premiere passe pour calculer min max 
+    var NumberPlots = positions.length / 3;
+
+    var ind = 0;
+
+    var minRadius = Number.MAX_VALUE;
+    var maxRadius = 0;
+
+    for (var i = 0; i < NumberPlots; i++) {
+        var x = positions[ind + 0] - (boundingBox[0] + LXmilieu);
+        var y = positions[ind + 1] - (boundingBox[1] + LYmilieu);
+        var z = positions[ind + 2] - (boundingBox[2] + LZmilieu);
+
+        var norme = Math.sqrt(x * x + y * y + z * z);
+        normes.push(norme);
+        minRadius = Math.min(minRadius, norme);
+        maxRadius = Math.max(maxRadius, norme);
+        ind += 3;
+    }
+    var facteur = 1 / (maxRadius - minRadius);
+
+
+    var nbIndex = palette.length - 1;
+    //deuxieme passe calcul des couleurs de chaque plot
+    for (var i = 0; i < NumberPlots; i++) {
+        var index = Math.round(((normes[i] - minRadius) * facteur) * (nbIndex));
+        //var color = BABYLON.Color3.FromHexString(palette[index]);
+        var color = hexToRgb(palette[index]);
+        colors.push(color.r/255, color.g/255, color.b/255, 1);
+
+    }
+
+    return colors;
+}
+
+
 //Elevation palettes
 
 const elevationcolors_aztecCalendar = [
