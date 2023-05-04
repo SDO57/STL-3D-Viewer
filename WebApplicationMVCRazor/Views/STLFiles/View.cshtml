@@ -28,6 +28,10 @@
         </div>
         <div class="col-2">
             <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
+        </div><div class="col-6">
+
+            <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
+
         </div>
     </div>
 
@@ -167,16 +171,7 @@
 
 
 
-                <div>
-                    <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                           min="0" max="100" value="40" step="1">
-                    <label for="RAmbiantColor">RAmbiantColor</label>
-                </div>
-                <div>
-                    <input type="range" id="RCameraLight" name="RCameraLight"
-                           min="0" max="100" value="50" step="1">
-                    <label for="RCameraLight">RCameraLight</label>
-                </div>
+            
 
 
 
@@ -312,12 +307,20 @@
 
                 </div>
                 <div class="row">
-
-                    <div class="col-12">
-
-                        <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
-
+                    <div class=col-2">
+                        <input type="range" id="RAmbiantColor" name="RAmbiantColor"
+                               min="0" max="100" value="40" step="1">
+                        <label for="RAmbiantColor">RAmbiantColor</label>
                     </div>
+                    <div class=col-2">
+                        <input type="range" id="RCameraLight" name="RCameraLight"
+                               min="0" max="100" value="50" step="1">
+                        <label for="RCameraLight">RCameraLight</label>
+                    </div>
+                </div>
+                <div class="row">
+
+                    
 
                 </div>
             </div>
