@@ -76,36 +76,7 @@ var MaterialsTable = {
     'yellow_mat': [0.06, 0.06, 0.01, 0.6, 0.6, 0.2, 0., 0., 0., .25]
 };
 var whitePalette = ["#FFFFFF"];
-var lunarPalette = [
-    "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
-    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"
-];
-var moonPalette = [];
-for (var i = 64; i < 256; i++)
-    moonPalette.push("#" + i.toString(16) + i.toString(16) + i.toString(16));
-var mercuryPalette = [];
-for (var i = 128; i < 256; i++)
-    mercuryPalette.push("#" + (255 - i).toString(16) + (255 - i).toString(16) + (255 - i).toString(16));
-var venusPalette = [
-    "#2F2000", "#2F2000",
-    "#3F2000", "#3F2000",
-    "#6F3000", "#6F3000",
-    "#8F3000", "#8F3000",
-    //"#00FF00",
-    "#FFA040", "#FFA040", "#FFA040",
-    "#FFC050", "#FFC050", "#FFC050",
-    "#FFD060", "#FFD060", "#FFD060",
-    "#FFE070", "#FFE070", "#FFE070",
-    "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80"
-];
-var marsPalette = [];
-for (var i = 0; i < 256; i++)
-    marsPalette.push("#" + (64 + Math.round(i / 1.5)).toString(16) + (32 + Math.round(i / 2)).toString(16) + (16 + Math.round(i / 4)).toString(16));
-var plutoPalette = ["#2F2000", "#2F2000", "#2F2000", "#2F2000", "#3F2000", "#3F2000", "#3F2000", "#6F3000", "#6F3000", "#6F3000", "#8F3000", "#8F3000", "#FFA0A0", "#FFC0C0", "#FFD0D0", "#FFE0E0", "#FFFFFF", "#FFFFFF", "#FFFFFF",
-    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -320,6 +291,63 @@ var elevationcolors_Neptune = [
     { alt: 4000, rgb: hexToRgb("#EFFFFF") },
     { alt: 8000, rgb: hexToRgb("#EFFFFF") }
 ];
+var elevationcolors_Moon = [
+    { alt: -10000, rgb: hexToRgb("#404040") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+var elevationcolors_Mercury = [
+    { alt: -10000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#404040") }
+];
+var elevationcolors_Mars = [
+    { alt: -10000, rgb: hexToRgb("#402010") },
+    { alt: 8000, rgb: hexToRgb("#EAA050") }
+];
+var elevationcolors_Venus = [
+    { alt: -10000, rgb: hexToRgb("#2F2000") },
+    { alt: -8000, rgb: hexToRgb("#3F2000") },
+    { alt: -6000, rgb: hexToRgb("#6F3000") },
+    { alt: -4000, rgb: hexToRgb("#8F3000") },
+    { alt: -3000, rgb: hexToRgb("#FFA040") },
+    { alt: -1000, rgb: hexToRgb("#FFC050") },
+    { alt: 1000, rgb: hexToRgb("#FFD060") },
+    { alt: 3000, rgb: hexToRgb("#FFE070") },
+    { alt: 8000, rgb: hexToRgb("#FFFF80") }
+];
+/*var venusPalette = [
+    "#2F2000", "#2F2000",
+    "#3F2000", "#3F2000",
+    "#6F3000", "#6F3000",
+    "#8F3000", "#8F3000",
+    //"#00FF00",
+    "#FFA040", "#FFA040", "#FFA040",
+    "#FFC050", "#FFC050", "#FFC050",
+    "#FFD060", "#FFD060", "#FFD060",
+    "#FFE070", "#FFE070", "#FFE070",
+    "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80"
+];*/
+var elevationcolors_Pluto = [
+    { alt: -10000, rgb: hexToRgb("#2F2000") },
+    { alt: -7500, rgb: hexToRgb("#3F2000") },
+    { alt: -5000, rgb: hexToRgb("#6F3000") },
+    { alt: -2500, rgb: hexToRgb("#8F3000") },
+    { alt: -1000, rgb: hexToRgb("#FFA0A0") },
+    { alt: 0, rgb: hexToRgb("#FFC0C0") },
+    { alt: 1000, rgb: hexToRgb("#FFD0D0") },
+    { alt: 2000, rgb: hexToRgb("#FFE0E0") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }
+];
+/*var plutoPalette = [
+    "#2F2000", "#2F2000", "#2F2000", "#2F2000",
+    "#3F2000", "#3F2000", "#3F2000",
+    "#6F3000", "#6F3000", "#6F3000",
+    "#8F3000", "#8F3000",
+    "#FFA0A0",
+    "#FFC0C0",
+    "#FFD0D0",
+    "#FFE0E0",
+    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"
+];*/
 var elevationColorsComparaison = function (a, b) {
     if (a.alt < b.alt) {
         return -1;

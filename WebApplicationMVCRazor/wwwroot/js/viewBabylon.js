@@ -269,15 +269,18 @@ const createSceneSTL = () => {
                 case 'elevationcolors_earthEonPhanerozoique_Mesozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Mesozoique)); break;
                 case 'elevationcolors_earthEonPhanerozoique_Cenozoique': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_earthEonPhanerozoique_Cenozoique)); break;
 
-                case 'mercury': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(mercuryPalette)); break;
+                case 'mercury': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Mercury)); break;
+                  
                 case 'neptune': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Neptune)); break;
 
 
-                case 'venus': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(venusPalette)); break;
-                case 'mars': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(marsPalette)); break;
+                case 'venus': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Venus)); break;
 
-                case 'pluto': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(plutoPalette)); break;
-                case 'moon': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(moonPalette)); break;
+
+                case 'mars': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Mars)); break;
+                  
+                case 'pluto': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Pluto)); break;
+                case 'moon': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Moon)); break;
                 case 'Encelade': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_Encelade)); break;
 
                 case 'Arakis': customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, elevationColorization(elevationcolors_arrakis)); break;
@@ -573,6 +576,18 @@ const createSceneSTL = () => {
             skyboxMaterial.reflectionTexture = new BABYLON.Texture(urlimage, scene, true);
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.FIXED_EQUIRECTANGULAR_MODE;
             skybox.material = skyboxMaterial;
+
+            //var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 1000, subdivisions: 10 }, scene, false);
+
+            var gridGroundMaterial = new BABYLON.GridMaterial("gridGroundMaterial", scene);
+            gridGroundMaterial.majorUnitFrequency = 10;
+            gridGroundMaterial.minorUnitVisibility = 0.7;
+            gridGroundMaterial.lineColor = new BABYLON.Color3(0.9, 0.9, 1);
+            gridGroundMaterial.gridRatio = 1;
+            gridGroundMaterial.opacity = 0.99;
+            gridGroundMaterial.useMaxLine = true;
+
+            ground.material = gridGroundMaterial;
         }
     );
 
@@ -694,6 +709,7 @@ const createSceneSTL = () => {
     gridGroundMaterial.useMaxLine = true;
 
     ground.material = gridGroundMaterial;
+
     ground.setEnabled(false);
     $('#cbShowGridGround').on('change', function () {
         ground.setEnabled(this.checked);

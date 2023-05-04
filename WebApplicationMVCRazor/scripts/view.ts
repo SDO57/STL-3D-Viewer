@@ -106,33 +106,15 @@ const MaterialsTable = {
 
 
 const whitePalette = ["#FFFFFF"];
-const lunarPalette = [
+/*const lunarPalette = [
     "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
-    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"];*/
 
 
 
 
-var moonPalette = []; for (var i = 64; i < 256; i++) moonPalette.push("#" + i.toString(16) + i.toString(16) + i.toString(16));
-const mercuryPalette = []; for (var i = 128; i < 256; i++) mercuryPalette.push("#" + (255 - i).toString(16) + (255 - i).toString(16) + (255 - i).toString(16));
-const venusPalette = [
-    "#2F2000", "#2F2000",
-    "#3F2000", "#3F2000",
-    "#6F3000", "#6F3000",
-    "#8F3000", "#8F3000",
-    //"#00FF00",
-    "#FFA040", "#FFA040", "#FFA040",
-    "#FFC050", "#FFC050", "#FFC050",
-    "#FFD060", "#FFD060", "#FFD060",
-    "#FFE070", "#FFE070", "#FFE070",
-    "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80", "#FFFF80",
-    "#FFFF80", "#FFFF80"];
 
-const marsPalette = []; for (var i = 0; i < 256; i++) marsPalette.push("#" + (64 + Math.round(i / 1.5)).toString(16) + (32 + Math.round(i / 2)).toString(16) + (16 + Math.round(i / 4)).toString(16));
-const plutoPalette = ["#2F2000", "#2F2000", "#2F2000", "#2F2000", "#3F2000", "#3F2000", "#3F2000", "#6F3000", "#6F3000", "#6F3000", "#8F3000", "#8F3000", "#FFA0A0", "#FFC0C0", "#FFD0D0", "#FFE0E0", "#FFFFFF", "#FFFFFF", "#FFFFFF",
-    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+
 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -352,22 +334,22 @@ const elevationcolors_earthEonPhanerozoique_Cenozoique = [
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }];
 
 const elevationcolors_arrakis = [
-    { alt: -10000, rgb: hexToRgb("#00005F") },
-    { alt: -2501, rgb: hexToRgb("#4040FF") },
-    { alt: -2500, rgb: hexToRgb("#FFB000") },
-    { alt: -2000, rgb: hexToRgb("#203020") },
-    { alt: 0, rgb: hexToRgb("#FFB000") },
-    { alt: 500, rgb: hexToRgb("#804030") },
-    { alt: 600, rgb: hexToRgb("#FFB080") },
-    { alt: 800, rgb: hexToRgb("#408010") },
-    { alt: 900, rgb: hexToRgb("#806020") },
-    { alt: 1000, rgb: hexToRgb("#408010") },
-    { alt: 1300, rgb: hexToRgb("#804030") },
-    { alt: 1500, rgb: hexToRgb("#506050") },
-    { alt: 2000, rgb: hexToRgb("#706060") },
-    { alt: 3000, rgb: hexToRgb("#B0A080") },
-    { alt: 4000, rgb: hexToRgb("#FFFFFF") },
-    { alt: 8000, rgb: hexToRgb("#FFFFFF") }];
+    { alt: -10000,  rgb: hexToRgb("#00005F") },
+    { alt: -2501,   rgb: hexToRgb("#4040FF") },
+    { alt: -2500,   rgb: hexToRgb("#FFB000") },
+    { alt: -2000,   rgb: hexToRgb("#203020") },
+    { alt: 0,       rgb: hexToRgb("#FFB000") },
+    { alt: 500,     rgb: hexToRgb("#804030") },
+    { alt: 600,     rgb: hexToRgb("#FFB080") },
+    { alt: 800,     rgb: hexToRgb("#408010") },
+    { alt: 900,     rgb: hexToRgb("#806020") },
+    { alt: 1000,    rgb: hexToRgb("#408010") },
+    { alt: 1300,    rgb: hexToRgb("#804030") },
+    { alt: 1500,    rgb: hexToRgb("#506050") },
+    { alt: 2000,    rgb: hexToRgb("#706060") },
+    { alt: 3000,    rgb: hexToRgb("#B0A080") },
+    { alt: 4000,    rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000,    rgb: hexToRgb("#FFFFFF") }];
 
 const elevationcolors_Encelade = [
     { alt: -10000, rgb: hexToRgb("#00D0FF") },
@@ -379,6 +361,79 @@ const elevationcolors_Neptune = [
     { alt: 1000, rgb: hexToRgb("#50E0FF") },
     { alt: 4000, rgb: hexToRgb("#EFFFFF") },
     { alt: 8000, rgb: hexToRgb("#EFFFFF") }];
+
+
+const elevationcolors_Moon = [
+    { alt: -10000, rgb: hexToRgb("#404040") },
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }];
+
+
+const elevationcolors_Mercury = [
+    { alt: -10000, rgb: hexToRgb("#FFFFFF") },
+    { alt: 8000, rgb: hexToRgb("#404040") }];
+
+
+const elevationcolors_Mars = [
+    { alt: -10000, rgb: hexToRgb("#402010") },
+    { alt: 8000, rgb: hexToRgb("#EAA050") }];
+
+
+
+const elevationcolors_Venus = [
+    { alt: -10000, rgb: hexToRgb("#2F2000") },
+    { alt: -8000, rgb: hexToRgb("#3F2000") },
+    { alt: -6000, rgb: hexToRgb("#6F3000") },
+    { alt: -4000, rgb: hexToRgb("#8F3000") },
+
+    { alt: -3000, rgb: hexToRgb("#FFA040") },
+    { alt: -1000, rgb: hexToRgb("#FFC050") },
+    { alt: 1000, rgb: hexToRgb("#FFD060") },
+    { alt: 3000, rgb: hexToRgb("#FFE070") },
+
+    { alt: 8000, rgb: hexToRgb("#FFFF80") }]
+   ;
+
+const venusPalette = [
+    "#2F2000", "#2F2000",
+    "#3F2000", "#3F2000",
+    "#6F3000", "#6F3000",
+    "#8F3000", "#8F3000",
+    //"#00FF00",
+    "#FFA040", "#FFA040", "#FFA040",
+    "#FFC050", "#FFC050", "#FFC050",
+    "#FFD060", "#FFD060", "#FFD060",
+    "#FFE070", "#FFE070", "#FFE070",
+    "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80"];
+
+const elevationcolors_Pluto = [
+ 
+    { alt: -10000, rgb: hexToRgb("#2F2000") },
+
+    { alt: -7500, rgb: hexToRgb("#3F2000") },
+    { alt: -5000, rgb: hexToRgb("#6F3000") },
+
+    { alt: -2500, rgb: hexToRgb("#8F3000") },
+
+    { alt: -1000, rgb: hexToRgb("#FFA0A0") },
+    { alt: 0, rgb: hexToRgb("#FFC0C0") },
+    { alt: 1000, rgb: hexToRgb("#FFD0D0") },
+    { alt: 2000, rgb: hexToRgb("#FFE0E0") },
+
+    { alt: 8000, rgb: hexToRgb("#FFFFFF") }]
+    ;
+
+const plutoPalette = [
+    "#2F2000", "#2F2000", "#2F2000", "#2F2000",
+    "#3F2000", "#3F2000", "#3F2000",
+    "#6F3000", "#6F3000", "#6F3000",
+    "#8F3000", "#8F3000",
+
+    "#FFA0A0",
+    "#FFC0C0",
+    "#FFD0D0",
+    "#FFE0E0",
+    "#FFFFFF", "#FFFFFF", "#FFFFFF",    "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"];
+
 
 
 var elevationColorsComparaison = function (a, b) {
