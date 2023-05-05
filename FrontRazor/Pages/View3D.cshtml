@@ -1,0 +1,158 @@
+﻿@page
+@model FrontRazor.Pages.View3DModel
+@{
+}
+
+
+@section head {
+
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+                }
+
+
+
+<canvas id="renderCanvas"></canvas>
+
+
+@section script {
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+
+    <script>
+
+        const canvas = document.getElementById("renderCanvas"); // Get the canvas element
+        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+
+
+        var createScene = function () {
+
+            // This creates a basic Babylon Scene object (non-mesh)
+            var scene = new BABYLON.Scene(engine);
+
+            /********** ARC ROTATE CAMERA EXAMPLE **************************/
+
+            // Creates, angles, distances and targets the camera
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), scene);
+
+            // This positions the camera
+            camera.setPosition(new BABYLON.Vector3(0, 0, -10));
+
+            // This attaches the camera to the canvas
+            camera.attachControl(canvas, true);
+
+
+
+
+            //Materials
+            var redMat = new BABYLON.StandardMaterial("red", scene);
+            redMat.diffuseColor = new BABYLON.Color3(1, 0, 0);
+           // redMat.emissiveColor = new BABYLON.Color3(1, 0, 0);
+            redMat.specularColor = new BABYLON.Color3(1, 0, 0);
+
+            var greenMat = new BABYLON.StandardMaterial("green", scene);
+            greenMat.diffuseColor = new BABYLON.Color3(0, 1, 0);
+          //  greenMat.emissiveColor = new BABYLON.Color3(0, 1, 0);
+            greenMat.specularColor = new BABYLON.Color3(0, 1, 0);
+
+            var blueMat = new BABYLON.StandardMaterial("blue", scene);
+            blueMat.diffuseColor = new BABYLON.Color3(0, 0, 1);
+           // blueMat.emissiveColor = new BABYLON.Color3(0, 0, 1);
+            blueMat.specularColor = new BABYLON.Color3(0, 0, 1);
+
+            var cyanMat = new BABYLON.StandardMaterial("cyan", scene);
+            cyanMat.diffuseColor = new BABYLON.Color3(0, 1, 1);
+           // cyanMat.emissiveColor = new BABYLON.Color3(0, 1, 1);
+            cyanMat.specularColor = new BABYLON.Color3(0, 1, 1);
+
+            /**************************************************************/
+
+            // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+            var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+          
+            
+            var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
+            sphere.position.x = -2;
+            sphere.position.z = 2;
+            sphere.material =  redMat;
+
+            var sphere2 = BABYLON.Mesh.CreateSphere("sphere2", 16, 2, scene);
+            sphere2.position.x = -2;
+            sphere2.position.z = -2;
+            sphere2.material = greenMat;
+
+            var sphere3 = BABYLON.Mesh.CreateSphere("sphere3", 16, 2, scene);
+            sphere3.position.x = 2;
+            sphere3.position.z = -2;
+            sphere3.material = blueMat;
+
+            var sphere4 = BABYLON.Mesh.CreateSphere("sphere3", 16, 2, scene);
+            sphere4.position.x = 2;
+            sphere4.position.z = 2;
+            sphere4.material = cyanMat;
+
+           /* //Materials
+            var redMat = new BABYLON.StandardMaterial("red", scene);
+            redMat.diffuseColor = new BABYLON.Color3(1, 0, 0);
+            redMat.emissiveColor = new BABYLON.Color3(1, 0, 0);
+            redMat.specularColor = new BABYLON.Color3(1, 0, 0);
+
+            var greenMat = new BABYLON.StandardMaterial("green", scene);
+            greenMat.diffuseColor = new BABYLON.Color3(0, 1, 0);
+            greenMat.emissiveColor = new BABYLON.Color3(0, 1, 0);
+            greenMat.specularColor = new BABYLON.Color3(0, 1, 0);
+
+            var blueMat = new BABYLON.StandardMaterial("blue", scene);
+            blueMat.diffuseColor = new BABYLON.Color3(0, 0, 1);
+            blueMat.emissiveColor = new BABYLON.Color3(0, 0, 1);
+            blueMat.specularColor = new BABYLON.Color3(0, 0, 1);
+
+            // Shapes
+            var plane1 = BABYLON.MeshBuilder.CreatePlane("plane1", { size: 3, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene);
+            plane1.position.x = -3;
+            plane1.position.z = 0;
+            plane1.material = redMat;
+
+            var plane2 = BABYLON.MeshBuilder.CreatePlane("plane2", { size: 3, sideOrientation: BABYLON.Mesh.DOUBLESIDE });
+            plane2.position.x = 3;
+            plane2.position.z = -1.5;
+            plane2.material = greenMat;
+
+            var plane3 = BABYLON.MeshBuilder.CreatePlane("plane3", { size: 3, sideOrientation: BABYLON.Mesh.DOUBLESIDE });
+            plane3.position.x = 3;
+            plane3.position.z = 1.5;
+            plane3.material = blueMat;*/
+
+           // var ground = BABYLON.MeshBuilder.CreateGround("ground1", { width: 10, height: 10, subdivisions: 2 }, scene);
+
+            return scene;
+
+        };
+
+
+        const scene = createScene(); //Call the createScene function
+        // Register a render loop to repeatedly render the scene
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+        // Watch for browser/canvas resize events
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
+    </script>
+}
