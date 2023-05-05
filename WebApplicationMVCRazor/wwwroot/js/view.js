@@ -76,7 +76,9 @@ var MaterialsTable = {
     'yellow_mat': [0.06, 0.06, 0.01, 0.6, 0.6, 0.2, 0., 0., 0., .25]
 };
 var whitePalette = ["#FFFFFF"];
-
+/*const lunarPalette = [
+    "#00005F", "#00006F", "#00007F", "#00008F", "#00009F", "#0000AF", "#0000BF", "#1010CF", "#2020DF", "#3030EF", "#4040FF",
+    "#FFB080", "#80FF80", "#80FF80", "#80FF80", "#80FF80", "#FFFFFF", "#FFFFFF", "#FFFFFF"];*/
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -314,7 +316,7 @@ var elevationcolors_Venus = [
     { alt: 3000, rgb: hexToRgb("#FFE070") },
     { alt: 8000, rgb: hexToRgb("#FFFF80") }
 ];
-/*var venusPalette = [
+var venusPalette = [
     "#2F2000", "#2F2000",
     "#3F2000", "#3F2000",
     "#6F3000", "#6F3000",
@@ -325,7 +327,7 @@ var elevationcolors_Venus = [
     "#FFD060", "#FFD060", "#FFD060",
     "#FFE070", "#FFE070", "#FFE070",
     "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80", "#FFFF80"
-];*/
+];
 var elevationcolors_Pluto = [
     { alt: -10000, rgb: hexToRgb("#2F2000") },
     { alt: -7500, rgb: hexToRgb("#3F2000") },
@@ -337,7 +339,7 @@ var elevationcolors_Pluto = [
     { alt: 2000, rgb: hexToRgb("#FFE0E0") },
     { alt: 8000, rgb: hexToRgb("#FFFFFF") }
 ];
-/*var plutoPalette = [
+var plutoPalette = [
     "#2F2000", "#2F2000", "#2F2000", "#2F2000",
     "#3F2000", "#3F2000", "#3F2000",
     "#6F3000", "#6F3000", "#6F3000",
@@ -347,7 +349,7 @@ var elevationcolors_Pluto = [
     "#FFD0D0",
     "#FFE0E0",
     "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"
-];*/
+];
 var elevationColorsComparaison = function (a, b) {
     if (a.alt < b.alt) {
         return -1;
