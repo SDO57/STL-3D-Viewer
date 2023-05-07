@@ -175,7 +175,11 @@ const createOcean = function (scene, LX, LY, LZ) {
 }
 
 
-const setlavamat1 = function (lavamaterial) {
+//var gl;
+
+var alphaLavaAnimation = 0;
+var lavaAnimation = function () { };
+const lavaInitMaterial = function (lavamaterial) {
 
 
 
@@ -191,12 +195,15 @@ const setlavamat1 = function (lavamaterial) {
     //var lavamaterial = new BABYLON.PBRMaterial("lavamaterial", scene);
     lavamaterial.albedoTexture = new BABYLON.Texture(assetPath + "Lava_005_COLOR.jpg", scene);
 
-    //lavamaterial.bumpTexture = new BABYLON.Texture(assetPath + "Lava_005_NORM.jpg", scene);
-    //lavamaterial.bumpTexture.level = 0.9;
-    //   material.bumpTexture.uScale = 2;
-    //       material.bumpTexture.vScale = 2;
+    lavamaterial.bumpTexture = new BABYLON.Texture(assetPath + "Lava_005_NORM.jpg", scene);
+    lavamaterial.bumpTexture.level = 0.9;
+    lavamaterial.bumpTexture.uScale = 20;
+    lavamaterial.bumpTexture.vScale = 20;
+
+
+
     lavamaterial.emissiveTexture = new BABYLON.Texture(assetPath + "Lava_005_ROUGH.jpg"/*"spider_webs_compressed.jpg"*/, scene);
-    lavamaterial.emissiveColor = new BABYLON.Color3(245 / 255, 20 / 255, 20 / 255);
+    lavamaterial.emissiveColor = new BABYLON.Color3(64 / 255, 32 / 255, 16 / 255);
     //    material.specularTexture = new BABYLON.Texture("Lava_005_DISP.jpg", scene);
     lavamaterial.ambientTexture = new BABYLON.Texture(assetPath + "Lava_005_OCC.jpg", scene);
     lavamaterial.ambientColor = new BABYLON.Color3(245 / 255, 245 / 255, 20 / 255);
@@ -211,48 +218,41 @@ const setlavamat1 = function (lavamaterial) {
     lavamaterial.useRoughnessFromMetallicTextureGreen = false;
     lavamaterial.useMetallnessFromMetallicTextureBlue = false;
 //BUMPMAPPING
-    /*lavamaterial.clearCoat.isEnabled = true;
+    lavamaterial.clearCoat.isEnabled = true;
     lavamaterial.clearCoat.bumpTexture = new BABYLON.Texture(assetPath + "Lava_005_NORM.jpg", scene);
     lavamaterial.clearCoat.bumpTexture.level = 0.0;
-*/}
+
+    lavaAnimation = function () {
+        lavamaterial.albedoTexture.uOffset -= 0.0001;
+        lavamaterial.albedoTexture.vOffset -= 0.0001;
+        //lavamaterial.bumpTexture.uOffset += 0.0001;
+        //lavamaterial.bumpTexture.vOffset -= 0.001;
+        lavamaterial.ambientTexture.uOffset += 0.0001;
+        lavamaterial.ambientTexture.vOffset -= 0.0001;
+
+        //lavamaterial.metallicTexture.uOffset += 0.0001;
+
+        lavamaterial.emissiveTexture.uOffset -= 0.00017;
+        lavamaterial.emissiveTexture.vOffset -= 0.00023;
+
+      /*  gl.intensity += Math.sin(alphaLavaAnimation * 20) / 200;
+        alphaLavaAnimation += 0.0002;
 
 
-/*  var gl = new BABYLON.GlowLayer("glow", scene);
-   gl.intensity = 0.1;
-   var alphaLavaAnimation = 0;*/
-const lava2animation = function () {
-    lavamaterial.albedoTexture.uOffset -= 0.0001;
-    lavamaterial.albedoTexture.vOffset -= 0.0001;
-    //lavamaterial.bumpTexture.uOffset += 0.0001;
-    //lavamaterial.bumpTexture.vOffset -= 0.001;
-    lavamaterial.ambientTexture.uOffset += 0.0001;
-    lavamaterial.ambientTexture.vOffset -= 0.0001;
-
-    //lavamaterial.metallicTexture.uOffset += 0.0001;
-
-    lavamaterial.emissiveTexture.uOffset -= 0.00017;
-    lavamaterial.emissiveTexture.vOffset -= 0.00023;
-    /*  gl.intensity += Math.sin(alphaLavaAnimation * 2) / 100;
-      alphaLavaAnimation += 0.0002;
-  
-
-      lavamaterial.clearCoat.bumpTexture.level += Math.sin(alphaLavaAnimation) / 10;*/
+        lavamaterial.clearCoat.bumpTexture.level += Math.sin(alphaLavaAnimation) / 10;
+        */
+    }
 
 }
 
+
+
+
+
 const createLava = function (scene, lavamaterial, LX, LY, LZ) {
-    // OCEAN
-  /*  let lavaMat = new BABYLON.StandardMaterial("lavaMat", scene);
-    lavaMat.diffuseColor = new BABYLON.Color3(1,0.04, 0.04);
-    lavaMat.ambiantColor = new BABYLON.Color3(1,0.9, 0.9);
-    lavaMat.specularColor = new BABYLON.Color3(1, 0.9, 1);
-    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
-   */ 
+ 
 
-    setlavamat1(lavamaterial);
-
-
-
+    lavaInitMaterial(lavamaterial);
 
 
     //lavaMaterial.unlit = true;
@@ -286,10 +286,133 @@ const createLava = function (scene, lavamaterial, LX, LY, LZ) {
         lavamaterial.alpha = 0.01 * this.value;
     });
 
+    //gl = new BABYLON.GlowLayer("glow", scene);
+    //gl.intensity = 0.1;
 
 }
 
 
+//var alphaCloudsAnimation = 0;
+var cloudsAnimation = function () { };
+const cloudsInitMaterial = function (cloudsmaterial) {
+
+
+
+    cloudsmaterial.alpha = 0.5;
+
+
+    //var urlimage = __urlbase + "/images/texture/lava/";
+
+    // Lava Material creation  
+    //var assetPath = "https://raw.githubusercontent.com/eldinor/ForBJS/master/Lava_005_SD/";
+    var assetPath = __urlbase + "/images/texture/clouds/";
+
+    //var lavamaterial = new BABYLON.PBRMaterial("lavamaterial", scene);
+    cloudsmaterial.albedoTexture = new BABYLON.Texture(assetPath + "images (1).jpg", scene);
+
+    cloudsmaterial.bumpTexture = new BABYLON.Texture(assetPath + "images (1).jpg", scene);
+    cloudsmaterial.bumpTexture.level = 0.9;
+    cloudsmaterial.bumpTexture.uScale = 20;
+    cloudsmaterial.bumpTexture.vScale = 20;
+
+
+    cloudsmaterial.diffuseTexture = new BABYLON.Texture(assetPath + "images (1).jpg", scene);
+    cloudsmaterial.diffuseTexture.hasAlpha = true;
+    cloudsmaterial.useAlphaFromDiffuseTexture = true;
+    cloudsmaterial.useSpecularOverAlpha = true;
+    cloudsmaterial.alphaCutOff = 0.4;
+
+
+    cloudsmaterial.emissiveTexture = new BABYLON.Texture(assetPath + "Texturelabs_Atmosphere_131thumbnail.jpg"/*"spider_webs_compressed.jpg"*/, scene);
+    cloudsmaterial.emissiveColor = new BABYLON.Color3(64 / 255, 64 / 255, 64 / 255);
+    //    material.specularTexture = new BABYLON.Texture("Lava_005_DISP.jpg", scene);
+    cloudsmaterial.ambientTexture = new BABYLON.Texture(assetPath + "fx_cloudalpha05.jpg", scene);
+    cloudsmaterial.ambientColor = new BABYLON.Color3(128 / 255, 128 / 255, 255 / 255);
+
+
+    //lavamaterial.metallicTexture = new BABYLON.Texture(assetPath + "Lava_005_ROUGH.jpg", scene);
+
+    cloudsmaterial.roughness = 0.5;
+    cloudsmaterial.metallic = 0.1;
+
+    cloudsmaterial.useRoughnessFromMetallicTextureAlpha = true;
+    cloudsmaterial.useRoughnessFromMetallicTextureGreen = false;
+    cloudsmaterial.useMetallnessFromMetallicTextureBlue = false;
+    //BUMPMAPPING
+   /* cloudsmaterial.clearCoat.isEnabled = true;
+    cloudsmaterial.clearCoat.bumpTexture = new BABYLON.Texture(assetPath + "Texturelabs_Atmosphere_195thumbnail.jpg", scene);
+    cloudsmaterial.clearCoat.bumpTexture.level = 0.0;*/
+
+    cloudsAnimation = function () {
+        cloudsmaterial.albedoTexture.uOffset -= 0.0001;
+        cloudsmaterial.albedoTexture.vOffset -= 0.0001;
+        //lavamaterial.bumpTexture.uOffset += 0.0001;
+        //lavamaterial.bumpTexture.vOffset -= 0.001;
+        cloudsmaterial.ambientTexture.uOffset += 0.0001;
+        cloudsmaterial.ambientTexture.vOffset -= 0.0001;
+
+        cloudsmaterial.diffuseTexture.uOffset += 0.0001;
+        cloudsmaterial.diffuseTexture.vOffset -= 0.0001;
+        //lavamaterial.metallicTexture.uOffset += 0.0001;
+
+        cloudsmaterial.emissiveTexture.uOffset -= 0.00017;
+        cloudsmaterial.emissiveTexture.vOffset -= 0.00023;
+
+       /* //gl.intensity += Math.sin(alphaCloudsAnimation * 20) / 200;
+        alphaCloudsAnimation += 0.0002;
+
+
+        cloudsmaterial.clearCoat.bumpTexture.level += Math.sin(alphaCloudsAnimation) / 10;*/
+
+    }
+
+}
+
+
+
+
+
+const createClouds = function (scene, cloudsmaterial, LX, LY, LZ) {
+
+
+    cloudsInitMaterial(cloudsmaterial);
+
+
+    //lavaMaterial.unlit = true;
+    let CurrentRCloudsLavaRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius) * 0.1;
+    let cloudsSphere = BABYLON.MeshBuilder.CreateSphere("cloudsSphere",
+        { diameterX: CurrentRCloudsLavaRadius * 2, diameterY: CurrentRCloudsLavaRadius * 2, diameterZ: CurrentRCloudsLavaRadius * 2 }, scene);
+    cloudsSphere.material = cloudsmaterial;
+
+    cloudsSphere.position.x = LX * 0.5;
+    cloudsSphere.position.y = LY * 0.5;
+    cloudsSphere.position.z = LZ * 0.5;
+
+    cloudsSphere.setEnabled(false);
+    $('#cbClouds').on('change', function () {
+        cloudsSphere.setEnabled(this.checked);
+    });
+
+    let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+    let scale = 1 - amplitudeR + amplitudeR * 0.5;
+    cloudsSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    $('#RClouds').on('input', function () {
+        let pourcentage = 0.01 * this.value;
+        let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+        let scale = 1 - amplitudeR + amplitudeR * pourcentage;
+        cloudsSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    });
+
+    $('#RCloudsOpacity').on('input', function () {
+        cloudsmaterial.alpha = 0.01 * this.value;
+    });
+
+   
+    //gl.intensity = 0.1;
+
+}
 
 
 
@@ -332,8 +455,113 @@ const createAtmosphere = function (scene, LX, LY, LZ) {
     });
 }
 
+/*
+var createScene = function () {
+    // Create scene
+    var scene = new BABYLON.Scene(engine);
+
+    // Create simple sphere
+    var sphere = BABYLON.Mesh.CreateIcoSphere("sphere", { radius: 0.2, flat: true, subdivisions: 1 }, scene);
+    sphere.position.y = 3;
+    sphere.material = new BABYLON.StandardMaterial("sphere material", scene)
+
+    // Lights and camera
+    var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(0, -0.5, 1.0), scene);
+    light.position = new BABYLON.Vector3(0, 5, -2);
+    var camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 4, 3, new BABYLON.Vector3(0, 3, 0), scene);
+    camera.attachControl(canvas, true);
+    scene.activeCamera.beta += 0.8;
+
+    // Default Environment
+    var environment = scene.createDefaultEnvironment({ enableGroundShadow: true, groundYBias: 2.8 });
+    environment.setMainColor(BABYLON.Color3.FromHexString("#74b9ff"))
+
+    // Shadows
+    var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+    shadowGenerator.useBlurExponentialShadowMap = true;
+    shadowGenerator.blurKernel = 32;
+    shadowGenerator.addShadowCaster(sphere, true);
+
+    // Enable VR
+    var vrHelper = scene.createDefaultVRExperience({ createDeviceOrientationCamera: false, useXR: true });
+    vrHelper.enableTeleportation({ floorMeshes: [environment.ground] });
+
+    // Runs every frame to rotate the sphere
+    scene.onBeforeRenderObservable.add(() => {
+        sphere.rotation.y += 0.0001 * scene.getEngine().getDeltaTime();
+        sphere.rotation.x += 0.0001 * scene.getEngine().getDeltaTime();
+    })
+
+    // GUI
+    var plane = BABYLON.Mesh.CreatePlane("plane", 1);
+    plane.position = new BABYLON.Vector3(0.4, 4, 0.4)
+    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane);
+    var panel = new BABYLON.GUI.StackPanel();
+    advancedTexture.addControl(panel);
+    var header = new BABYLON.GUI.TextBlock();
+    header.text = "Color GUI";
+    header.height = "100px";
+    header.color = "white";
+    header.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+    header.fontSize = "120"
+    panel.addControl(header);
+    var picker = new BABYLON.GUI.ColorPicker();
+    picker.value = sphere.material.diffuseColor;
+    picker.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+    picker.height = "350px";
+    picker.width = "350px";
+    picker.onValueChangedObservable.add(function (value) {
+        sphere.material.diffuseColor.copyFrom(value);
+    });
+    panel.addControl(picker);
+
+    vrHelper.onAfterEnteringVRObservable.add(() => {
+        if (scene.activeCamera === vrHelper.vrDeviceOrientationCamera) {
+            BABYLON.FreeCameraDeviceOrientationInput.WaitForOrientationChangeAsync(1000).then(() => {
+                // Successfully received sensor input
+            }).catch(() => {
+                alert("Device orientation camera is being used but no sensor is found, prompt user to enable in safari settings");
+            })
+        }
+    })
 
 
+
+    return scene;
+};
+
+var colors = {
+    seaFoam: BABYLON.Color3.FromHexString("#16a085"),
+    green: BABYLON.Color3.FromHexString("#27ae60"),
+    blue: BABYLON.Color3.FromHexString("#2980b9"),
+    purple: BABYLON.Color3.FromHexString("#8e44ad"),
+    navy: BABYLON.Color3.FromHexString("#2c3e50"),
+    yellow: BABYLON.Color3.FromHexString("#f39c12"),
+    orange: BABYLON.Color3.FromHexString("#d35400"),
+    red: BABYLON.Color3.FromHexString("#c0392b"),
+    white: BABYLON.Color3.FromHexString("#bdc3c7"),
+    gray: BABYLON.Color3.FromHexString("#7f8c8d")
+}
+*/
+const initVR = function (scene) {
+    // Default Environment
+    //var environment = scene.createDefaultEnvironment({ enableGroundShadow: true, groundYBias: 2.8 });
+    //environment.setMainColor(BABYLON.Color3.FromHexString("#74b9ff"))
+
+    // Enable VR
+     var vrHelper = scene.createDefaultVRExperience({ createDeviceOrientationCamera: false, useXR: true });
+  //  vrHelper.enableTeleportation({ floorMeshes: [environment.ground] });
+
+    vrHelper.onAfterEnteringVRObservable.add(() => {
+        if (scene.activeCamera === vrHelper.vrDeviceOrientationCamera) {
+            BABYLON.FreeCameraDeviceOrientationInput.WaitForOrientationChangeAsync(1000).then(() => {
+                // Successfully received sensor input
+            }).catch(() => {
+                alert("Device orientation camera is being used but no sensor is found, prompt user to enable in safari settings");
+            })
+        }
+    }) 
+}
 
 const createSceneSTL = () => {
 
@@ -341,6 +569,12 @@ const createSceneSTL = () => {
     var scene = new BABYLON.Scene(engine);
     var hdrTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("textures/environment.env", scene);
     scene.environmentTexture = hdrTexture;
+
+    // VR
+    //initVR(scene);
+
+    // VR FIN 
+
 
     // CUSTOM MESH
 
@@ -367,7 +601,7 @@ const createSceneSTL = () => {
     computeIOBoundingRadius();
 
  
-
+    gl = new BABYLON.GlowLayer("glow", scene);
 
     customMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, earthColorization(whitePalette));
 
@@ -446,10 +680,13 @@ const createSceneSTL = () => {
 
     createAtmosphere(scene, LX, LY, LZ);  
     createOcean(scene, LX, LY, LZ);
+   
 
     lavamaterial = new BABYLON.PBRMaterial("lavamaterial", scene);
     createLava(scene, lavamaterial, LX, LY, LZ);
- 
+
+    cloudsmaterial = new BABYLON.PBRMaterial("cloudsmaterial", scene);
+    createClouds(scene, cloudsmaterial, LX, LY, LZ);
 
     // MATERIAL
 
@@ -895,7 +1132,8 @@ const createSceneSTL = () => {
     
         registerCameraLimitations();
      
-        lava2animation();
+        lavaAnimation();
+        cloudsAnimation();
  
         });
 
