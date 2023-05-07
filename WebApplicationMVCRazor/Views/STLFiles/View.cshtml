@@ -79,19 +79,23 @@
 
                 <label> SkyBox</label>
                 <select class="form-select" name="SkyTexture2" id="sky-select">
-                    <option disabled>Space</option>
-                    <option selected value='voie lactee.jpeg'>voie lactee</option>
-
-                    <option value='industrial_sunset_02_puresky.jpg'>industrial_sunset_02_puresky</option>
-                    <option value='sunflowers_puresky.jpg'>sunflowers_puresky</option>
-                    <option value='blaubeuren_night.jpg'>blaubeuren_night</option>
-                    <option value='shanghai_bund.jpg'>shanghai_bund</option>
-                    <option value='snowy_field.jpg'>snowy_field</option>
-                    <option value='symmetrical_garden.jpg'>symmetrical_garden</option>
-                    <option value='narrow_moonlit_road.jpg'>narrow_moonlit_road</option>
-                    <option value='umhlanga_sunrise.jpg'>umhlanga_sunrise</option>
-                    <option value='hilltop_construction.jpg'>hilltop_construction</option>
-
+                    <option value='autumn_forest_04.jpg'>autumn_forest_04.jpg</option>
+                    <option value='blaubeuren_night.jpg'>blaubeuren_night.jpg</option>                 
+                    <option value='blaubeuren_church_square.jpg'>blaubeuren_church_square.jpg</option>
+                    <option value='drakensberg_solitary_mountain.jpg'>drakensberg_solitary_mountain.jpg</option>
+                    <option value='hilltop_construction.jpg'>hilltop_construction.jpg</option>
+                    <option value='industrial_sunset_02_puresky.jpg'>industrial_sunset_02_puresky.jpg</option>
+                    <option value='narrow_moonlit_road.jpg'>narrow_moonlit_road.jpg</option>
+                    <option value='sandsloot.jpg'>sandsloot.jpg</option>
+                    <option value='shanghai_bund.jpg'>shanghai_bund.jpg</option>
+                    <option value='snowy_field.jpg'>snowy_field.jpg</option>
+                    <option value='studio_small_09.jpg'>studio_small_09.jpg</option>
+                    <option value='sunflowers_puresky.jpg'>sunflowers_puresky.jpg</option>
+                    <option value='symmetrical_garden.jpg'>symmetrical_garden.jpg</option>
+                    <option value='trekker_monument.jpg'>trekker_monument.jpg</option>                    
+                    <option value='umhlanga_sunrise.jpg'>umhlanga_sunrise.jpg</option>
+                    <option value='vestibule.jpg'>vestibule.jpg</option>
+                    <option selected value='voie lactee.jpeg'>voie lactee.jpeg</option>
                 </select>
             </div>
 
@@ -102,6 +106,7 @@
                     <option selected value='white'>white</option>
 
                     <option value='aztecCalendarPalette'>AZTEC CALENDAR</option>
+
                     <option disabled>Earth</option>
                     <option value='earthHadeenBeginPalette'>earth - 4,51 MA - Hadeen - Debut</option>
                     <option value='earthHadeenEndPalette'>earth - 3,8 MA - Hadeen - Fin</option>
@@ -136,7 +141,7 @@
                 
                     <input type="range" id="RAtmosphere" name="RAtmosphere"
                            min="0" max="100" value="100" step="1">
-                    <label for="RAtmosphere">RAtmosphere</label>
+                    <label for="RAtmosphere">RAtmosphereRadius</label>
             
 
              
@@ -156,7 +161,7 @@
 
                     <input type="range" id="ROcean" name="ROcean"
                            min="0" max="100" value="50" step="1">
-                    <label for="ROcean">ROcean</label>
+                    <label for="ROcean">ROceanRadius</label>
             
 
 
@@ -164,7 +169,27 @@
                     <input type="range" id="ROceanOpacity" name="ROceanOpacity"
                            min="0" max="100" value="50" step="1">
                     <label for="ROceanOpacity">ROceanOpacity</label>
-             
+
+
+
+                <div>
+                    <input type="checkbox" id="cbLava" name="cbLava">
+                    <label for="cbLava">Lava</label>
+
+                </div>
+
+
+
+                <input type="range" id="RLava" name="RLava"
+                       min="0" max="100" value="50" step="1">
+                <label for="RLava">RLavaRadius</label>
+
+
+
+
+                <input type="range" id="RLavaOpacity" name="RLavaOpacity"
+                       min="0" max="100" value="50" step="1">
+                <label for="RLavaOpacity">RLavaOpacity</label>
             </div>
 
             <div id="material-group">
@@ -180,6 +205,7 @@
 
                     <option disabled>Image Texture Materials</option>
                     <option value='stone'>stone</option>
+                    <option value='lava'>lava</option> '
 
                     <option disabled>Procedural Texture Materials</option>
                     <option value='grid'>grid</option>

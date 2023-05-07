@@ -34,6 +34,8 @@ var canvas = document.getElementById("renderCanvas");
 
 var engine = null;
 var scene = null;
+var lavamaterial;
+
 var sceneToRender = null;
 var createDefaultEngine = function () {
     return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false });
@@ -171,6 +173,126 @@ const createOcean = function (scene, LX, LY, LZ) {
     
 
 }
+
+
+const setlavamat1 = function (lavamaterial) {
+
+
+
+    lavamaterial.alpha = 0.5;
+
+
+    //var urlimage = __urlbase + "/images/texture/lava/";
+
+    // Lava Material creation  
+    //var assetPath = "https://raw.githubusercontent.com/eldinor/ForBJS/master/Lava_005_SD/";
+    var assetPath = __urlbase + "/images/texture/lava/";
+
+    //var lavamaterial = new BABYLON.PBRMaterial("lavamaterial", scene);
+    lavamaterial.albedoTexture = new BABYLON.Texture(assetPath + "Lava_005_COLOR.jpg", scene);
+
+    //lavamaterial.bumpTexture = new BABYLON.Texture(assetPath + "Lava_005_NORM.jpg", scene);
+    //lavamaterial.bumpTexture.level = 0.9;
+    //   material.bumpTexture.uScale = 2;
+    //       material.bumpTexture.vScale = 2;
+    lavamaterial.emissiveTexture = new BABYLON.Texture(assetPath + "Lava_005_ROUGH.jpg"/*"spider_webs_compressed.jpg"*/, scene);
+    lavamaterial.emissiveColor = new BABYLON.Color3(245 / 255, 20 / 255, 20 / 255);
+    //    material.specularTexture = new BABYLON.Texture("Lava_005_DISP.jpg", scene);
+    lavamaterial.ambientTexture = new BABYLON.Texture(assetPath + "Lava_005_OCC.jpg", scene);
+    lavamaterial.ambientColor = new BABYLON.Color3(245 / 255, 245 / 255, 20 / 255);
+
+
+    //lavamaterial.metallicTexture = new BABYLON.Texture(assetPath + "Lava_005_ROUGH.jpg", scene);
+
+    lavamaterial.roughness = 0.5;
+    lavamaterial.metallic = 0.1;
+
+    lavamaterial.useRoughnessFromMetallicTextureAlpha = true;
+    lavamaterial.useRoughnessFromMetallicTextureGreen = false;
+    lavamaterial.useMetallnessFromMetallicTextureBlue = false;
+//BUMPMAPPING
+    /*lavamaterial.clearCoat.isEnabled = true;
+    lavamaterial.clearCoat.bumpTexture = new BABYLON.Texture(assetPath + "Lava_005_NORM.jpg", scene);
+    lavamaterial.clearCoat.bumpTexture.level = 0.0;
+*/}
+
+
+/*  var gl = new BABYLON.GlowLayer("glow", scene);
+   gl.intensity = 0.1;
+   var alphaLavaAnimation = 0;*/
+const lava2animation = function () {
+    lavamaterial.albedoTexture.uOffset -= 0.0001;
+    lavamaterial.albedoTexture.vOffset -= 0.0001;
+    //lavamaterial.bumpTexture.uOffset += 0.0001;
+    //lavamaterial.bumpTexture.vOffset -= 0.001;
+    lavamaterial.ambientTexture.uOffset += 0.0001;
+    lavamaterial.ambientTexture.vOffset -= 0.0001;
+
+    //lavamaterial.metallicTexture.uOffset += 0.0001;
+
+    lavamaterial.emissiveTexture.uOffset -= 0.00017;
+    lavamaterial.emissiveTexture.vOffset -= 0.00023;
+    /*  gl.intensity += Math.sin(alphaLavaAnimation * 2) / 100;
+      alphaLavaAnimation += 0.0002;
+  
+
+      lavamaterial.clearCoat.bumpTexture.level += Math.sin(alphaLavaAnimation) / 10;*/
+
+}
+
+const createLava = function (scene, lavamaterial, LX, LY, LZ) {
+    // OCEAN
+  /*  let lavaMat = new BABYLON.StandardMaterial("lavaMat", scene);
+    lavaMat.diffuseColor = new BABYLON.Color3(1,0.04, 0.04);
+    lavaMat.ambiantColor = new BABYLON.Color3(1,0.9, 0.9);
+    lavaMat.specularColor = new BABYLON.Color3(1, 0.9, 1);
+    // oceanMat.emissiveColor = new BABYLON.Color3(0.5, 0.5, 1);
+   */ 
+
+    setlavamat1(lavamaterial);
+
+
+
+
+
+    //lavaMaterial.unlit = true;
+    let CurrentRLavaRadius = outsideBoundingRadius + (outsideBoundingRadius - insideBoundingRadius) * 0.1;
+    let lavaSphere = BABYLON.MeshBuilder.CreateSphere("lavaSphere",
+        { diameterX: CurrentRLavaRadius * 2, diameterY: CurrentRLavaRadius * 2, diameterZ: CurrentRLavaRadius * 2 }, scene);
+    lavaSphere.material = lavamaterial;
+
+    lavaSphere.position.x = LX * 0.5;
+    lavaSphere.position.y = LY * 0.5;
+    lavaSphere.position.z = LZ * 0.5;
+
+    lavaSphere.setEnabled(false);
+    $('#cbLava').on('change', function () {
+        lavaSphere.setEnabled(this.checked);
+    });
+
+    let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+    let scale = 1 - amplitudeR + amplitudeR * 0.5;
+    lavaSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    $('#RLava').on('input', function () {
+        let pourcentage = 0.01 * this.value;
+        let amplitudeR = (outsideBoundingRadius - insideBoundingRadius) / outsideBoundingRadius;
+        let scale = 1 - amplitudeR + amplitudeR * pourcentage;
+        lavaSphere.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+    });
+
+    $('#RLavaOpacity').on('input', function () {
+        lavamaterial.alpha = 0.01 * this.value;
+    });
+
+
+}
+
+
+
+
+
 
 const createAtmosphere = function (scene, LX, LY, LZ) {
     // ATMOSPHERE
@@ -319,11 +441,15 @@ const createSceneSTL = () => {
         LY,
         LZ);
 
-    createAtmosphere(scene, LX, LY, LZ);
 
     createBoundingSphere(scene, LX, LY, LZ);
 
+    createAtmosphere(scene, LX, LY, LZ);  
     createOcean(scene, LX, LY, LZ);
+
+    lavamaterial = new BABYLON.PBRMaterial("lavamaterial", scene);
+    createLava(scene, lavamaterial, LX, LY, LZ);
+ 
 
     // MATERIAL
 
@@ -353,7 +479,9 @@ const createSceneSTL = () => {
     $('#material-select').on('change',
         function () {
             var mat = this.value;
-            if (mat == 'stone') {
+
+            if (mat == 'lava') { customMesh.material = lavamaterial;  }
+            else if (mat == 'stone') {
                 customMesh.material = stoneMaterial;
             }
             else if (mat == 'grid') {
@@ -543,7 +671,6 @@ const createSceneSTL = () => {
     cloudMaterial.emissiveTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
     // SKYBOX
-    //var urlimage = "https://cdn.jsdelivr.net/gh/PirateJC/assets@deeb0dbb5f526d2fa607c2178578b1bb6a72d9d5/NightSkybox.jpg";
    
     var urlimage = __urlbase + "/images/sky/voie lactee.jpeg";
 
@@ -659,21 +786,16 @@ const createSceneSTL = () => {
     camera.setTarget(cameraTarget);
 
     camera.beta = Math.PI / 2;
-    camera.alpha = Math.PI;
+    camera.alpha = 1.75 * Math.PI;
 
+
+   // showAmbiantLight(0.8, scene);
+    
     // CAMERA LIMITATIONS
     camera.radius = maxBoundingLengh*1.5;
-    var camerasBorderFunction = function () {
-        //Angle
-        // if (camera.beta < 0.1) camera.beta = 0.1;
-        // else if (camera.beta > (Math.PI / 2) * 0.9) camera.beta = (Math.PI / 2) * 0.9;
+   
 
-        //Zoom
-        if (camera.radius > maxBoundingLengh * 2.5) camera.radius = maxBoundingLengh * 2.5;
-        if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
-    };
-
-    scene.registerBeforeRender(camerasBorderFunction);
+   
 
 
     // LIGHTS
@@ -752,11 +874,30 @@ const createSceneSTL = () => {
 
     });
 
+    const registerCameraLimitations = function () {
+
+        // lightCamera.position = camera.position;
+        // lightCamera.position = camera.position;
+
+        //Angle
+        // if (camera.beta < 0.1) camera.beta = 0.1;
+        // else if (camera.beta > (Math.PI / 2) * 0.9) camera.beta = (Math.PI / 2) * 0.9;
+
+        //Zoom
+        if (camera.radius > maxBoundingLengh * 2.5) camera.radius = maxBoundingLengh * 2.5;
+        if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
+    }
+
+   
+
     // BEFORE RENDER
     scene.registerBeforeRender(function () {
-        // lightCamera.position = camera.position;
-        // lightCamera.position = camera.position;
-    });
+    
+        registerCameraLimitations();
+     
+        lava2animation();
+ 
+        });
 
     scene.getEngine().onResizeObservable.add(() => {
 
