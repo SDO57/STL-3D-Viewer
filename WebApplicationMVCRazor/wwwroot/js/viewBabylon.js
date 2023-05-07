@@ -563,7 +563,7 @@ const createSceneSTL = () => {
    /* var skybox = BABYLON.Mesh.CreateBox('SkyBox', 1000, scene, false, BABYLON.Mesh.BACKSIDE);
     skybox.material = new BABYLON.SkyMaterial('sky', scene);
     skybox.material.inclination = -0.35;*/
-    skybox.setEnabled(false);
+    skybox.setEnabled(true);
     $('#cbShowSkyBox').on('change', function () {
         skybox.setEnabled(this.checked);
     });
@@ -651,15 +651,18 @@ const createSceneSTL = () => {
     // CAMERA Target
     var camera = new BABYLON.ArcRotateCamera("camera1",
         0, 0,
-        maxBoundingLengh * 2.5,
+        maxBoundingLengh * 1.5,
         new BABYLON.Vector3(0, 1, -1),
         scene);
 
     camera.attachControl(canvas, true);
     camera.setTarget(cameraTarget);
 
+    camera.beta = Math.PI / 2;
+    camera.alpha = Math.PI;
+
     // CAMERA LIMITATIONS
-    camera.radius = maxBoundingLengh;
+    camera.radius = maxBoundingLengh*1.5;
     var camerasBorderFunction = function () {
         //Angle
         // if (camera.beta < 0.1) camera.beta = 0.1;

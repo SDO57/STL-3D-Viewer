@@ -6,7 +6,7 @@
     },
     "StartDemoPopulateDataBase": {
       "commandName": "Executable",
-      "executablePath": "H:\\STLViewer\\STL-3D-Viewer\\StartDemoPopulateDataBase\\bin\\Debug\\net7.0\\StartDemoPopulateDataBase.exe"
+      "executablePath": "H:\\Projects/STLViewer\\STL-3D-Viewer\\StartDemoPopulateDataBase\\bin\\Debug\\net7.0\\StartDemoPopulateDataBase.exe"
     }
   }
 }
