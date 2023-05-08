@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Balylon.Blazor": {
-      "commandName": "Project",
-      "nativeDebugging": false,
-      "jsWebView2Debugging": true
-    }
-  }
-}

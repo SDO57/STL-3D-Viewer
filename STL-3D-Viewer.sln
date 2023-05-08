@@ -7,59 +7,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{D89BE5BA-EBB0-4D7D-94D8-E566DAD53033}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{3166559A-8075-4519-B4B4-B24F4FB02D4F}"
-	ProjectSection(SolutionItems) = preProject
-		Core\Hexagonal, Onion & Clean Architecture - YouTube.url = Core\Hexagonal, Onion & Clean Architecture - YouTube.url
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REST", "REST", "{05F3E05F-113B-4908-B5BF-008E66517960}"
-	ProjectSection(SolutionItems) = preProject
-		F:\Bureau\Meilleures pratiques en matière de conception d’API web - Azure Architecture Center - Microsoft Learn.url = F:\Bureau\Meilleures pratiques en matière de conception d’API web - Azure Architecture Center - Microsoft Learn.url
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BigFiles", "BigFiles", "{E108FF96-968A-4221-8F8C-8BC9986AF36F}"
-	ProjectSection(SolutionItems) = preProject
-		F:\Bureau\ASP.NET Web API and HTTP Byte Range Support - .NET Blog.url = F:\Bureau\ASP.NET Web API and HTTP Byte Range Support - .NET Blog.url
-		F:\Bureau\HTTP Range Requests and Partial Responses With ASP.NET Core - Khalid Abuhakmeh.url = F:\Bureau\HTTP Range Requests and Partial Responses With ASP.NET Core - Khalid Abuhakmeh.url
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{34FFFEBA-4B4E-4062-B349-B611DAE248E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWeb", "ApiWeb\ApiWeb.csproj", "{31517281-FC1C-4F9B-84D1-7C0679BD76F6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grpc", "Grpc", "{DC513B9A-6981-48C2-86AE-E11CAD1F6BBD}"
-	ProjectSection(SolutionItems) = preProject
-		F:\Bureau\Créer un serveur et un client gRPC .NET Core dans ASP.NET Core - Microsoft Learn.url = F:\Bureau\Créer un serveur et un client gRPC .NET Core dans ASP.NET Core - Microsoft Learn.url
-		F:\Bureau\gRPC And Blazor WebAssembly App In .NET 6.url = F:\Bureau\gRPC And Blazor WebAssembly App In .NET 6.url
-		F:\Bureau\gRPC-Web in ASP.NET Core gRPC apps - Microsoft Learn.url = F:\Bureau\gRPC-Web in ASP.NET Core gRPC apps - Microsoft Learn.url
-		F:\Bureau\Overview for gRPC on .NET - Microsoft Learn.url = F:\Bureau\Overview for gRPC on .NET - Microsoft Learn.url
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EF Core", "EF Core", "{60795368-248E-48FA-B959-63A79CD0AE4A}"
-	ProjectSection(SolutionItems) = preProject
-		Infra\ReadmeFirst\Pour aller plus loin\Bien démarrer - EF Core - Microsoft Learn.url = Infra\ReadmeFirst\Pour aller plus loin\Bien démarrer - EF Core - Microsoft Learn.url
-		Infra\ReadmeFirst\Pour aller plus loin\The specified deps.json [..] does not exist after VS 2019 update · Issue #16386 · dotnet-efcore · GitHub.url = Infra\ReadmeFirst\Pour aller plus loin\The specified deps.json [..] does not exist after VS 2019 update · Issue #16386 · dotnet-efcore · GitHub.url
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBlazorBabylonJS", "WebBlazorBabylonJS\WebBlazorBabylonJS.csproj", "{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationMVCRazor", "WebApplicationMVCRazor\WebApplicationMVCRazor.csproj", "{62534BC1-42E3-43C9-91A3-7E770993B783}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Babylon.Blazor", "Babylon.Blazor\Babylon.Blazor.csproj", "{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartDemoPopulateDataBase", "StartDemoPopulateDataBase\StartDemoPopulateDataBase.csproj", "{101E26B9-25D7-4403-928F-51DF245EC62B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontAngular", "FrontAngular\FrontAngular.csproj", "{BDFE5CE3-66F7-4DDF-8C33-80107F3C761E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontAngular", "FrontAngular\FrontAngular.csproj", "{BDFE5CE3-66F7-4DDF-8C33-80107F3C761E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontReact", "FrontReact\FrontReact.csproj", "{1D58A9A1-4F9C-4B9F-AD9E-738853659384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontReact", "FrontReact\FrontReact.csproj", "{1D58A9A1-4F9C-4B9F-AD9E-738853659384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontRazor", "FrontRazor\FrontRazor.csproj", "{6F69E2E0-0524-4AC7-B9F8-7584570FAAAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontRazor", "FrontRazor\FrontRazor.csproj", "{6F69E2E0-0524-4AC7-B9F8-7584570FAAAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontBlazor.Server", "FrontBlazor\Server\FrontBlazor.Server.csproj", "{6BBC5C2A-A505-474A-9032-CB6699F9A046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontBlazor.Server", "FrontBlazor\Server\FrontBlazor.Server.csproj", "{6BBC5C2A-A505-474A-9032-CB6699F9A046}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontBlazor.Client", "FrontBlazor\Client\FrontBlazor.Client.csproj", "{5B794837-3619-4D56-B215-4A73568A905E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontBlazor.Client", "FrontBlazor\Client\FrontBlazor.Client.csproj", "{5B794837-3619-4D56-B215-4A73568A905E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontBlazor.Shared", "FrontBlazor\Shared\FrontBlazor.Shared.csproj", "{18790C12-0AED-4EF1-8883-4B2478F2A453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontBlazor.Shared", "FrontBlazor\Shared\FrontBlazor.Shared.csproj", "{18790C12-0AED-4EF1-8883-4B2478F2A453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,24 +58,12 @@ Global
 		{31517281-FC1C-4F9B-84D1-7C0679BD76F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31517281-FC1C-4F9B-84D1-7C0679BD76F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31517281-FC1C-4F9B-84D1-7C0679BD76F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.ClientMAUI+API|Any CPU.ActiveCfg = ClientMAUI+API|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.ClientMAUI+API|Any CPU.Build.0 = ClientMAUI+API|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8992FC8A-3D53-471D-9B0F-DAB9DA7720FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.ClientMAUI+API|Any CPU.ActiveCfg = Debug|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.ClientMAUI+API|Any CPU.Build.0 = Debug|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62534BC1-42E3-43C9-91A3-7E770993B783}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.ClientMAUI+API|Any CPU.ActiveCfg = ClientMAUI+API|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.ClientMAUI+API|Any CPU.Build.0 = ClientMAUI+API|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ED19F6B-8061-4E49-96E2-BACD7FF26A5D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{101E26B9-25D7-4403-928F-51DF245EC62B}.ClientMAUI+API|Any CPU.ActiveCfg = ClientMAUI+API|Any CPU
 		{101E26B9-25D7-4403-928F-51DF245EC62B}.ClientMAUI+API|Any CPU.Build.0 = ClientMAUI+API|Any CPU
 		{101E26B9-25D7-4403-928F-51DF245EC62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -155,12 +109,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{05F3E05F-113B-4908-B5BF-008E66517960} = {3166559A-8075-4519-B4B4-B24F4FB02D4F}
-		{E108FF96-968A-4221-8F8C-8BC9986AF36F} = {05F3E05F-113B-4908-B5BF-008E66517960}
-		{DC513B9A-6981-48C2-86AE-E11CAD1F6BBD} = {3166559A-8075-4519-B4B4-B24F4FB02D4F}
-		{60795368-248E-48FA-B959-63A79CD0AE4A} = {3166559A-8075-4519-B4B4-B24F4FB02D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAEC77B5-1FF5-4E89-86CD-620314C521C4}
