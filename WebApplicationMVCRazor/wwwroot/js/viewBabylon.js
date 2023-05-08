@@ -64,16 +64,43 @@ var showRGBPointLight = function (intensity, scene) {
 
 
 }
+var lightAmbiant;
 
+var showAmbiantLight = function (scene) {
 
-var showAmbiantLight = function (intensity, scene) {
-
-    var lightAmbiant = new BABYLON.HemisphericLight("lightAmbiant", new BABYLON.Vector3(0, 1, 0), scene);
+    lightAmbiant = new BABYLON.HemisphericLight("lightAmbiant", new BABYLON.Vector3(0, 1, 0), scene);
     // Default intensity is 1. Let's dim the light a small amount
-    lightAmbiant.intensity = intensity;
+ //   lightAmbiant.intensity = intensity;
     lightAmbiant.diffuse = new BABYLON.Color3(1, 1, 1);
     lightAmbiant.specular = new BABYLON.Color3(1, 1, 1);
+
+   
+
     return lightAmbiant;
+}
+
+
+var AmbiantLightFollowCamera = function(camera)
+{
+    lightAmbiant.direction = camera.cameraDirection;
+}
+
+
+var lightCamera;
+
+var defineLightCamera = function (scene , camera) {
+    lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
+
+    lightCamera.ambiant = new BABYLON.Color3(1, 1, 1);
+    lightCamera.diffuse = new BABYLON.Color3(1, 1, 1);
+    lightCamera.specular = new BABYLON.Color3(1, 1, 1);
+    lightCamera.parent = camera;
+
+
+      /*  lightCamera.intensity = 0.5;
+        $('#RCameraLight').on('input', function () {
+            lightCamera.intensity = 0.01 * this.value;
+        });*/
 }
 
 
@@ -344,19 +371,19 @@ const cloudsInitMaterial = function (cloudsmaterial) {
     cloudsmaterial.clearCoat.bumpTexture.level = 0.0;*/
 
     cloudsAnimation = function () {
-        cloudsmaterial.albedoTexture.uOffset -= 0.0001;
-        cloudsmaterial.albedoTexture.vOffset -= 0.0001;
+        cloudsmaterial.albedoTexture.uOffset += 0.0001;
+        cloudsmaterial.albedoTexture.vOffset += 0.0001;
         //lavamaterial.bumpTexture.uOffset += 0.0001;
         //lavamaterial.bumpTexture.vOffset -= 0.001;
-        cloudsmaterial.ambientTexture.uOffset += 0.0001;
-        cloudsmaterial.ambientTexture.vOffset -= 0.0001;
+        cloudsmaterial.ambientTexture.uOffset -= 0.0001;
+        cloudsmaterial.ambientTexture.vOffset += 0.0001;
 
-        cloudsmaterial.diffuseTexture.uOffset += 0.0001;
-        cloudsmaterial.diffuseTexture.vOffset -= 0.0001;
+        cloudsmaterial.diffuseTexture.uOffset -= 0.0001;
+        cloudsmaterial.diffuseTexture.vOffset += 0.0001;
         //lavamaterial.metallicTexture.uOffset += 0.0001;
 
-        cloudsmaterial.emissiveTexture.uOffset -= 0.00017;
-        cloudsmaterial.emissiveTexture.vOffset -= 0.00023;
+        cloudsmaterial.emissiveTexture.uOffset += 0.00017;
+        cloudsmaterial.emissiveTexture.vOffset += 0.00023;
 
        /* //gl.intensity += Math.sin(alphaCloudsAnimation * 20) / 200;
         alphaCloudsAnimation += 0.0002;
@@ -1026,7 +1053,7 @@ const createSceneSTL = () => {
     camera.alpha = 1.75 * Math.PI;
 
 
-   // showAmbiantLight(0.8, scene);
+    showAmbiantLight( scene);
     
     // CAMERA LIMITATIONS
     camera.radius = maxBoundingLengh*1.5;
@@ -1040,22 +1067,17 @@ const createSceneSTL = () => {
     //   var lightAmbiant =
     //   showAmbiantLight(0.4, scene);
     //  showRGBPointLight(0.2,scene);
-    var defineLightCamera = function () {
-        var lightCamera = new BABYLON.PointLight("lightCamera", new BABYLON.Vector3(0, 0, 0), scene);
+   
 
+    defineLightCamera(scene,camera);
 
-        lightCamera.diffuse = new BABYLON.Color3(1, 1, 1);
-        lightCamera.specular = new BABYLON.Color3(1, 1, 1);
-        lightCamera.parent = camera;
+    lightCamera.intensity = 0.5;
+    lightAmbiant.intensity = 0.5;
+    $('#RCameraLight').on('input', function () {
+        lightCamera.intensity = 0.01 * this.value;
+        lightAmbiant.intensity = 0.01 * this.value;
+    });
 
-
-        lightCamera.intensity = 0.5;
-        $('#RCameraLight').on('input', function () {
-            lightCamera.intensity = 0.01 * this.value;
-        });
-    }
-
-    defineLightCamera();
 
     // SHOW GROUND ON/OFF
 
@@ -1123,6 +1145,8 @@ const createSceneSTL = () => {
         //Zoom
         if (camera.radius > maxBoundingLengh * 2.5) camera.radius = maxBoundingLengh * 2.5;
         if (camera.radius < maxBoundingLengh * 0.5) camera.radius = maxBoundingLengh * 0.5;
+
+        AmbiantLightFollowCamera(camera);
     }
 
    

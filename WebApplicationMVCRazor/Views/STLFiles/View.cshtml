@@ -17,70 +17,44 @@
 
     <div class="row">
 
-        <div class="col-2">
-
+        <div class="col-4">
             <h2><a class="btn btn-primary" href="/STLFiles/Files?StoreId=@Model.Desc.StoreId">Go back to Store</a></h2>
-
         </div>
-        <div class="col-2">
+        <div class="col-3">
             <a class="btn btn-warning" asp-action="Save" asp-route-id="@Model.Desc.FileId">Save preferences</a>
-
         </div>
-        <div class="col-2">
+        <div class="col-5">
             <a class="btn btn-info" asp-action="Load" asp-route-id="@Model.Desc.FileId">Download File</a>
         </div><div class="col-6">
-
             <label> @Model.Desc.FileName, @Model.Desc.FileCodage, @Model.Desc.FileSize (bytes), @(decrypt.NbFaces) faces</label>
-
         </div>
+
     </div>
+
 
     <div class="row">
 
+        <div class="col-4">
+
+            <input type="color" id="CClearColor" name="CClearColor" value="@ClearColor">
+            <label class="form-label" for="CClearColor">CClearColor</label>
+
+
+            <input class="form-check-input" type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
+            <label class="form-label" for="cbShowGridGround">Ground</label>
+
+
+            <input class ="form-check-input" checked type="checkbox" id="cbShowSkyBox" name="cbShowSkyBox">
+            <label class="form-label" for="cbShowSkyBox">SkyBox</label>
 
 
 
-
-
-        <div class="col-2">
-
-            <input type="color" id="CClearColor" name="CClearColor"
-                   value="@ClearColor">
-            <label for="CClearColor">CClearColor</label>
-
-       
-            <div>
-                <input type="checkbox" id="cbShowGridGround" name="cbShowGridGround">
-                <label for="cbShowGridGround">Ground</label>
-
-            </div>
-       
-
-       
-            <div>
-                <input checked type="checkbox" id="cbShowSkyBox" name="cbShowSkyBox">
-                <label for="cbShowSkyBox">SkyBox</label>
-
-            </div>
-     
-
-
-
-  
-
-
-
-
-
-
-         
             <div id="skybox-group">
 
-
-                <label> SkyBox</label>
+                <label class="form-label"> SkyBox</label>
                 <select class="form-select" name="SkyTexture2" id="sky-select">
                     <option value='autumn_forest_04.jpg'>autumn_forest_04.jpg</option>
-                    <option value='blaubeuren_night.jpg'>blaubeuren_night.jpg</option>                 
+                    <option value='blaubeuren_night.jpg'>blaubeuren_night.jpg</option>
                     <option value='blaubeuren_church_square.jpg'>blaubeuren_church_square.jpg</option>
                     <option value='drakensberg_solitary_mountain.jpg'>drakensberg_solitary_mountain.jpg</option>
                     <option value='hilltop_construction.jpg'>hilltop_construction.jpg</option>
@@ -92,21 +66,20 @@
                     <option value='studio_small_09.jpg'>studio_small_09.jpg</option>
                     <option value='sunflowers_puresky.jpg'>sunflowers_puresky.jpg</option>
                     <option value='symmetrical_garden.jpg'>symmetrical_garden.jpg</option>
-                    <option value='trekker_monument.jpg'>trekker_monument.jpg</option>                    
+                    <option value='trekker_monument.jpg'>trekker_monument.jpg</option>
                     <option value='umhlanga_sunrise.jpg'>umhlanga_sunrise.jpg</option>
                     <option value='vestibule.jpg'>vestibule.jpg</option>
                     <option selected value='voie lactee.jpeg'>voie lactee.jpeg</option>
                 </select>
+
             </div>
 
             <div id="planet-group">
 
-                <label> Planet Colorization</label>
+                <label class="form-label"> Planet Colorization</label>
                 <select class="form-select" name="PlanetColorization" id="preset-select">
                     <option selected value='white'>white</option>
-
-                    <option value='aztecCalendarPalette'>AZTEC CALENDAR</option>
-
+                    <!-- <option value='aztecCalendarPalette'>AZTEC CALENDAR</option> -->
                     <option disabled>Earth</option>
                     <option value='earthHadeenBeginPalette'>earth - 4,51 MA - Hadeen - Debut</option>
                     <option value='earthHadeenEndPalette'>earth - 3,8 MA - Hadeen - Fin</option>
@@ -126,99 +99,48 @@
                     <option value='Encelade'>Encelade</option>
                     <option disabled>SF</option>
                     <option value='earthTodayPalette'>Arakis</option>
-
-
                 </select>
-                
-                    <div>
-                        <input type="checkbox" id="cbAtmospheric" name="cbAtmospheric">
-                        <label for="cbAtmospheric">Atmosphere</label>
-
-                    </div>
-              
 
 
-                
-                    <input type="range" id="RAtmosphere" name="RAtmosphere"
-                           min="0" max="100" value="100" step="1">
-                    <label for="RAtmosphere">RAtmosphereRadius</label>
-            
-
-             
-                    <input type="range" id="RAtmosphereOpacity" name="RAtmosphereOpacity"
-                           min="0" max="100" value="50" step="1">
-                    <label for="RAtmosphereOpacity">RAtmosphereOpacity</label>
-              
-
-              
-                    <div>
-                        <input type="checkbox" id="cbOcean" name="cbOcean">
-                        <label for="cbOcean">Ocean</label>
-
-                    </div>
-             
+                <input class="form-check-input" " type="checkbox" id="cbOcean" name="cbOcean">
+                <label class="form-label" for="cbOcean">Ocean</label>
 
 
-                    <input type="range" id="ROcean" name="ROcean"
-                           min="0" max="100" value="50" step="1">
-                    <label for="ROcean">ROceanRadius</label>
-            
-
-
-                
-                    <input type="range" id="ROceanOpacity" name="ROceanOpacity"
-                           min="0" max="100" value="50" step="1">
-                    <label for="ROceanOpacity">ROceanOpacity</label>
-
-
-
-                <div>
-                    <input type="checkbox" id="cbLava" name="cbLava">
-                    <label for="cbLava">Lava</label>
-
-                </div>
-
-
-
-                <input type="range" id="RLava" name="RLava"
+                <input class="form-range" type="range" id="ROcean" name="ROcean"
                        min="0" max="100" value="50" step="1">
-                <label for="RLava">RLavaRadius</label>
+                <label class="form-label" for="ROcean">ROceanRadius</label>
 
-
-
-                <input type="range" id="RLavaOpacity" name="RLavaOpacity"
+                <input class="form-range" type="range" id="ROceanOpacity" name="ROceanOpacity"
                        min="0" max="100" value="50" step="1">
-                <label for="RLavaOpacity">RLavaOpacity</label>
-
-                
-
-                <div>
-                    <input type="checkbox" id="cbClouds" name="cbClouds">
-                    <label for="cbClouds">Clouds</label>
-
-                </div>
+                <label class="form-label" for="ROceanOpacity">ROceanOpacity</label>
 
 
+                <input class="form-check-input" type="checkbox" id="cbLava" name="cbLava">
+                <label class="form-label" for="cbLava">Lava</label>
 
-                <input type="range" id="RClouds" name="RClouds"
+                <input class="form-range" type="range" id="RLava" name="RLava"
                        min="0" max="100" value="50" step="1">
-                <label for="RClouds">RCloudsRadius</label>
+                <label class="form-label" for="RLava">RLavaRadius</label>
 
-                <input type="range" id="RCloudsOpacity" name="RCloudsOpacity"
+                <input class="form-range" type="range" id="RLavaOpacity" name="RLavaOpacity"
                        min="0" max="100" value="50" step="1">
-                <label for="RCloudsOpacity">RCloudsOpacity</label>
+                <label class="form-label" for="RLavaOpacity">RLavaOpacity</label>
 
+
+                <input class="form-check-input" " type="checkbox" id="cbClouds" name="cbClouds">
+                <label class="form-label" for="cbClouds">Clouds</label>
+
+                <input class="form-range" type="range" id="RClouds" name="RClouds"
+                       min="0" max="100" value="50" step="1">
+                <label class="form-label" for="RClouds">RCloudsRadius</label>
+
+                <input class="form-range" type="range" id="RCloudsOpacity" name="RCloudsOpacity"
+                       min="0" max="100" value="50" step="1">
+                <label class="form-label" for="RCloudsOpacity">RCloudsOpacity</label>
 
             </div>
 
             <div id="material-group">
-
-
-
-            
-
-
-
 
                 <select class="form-select" name="Material" id="material-select">
 
@@ -286,89 +208,69 @@
 
                 </select>
 
-
-
-
             </div>
 
 
+            <div id="lowlevel-group">
 
-              <div id="lowlevel-group">
 
-                <div class="col-2">
-                    <div>
-                        <input type="checkbox" id="cbShowAxis" name="cbShowAxis">
-                        <label for="cbShowAxis">Axis</label>
+                <input class="form-check-input" type="checkbox" id="cbShowAxis" name="cbShowAxis">
+                <label class="form-label" for="cbShowAxis">Axis</label>
 
-                    </div>
-                </div>
-                <div>
-                    <input type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
-                    <label for="cbBoundingBox">BoundingBox</label>
+                <input class="form-check-input" type="checkbox" id="cbBoundingBox" name="cbBoundingBox">
+                <label class="form-label" for="cbBoundingBox">BoundingBox</label>
 
-                </div>
+                <input cclass="form-check-input" type="checkbox" id="cbBoundingSphere" name="cbBoundingSphere">
+                <label class="form-label" for="cbBoundingSphere">BoundingSphere</label>
 
-                <div>
-                    <input type="checkbox" id="cbBoundingSphere" name="cbBoundingSphere">
-                    <label for="cbBoundingSphere">BoundingSphere</label>
+                <input class="form-check-input" type="checkbox" id="cbEdges" name="cbEdges">
+                <label class="form-label" for="cbEdges">Edges</label>
 
-                </div>
+                <input class="form-check-input" type="checkbox" id="cbShowNormals" name="cbShowNormals">
+                <label class="form-label" for="cbShowNormals">Normals</label>
 
-                <div>
-                    <input type="checkbox" id="cbEdges" name="cbEdges">
-                    <label for="cbEdges">Edges</label>
+                <input class="form-check-input" type="checkbox" id="wireframe" name="wireframe">
+                <label class="form-label" for="scales">Wireframe</label>
 
-                </div>
-                <div>
-                    <input type="checkbox" id="cbShowNormals" name="cbShowNormals">
-                    <label for="cbShowNormals">Normals</label>
+                <input class="form-check-input" type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
+                <label class="form-label" for="scales">Back Face Culling</label>
 
-                </div>
-                <div>
-                    <input type="checkbox" id="wireframe" name="wireframe">
-                    <label for="scales">Wireframe</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="backFaceCulling" name="backFaceCulling" checked>
-                    <label for="scales">Back Face Culling</label>
-                </div>
 
             </div>
 
 
         </div>
-        <div class="col-10">
-            <div class="container">
 
 
-                <div class="row">
+        <div class="col-8">
 
 
-                    <!-- RENDERING CANVAS-->
-                    <div id="canvasZone">
-                        <canvas id="renderCanvas"></canvas>
-                    </div>
+            <div class="row">
 
-
+                <!-- RENDERING CANVAS-->
+                <div id="canvasZone">
+                    <canvas id="renderCanvas"></canvas>
                 </div>
-                <div class="row">
-                    <div class=col-2">
-                        <input type="range" id="RAmbiantColor" name="RAmbiantColor"
-                               min="0" max="100" value="40" step="1">
-                        <label for="RAmbiantColor">RAmbiantColor</label>
-                    </div>
-                    <div class=col-2">
-                        <input type="range" id="RCameraLight" name="RCameraLight"
-                               min="0" max="100" value="50" step="1">
-                        <label for="RCameraLight">RCameraLight</label>
-                    </div>
-                </div>
-                <div class="row">
 
-                    
-
-                </div>
             </div>
+
+            <div class="row">
+
+                <div class=col-2">
+                    <input class="form-range" type="range" id="RAmbiantColor" name="RAmbiantColor"
+                           min="0" max="100" value="40" step="1">
+                    <label class="form-label" for="RAmbiantColor">RAmbiantColor</label>
+                </div>
+
+                <div class=col-2">
+                    <input class="form-range" type="range" id="RCameraLight" name="RCameraLight"
+                           min="0" max="100" value="50" step="1">
+                    <label class="form-label" for="RCameraLight">RCameraLight</label>
+                </div>
+
+            </div>
+
+
         </div>
 
     </div>
@@ -393,7 +295,7 @@
 
 
 
-     
+
 
     </div>
 
