@@ -361,7 +361,9 @@
     indices = [@jindices];
     normals = [@jnormals];
     $('#renderCanvas').css('background-color', clearColor);
-    __urlbase = "https://localhost:7233"; //@Url.Content("~/");
+    /*  var getUrl = window.location;
+     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];*/
+    __urlbase = window.location.origin;
 
 
 
